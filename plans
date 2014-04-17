@@ -1,0 +1,11 @@
+1) echo
+2) parser / lexer / sematic analyser / tokeniser
+3) termcaps / historique / globbing
+4) inibiteurs
+5) fichier de conf (alias / prompt)
+
+
+victor   => inibiteur "coucou ca va" coucou
+ambroise => echo + termcaps
+abel	 => parser + clean sh2
+kalash	 => fichier de conf
