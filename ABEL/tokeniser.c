@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Fri Apr 18 06:28:40 2014 chalie_a
+** Last update Fri Apr 18 18:09:30 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -13,10 +13,13 @@
 #include <string.h>
 #include "tokenizer.h"
 
-static const char		*token_tab[10] = {"<<", "<",
-						 ">>", ">",
-						 "||", "|",
-						 "&&", ";", "DATA", "END_OF_LINE"};
+static const char		*token_tab[T_NBR] = {"<<", "<",
+						     ">>", ">",
+						     "||", "|",
+						     "&&", "&",
+						     "`", ";",
+						     "DATA",
+						     "END_OF_LINE"};
 
 void			print_data(t_token *root)
 {
@@ -26,10 +29,10 @@ void			print_data(t_token *root)
   while ((tmp = tmp->next) != root)
     {
       int	i = -1;
-      printf("token = %s\n \"", token_tab[tmp->token]);
+      printf("token = %s\n                        \"", token_tab[tmp->token]);
       while (++i < tmp->data_size)
 	printf("%c", tmp->data[i]);
-      printf("\"\n");
+      printf("\"\n\n");
     }
   printf("END_OF_LINE\n");
 }
@@ -63,19 +66,21 @@ int			get_data_len(char *str)
 
   i = -1;
   j = -1;
-  while (str[++i] && !(j = 0))
+  while (str[++i] && (j = -1))
     while (++j < T_CHAR_NBR)
-      if (str[i] == token_char[j] || !str[i])
-	return (i);
-  return (i);
+      { 
+	if (str[i] == token_char[j] || !str[i] || str[i] == ' ')
+	  return (i);
+      }
+     return (i);
     
 }
 
 int			find_token(t_token *token, char *cmp)
 {
-  while (++(token->token) != 8)
+  while (++(token->token) != T_CMD)
     if (TOKEN_MATCH(token_tab[token->token], cmp) == TRUE)
-      return (token->token % 2 == 0 ? 2 : 1);
+      return (token->token % 2 == 0 && token->token < 7 ? 2 : 1);
   return (get_data_len(cmp));
 }
 
@@ -94,6 +99,8 @@ int			add_token_in_list(t_token *root, int i)
 
 int			tokenizer_parsing(t_token *root, int i)
 {
+  //printf("data = '%c'\n", root->data[i]);
+  //sleep(1);
   if (root->data[i] == '\0')
     return (SUCCESS);
   if (IS_SEP(root->data[i]) == FALSE)
@@ -130,9 +137,10 @@ t_token			*tokenizer(char *str)
 int		main(int ac, char **av)
 {
   t_token		*root;
-
-  char	*str = strdup(av[1]);
-
-  root = tokenizer(str);
-  print_data(root);
+  char	*str;
+  while (str = gnl(0))
+    {
+      root = tokenizer(str);
+      print_data(root);
+    }
 }

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Fri Apr 18 00:51:03 2014 chalie_a
-** Last update Fri Apr 18 06:30:58 2014 chalie_a
+** Last update Fri Apr 18 17:48:30 2014 chalie_a
 */
 
 #ifndef TOKENIZER_H_
@@ -32,8 +32,8 @@ typedef struct		s_token
 #define TOKEN_MATCH(s1, s2)	s1[0] == s2[0] && (s1[1] == s2[1] || s1[1] == 0) ? TRUE : FALSE
 
 
-#define T_CHAR "><|&;"
-#define T_CHAR_NBR 5
+#define T_CHAR "><|&`;"
+#define T_CHAR_NBR 6
 
 #define T_RED_CC 0
 #define T_RED_C  1
@@ -42,7 +42,12 @@ typedef struct		s_token
 #define T_OR	 4
 #define T_PIPE	 5
 #define T_AND	 6
-#define T_SEM	 7
-#define T_CMD	 8
-#define T_EOL	 9
+#define T_AMP	 7
+#define T_BACK	 8
+#define T_SEM	 9
+#define T_CMD	 10
+#define T_EOL	 11
+
+#define T_NBR	12
+
 #endif /* !TOKENIZER_H_ */
