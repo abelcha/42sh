@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Sun Apr 20 14:53:49 2014 chalie_a
+** Last update Sun Apr 20 15:33:08 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -23,17 +23,10 @@ static const char           *token_tab[T_NBR] = {
   "DATA",
   "END_OF_LINE"};
 
-void                    print_token(t_token *tmp)
+int			lexical_error(t_cmd *cmd, t_token *token)
 {
-  int		i;
 
-  i = -1;
-  printf("token = %s\n                        \"", token_tab[tmp->token]);
-  while (++i < tmp->data_size)
-    printf("%c", tmp->data[i]);
-  printf("\"\n\n");
 }
-
 
 t_parse_tree		*init_tree()
 {
@@ -48,7 +41,9 @@ t_parse_tree		*init_tree()
 
 int		add_data_in_cmd(t_cmd *cmd, t_token *token)
 {
-  printf("yolo\n");
+  if (!cmd)
+    return (0);
+  // fprintf(stderr, "add data in cmd\n");
   cmd->stock[cmd->size] = token->data;
   cmd->stock[cmd->size][token->data_size] = 0;
   ++(cmd->size);
@@ -59,7 +54,7 @@ int		add_token_in_node(t_parse_tree *tmp, t_token *token)
 {
 //  if (lexical_error(tmp, token) == TRUE)
 //   return (FAILURE);
-
+  // fprintf(stderr, "add token in node\n");
   if (token->token == T_PIPE)
     create_new_cmd(tmp->cmd);
   if (token->token == T_CMD)
@@ -70,7 +65,7 @@ int		add_token_in_node(t_parse_tree *tmp, t_token *token)
 int			create_new_cmd(t_cmd *elem)
 {
   t_cmd		*newelem;
-
+  // fprintf(stderr, "create new cmd\n");
   if (!(newelem = calloc(1, sizeof(t_cmd))))
     return (FAILURE);
   newelem->stock = calloc(128, sizeof(char));
@@ -113,7 +108,7 @@ int			create_new_tree_node(t_parse_tree *root, t_token *token)
   t_parse_tree		*new;
   t_cmd			*next_elem;
 
-  printf("lol\n");
+  //fprintf(stderr, "create new tree node\n");
   if (!(new = calloc(1, sizeof(t_parse_tree))))
     return (FAILURE);
   if (!(new->cmd = init_cmd()))
@@ -140,12 +135,18 @@ int		display_tree(t_parse_tree *root)
       temp = tmp->cmd;
       while ((temp = temp->next) != tmp->cmd)
 	{
-	  temp != tmp->cmd->next ? printf("--------------\n") : 0;
+	  if (temp != tmp->cmd->next)
+	    {
+	      //      free(temp->prev->stock);
+	      //free(temp->prev);
+	      printf("--------------\n");
+	    }	  
 	  int	i = -1;
 	  while (temp->stock[++i])
 	    printf("data = %s\n", temp->stock[i]);
 	}
       tmp = tmp->next;
+      //free(tmp->prev);
     }
 }
 
@@ -157,5 +158,8 @@ int		lexical_analysis(t_token *token)
     return (FAILURE);
   fill_tree(root, token);
   display_tree(root);
+  free(token->data);
+  free(token);
+  free(root);
 }
 
