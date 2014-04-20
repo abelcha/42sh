@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Sun Apr 20 10:26:58 2014 chalie_a
+** Last update Sun Apr 20 18:16:16 2014 chalie_a
 */
 
 char	*gnl(int);
@@ -122,13 +122,32 @@ t_token			*tokenizer(char *str)
   return (root);
 }
 
+void		free_tokens(t_token *root)
+{
+  t_token	*tmp;
+  t_token	*save;
+
+  save = root->prev;
+  tmp = root;
+  while ((tmp = tmp->next) != root)
+    free(tmp->prev);
+  free(save);
+}
+
 int		main(int ac, char **av)
 {
   t_token		*root;
   char	*str;
-  while (str = gnl(0))
+  static int u = -1;
+
+  while (str = get_next_line(0))
     {
       root = tokenizer(str);
       lexical_analysis(root);
+      free(str);
+      free_tokens(root);
+      if (++u > 100000)
+	exit(0);
+      printf("u ==  %d\n", u);
     }
 }
