@@ -5,21 +5,26 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Fri Apr 18 18:09:30 2014 chalie_a
+** Last update Sun Apr 20 10:26:58 2014 chalie_a
 */
+
+char	*gnl(int);
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "tokenizer.h"
 
-static const char		*token_tab[T_NBR] = {"<<", "<",
-						     ">>", ">",
-						     "||", "|",
-						     "&&", "&",
-						     "`", ";",
-						     "DATA",
-						     "END_OF_LINE"};
+static const char           *token_tab[T_NBR] = {
+  "&>", "<",
+  ">&", ">",
+  "||", "|",
+  "&&", "&",
+  ">>", "`",
+  "<<", ";",
+  "DATA",
+  "END_OF_LINE"};
+
 
 void			print_data(t_token *root)
 {
@@ -35,18 +40,6 @@ void			print_data(t_token *root)
       printf("\"\n\n");
     }
   printf("END_OF_LINE\n");
-}
-
-int			is_separator(char c)
-{
-  static const char	cmp[2] = {SPACE, TAB};
-  int			i;
-  
-  i = -1;
-  while (++i < 3)
-    if (cmp[i] == c)
-      return (TRUE);
-  return (FALSE);
 }
 
 int			add_elem(t_token *elem, t_token	*newelem)
@@ -68,19 +61,16 @@ int			get_data_len(char *str)
   j = -1;
   while (str[++i] && (j = -1))
     while (++j < T_CHAR_NBR)
-      { 
-	if (str[i] == token_char[j] || !str[i] || str[i] == ' ')
-	  return (i);
-      }
-     return (i);
-    
+      if (str[i] == token_char[j] || !str[i] || str[i] == ' ')
+	return (i);
+  return (i);
 }
 
 int			find_token(t_token *token, char *cmp)
 {
   while (++(token->token) != T_CMD)
     if (TOKEN_MATCH(token_tab[token->token], cmp) == TRUE)
-      return (token->token % 2 == 0 && token->token < 7 ? 2 : 1);
+      return (token->token % 2 == 0 ? 2 : 1);
   return (get_data_len(cmp));
 }
 
@@ -99,8 +89,6 @@ int			add_token_in_list(t_token *root, int i)
 
 int			tokenizer_parsing(t_token *root, int i)
 {
-  //printf("data = '%c'\n", root->data[i]);
-  //sleep(1);
   if (root->data[i] == '\0')
     return (SUCCESS);
   if (IS_SEP(root->data[i]) == FALSE)
@@ -141,6 +129,6 @@ int		main(int ac, char **av)
   while (str = gnl(0))
     {
       root = tokenizer(str);
-      print_data(root);
+      lexical_analysis(root);
     }
 }
