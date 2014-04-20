@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Fri Apr 18 00:51:03 2014 chalie_a
-** Last update Fri Apr 18 17:48:30 2014 chalie_a
+** Last update Sat Apr 19 19:08:17 2014 chalie_a
 */
 
 #ifndef TOKENIZER_H_
@@ -30,7 +30,6 @@ typedef struct		s_token
 #define IS_ESCAPED(i, str)      i == 0 || str[i - 1] != '\\' ? FALSE : TRUE
 #define IS_SEP(c)		(c != SPACE && c != TAB) ? FALSE : TRUE
 #define TOKEN_MATCH(s1, s2)	s1[0] == s2[0] && (s1[1] == s2[1] || s1[1] == 0) ? TRUE : FALSE
-
 
 #define T_CHAR "><|&`;"
 #define T_CHAR_NBR 6
