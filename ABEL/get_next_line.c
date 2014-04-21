@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 17:05:51 2014 chalie_a
-** Last update Sun Apr 20 17:05:54 2014 chalie_a
+** Last update Sun Apr 20 21:12:58 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -77,7 +77,7 @@ static char		*conclude(char *line, int j)
   return (line);
 }
 
-char			*get_next_line(const int fd)
+char			*gnl(const int fd)
 {
   char			*line;
   int			j;
