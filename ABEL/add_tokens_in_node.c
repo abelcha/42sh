@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon Apr 21 05:59:02 2014 chalie_a
+** Last update Tue Apr 22 18:26:40 2014 chalie_a
 */
 
 #define LAST_PIPE token->next->token == T_EOL ? 1 : 0
@@ -31,11 +31,27 @@ int			is_redir(int t)
   return (0); 
 }
 
+int			cmd_in_background(t_parse_tree *tmp, t_token *token)
+{
+  if (tmp->cmd->prev->background == 1)
+    return (lex_error(token->token, AFTER, token->prev->token));
+  tmp->cmd->prev->background = 1;
+  token->prev->next = token->next;                                                                                   
+  token->next->prev = token->prev;                                                                                   
+  if (token)                                                                                                         
+    {                                                                                                                
+      free(token);                                                                                                   
+      token = NULL;                                                                                                  
+    } 
+  return (SUCCESS);
+}
+
 int			add_token_in_node(t_parse_tree *tmp, t_token *token)
 {
   int			result;
 
-
+  if (token->token == T_AMP)
+    return (cmd_in_background(tmp, token));
   if (token->token == T_PIPE)
     result = LAST_PIPE ? expected_after_pipe() : create_new_cmd_node(tmp->cmd);
   else if (IN_RED(token->token) || OUT_RED(token->token))

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Tue Apr 22 07:29:19 2014 chalie_a
+** Last update Tue Apr 22 18:10:34 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -57,6 +57,7 @@ static int		fill_tree(t_parse_tree *root, t_token *beg)
       return (FAILURE);
   if (LLG(token->prev->token))
     {
+      return (lex_error(token->prev->token, BEFORE, token->token));
       printf("NIKTAMERERERER\n");
       return (FAILURE);
     }

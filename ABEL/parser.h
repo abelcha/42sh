@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Tue Apr 22 06:45:06 2014 chalie_a
+** Last update Tue Apr 22 18:14:34 2014 chalie_a
 */
 
 #ifndef PARSER_H_
@@ -26,6 +26,7 @@ typedef struct		s_cmd
   int			size;
   char			*path;
   char			**stock;
+  int			background;
   struct s_red		*red;
   struct s_cmd		*prev;
   struct s_cmd		*next;

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon Apr 21 06:07:46 2014 chalie_a
+** Last update Tue Apr 22 18:27:32 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -30,6 +30,8 @@ void		display_tree(t_parse_tree *root)
 	{
 	  if (temp != tmp->cmd->next)
 	      printf("|||||PIPE||||\n");
+	  if (temp->background == 1)
+	    printf("========> BACKGROUND\n");
 	  int	i = -1;
 	  while (temp->stock && temp->stock[++i])
 	    printf("data = %s\n", temp->stock[i]);
