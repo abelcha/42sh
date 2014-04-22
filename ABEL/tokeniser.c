@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Sun Apr 20 23:46:50 2014 chalie_a
+** Last update Tue Apr 22 06:07:42 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -28,13 +28,18 @@ void			free_tokens(t_token *root)
 int			main(int ac, char **av)
 {
   t_token		*root;
+  t_parse_tree		*tree;
   char			*str;
+  int			i = 1;
 
   while ((str = gnl(0)))
     {
       root = get_tokens(str);
-      start_parsing(root);
+      if ((tree = start_parsing(root)))
+	free_tree(tree);
       free(str);
       free_tokens(root);
+      if (++i > 10000)
+	return (0);
     }
 }

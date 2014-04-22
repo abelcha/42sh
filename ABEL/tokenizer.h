@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Fri Apr 18 00:51:03 2014 chalie_a
-** Last update Mon Apr 21 04:49:51 2014 chalie_a
+** Last update Tue Apr 22 07:26:01 2014 chalie_a
 */
 
 #ifndef TOKENIZER_H_
@@ -30,8 +30,8 @@ typedef struct		s_token
 #define IS_ESCAPED(i, str)      i == 0 || str[i - 1] != '\\' ? FALSE : TRUE
 #define IS_SEP(c)		(c != SPACE && c != TAB) ? FALSE : TRUE
 #define TOKEN_MATCH(s1, s2)	s1[0] == s2[0] && (s1[1] == s2[1] || s1[1] == 0) ? TRUE : FALSE
-#define IS_MAJOR(c)		(c == T_OR || c == T_AND || c == T_SEM || c == T_EOL) ? 1 : 0
-
+#define IS_MAJOR(c)		((c == T_OR || c == T_AND || c == T_SEM || c == T_EOL) ? 1 : 0)
+#define LLG(c)			((c == T_PIPE || c == T_AND || c == T_OR || c == T_SEM) ? 1 : 0) 
 #define T_CHAR "><|&`;"
 #define T_CHAR_NBR 6
 
@@ -53,9 +53,9 @@ typedef struct		s_token
 
 #define IN_RED(c)		(c == T_RED_C || c == T_RED_CC) ? 1 : 0
 #define OUT_RED(c)		(c == T_RED_D || c == T_RED_DD || c == 0 || c == 2) ? 1 : 0
+#include "parser.h"
 
-
-int             start_parsing(t_token *);
+t_parse_tree	*start_parsing(t_token *);
 int		add_token_in_list(t_token *, int);
 t_token		*get_tokens(char *);
 

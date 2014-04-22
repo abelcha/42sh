@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:42:24 2014 chalie_a
-** Last update Mon Apr 21 00:32:25 2014 chalie_a
+** Last update Tue Apr 22 06:06:33 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -21,15 +21,31 @@ static int			x_free(void *ptr)
   return (42);
 }
 
+static void			free_red(t_red *root)
+{
+  t_red				*tmp;
+  t_red				*save;
+
+  if (!root)
+    return ;
+  save = root->prev;
+  tmp = root;
+  while ((tmp = tmp->next) != root)
+    x_free(tmp->prev);
+  x_free(save);
+}
 static void			free_cmd(t_cmd *root)
 {
   t_cmd				*tmp;
   t_cmd				*save;
 
+  if (!root)
+    return ;
   save = root->prev;
   tmp = root;
   while ((tmp = tmp->next) != root)
     {
+      free_red(tmp->red);
       x_free(tmp->prev->stock);
       free(tmp->prev);
     }
@@ -37,7 +53,7 @@ static void			free_cmd(t_cmd *root)
   x_free(save);
 }
 
-void				free_tree(t_parse_tree *root)
+void				*free_tree(t_parse_tree *root)
 {
   t_parse_tree			*tmp;
   t_parse_tree			*save;
@@ -52,5 +68,6 @@ void				free_tree(t_parse_tree *root)
     }
   free_cmd(save->cmd);
   x_free(save);
+  return (NULL);
 }
 

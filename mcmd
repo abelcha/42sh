@@ -1,0 +1,1 @@
+find ./ | grep .c > tmp && awk '{ printf tt; print; }' tmp > Makefile && sed -i    's/$/\/' Makefile  && rm tmp

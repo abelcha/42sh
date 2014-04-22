@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Mon Apr 21 05:35:42 2014 chalie_a
+** Last update Tue Apr 22 06:09:57 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -29,8 +29,11 @@ int		error_handling(int tk1, int tk2)
  {
    token->prev->next = token->next;
    token->next->prev = token->prev;
-   //   if (token)
-   // free(token);
+   if (token)
+     {
+       free(token);
+       token = NULL;
+     }
    return (SUCCESS);
 }
 
@@ -40,6 +43,7 @@ t_red		*init_red()
 
   if (!(root = calloc(1, sizeof(t_red))))
     return (NULL);
+  //printf("allocated root = %p\n", root);
   root->prev = root;
   root->next = root;
   return (root);
@@ -49,8 +53,9 @@ int			add_elem(t_red *elem)
 {
   t_red		*newelem;
 
-  if (!(newelem = malloc(sizeof(t_red))))
-    return (FAILURE);  
+  if (!(newelem = calloc(1, sizeof(t_red))))
+    return (FAILURE);
+  //  printf("allocated node = %p\n", root);
   newelem->prev = elem->prev;
   newelem->next = elem;
   elem->prev->next = newelem;

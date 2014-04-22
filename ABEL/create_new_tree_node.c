@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon Apr 21 03:25:27 2014 chalie_a
+** Last update Tue Apr 22 06:31:33 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -38,8 +38,6 @@ int			create_new_tree_node(t_parse_tree *root, t_token *token)
   t_parse_tree		*new;
   t_cmd			*next_elem;
 
-  if (IS_MAJOR(token->next->token))
-    return (lex_error(token->token, token->next->token));
   if (!(new = calloc(1, sizeof(t_parse_tree))))
     return (FAILURE);
   if (!(new->cmd = init_cmd()))

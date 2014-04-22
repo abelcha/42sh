@@ -5,13 +5,14 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon Apr 21 02:26:05 2014 chalie_a
+** Last update Tue Apr 22 07:29:19 2014 chalie_a
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "tokenizer.h"
 #include "parser.h"
+
 
 static t_parse_tree	*init_tree()
 {
@@ -24,16 +25,27 @@ static t_parse_tree	*init_tree()
   return (root);
 }
 
-static int			add_token_or_create_node(t_parse_tree *root,
+int			lexical_error(t_parse_tree *root, t_token *token)
+{
+  if (token->prev->token != T_CMD  && (IS_MAJOR(token->token)))
+    return (lex_error(token->prev->token, BEFORE, token->token));
+  if (token->token == T_PIPE && token->prev->token != T_CMD)
+    return (lex_error(token->token, AFTER, token->prev->token));
+  return (SUCCESS);
+}
+
+static int		add_token_or_create_node(t_parse_tree *root,
 							 t_token *token)
 {
+  if (lexical_error(root, token) == FAILURE)
+    return (FAILURE);
   if (IS_MAJOR(token->token))
     return (create_new_tree_node(root, token));
   else
     return (add_token_in_node(root->prev, token));
 }
 
-int			fill_tree(t_parse_tree *root, t_token *beg)
+static int		fill_tree(t_parse_tree *root, t_token *beg)
 {
   t_token		*token;
 
@@ -43,19 +55,23 @@ int			fill_tree(t_parse_tree *root, t_token *beg)
   while ((token = token->next) != beg)
     if (add_token_or_create_node(root, token) == FAILURE)
       return (FAILURE);
+  if (LLG(token->prev->token))
+    {
+      printf("NIKTAMERERERER\n");
+      return (FAILURE);
+    }
   return (SUCCESS);
 }
 
-int		start_parsing(t_token *token)
+t_parse_tree		*start_parsing(t_token *token)
 {
-  t_parse_tree	*root;
+  t_parse_tree		*root;
 
   if (!(root = init_tree()))
-    return (FAILURE);
+    return (NULL);
   if (fill_tree(root, token) == FAILURE)
-    return (FAILURE);
+    return (free_tree(root));
   display_tree(root);
-  free_tree(root);
-  return (SUCCESS);
+  return (root);
 }
 
