@@ -1,1 +1,4 @@
-find ./ | grep .c > tmp && awk '{ printf tt; print; }' tmp > Makefile && sed -i    's/$/\/' Makefile  && rm tmp
+find ./ | grep .c > tmp &&
+ awk '{ printf "\t\t"; print; }' tmp > Makefile &&
+  sed -i    's/$/\/' Makefile
+&& rm tmp   

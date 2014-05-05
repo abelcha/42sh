@@ -16,6 +16,8 @@ SRC	=	./free_parse_tree.c\
 		./create_cmd_node.c\
 		./handle_redirections.c\
 		./main_parsing.c\
+		./get_paths.c	\
+		./exec2.c	\
 
 LIB	=	./gnl.c\
 

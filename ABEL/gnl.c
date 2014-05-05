@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 17:05:51 2014 chalie_a
-** Last update Mon Apr 21 22:48:38 2014 chalie_a
+** Last update Wed Apr 23 11:56:43 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -87,12 +87,15 @@ char			*gnl(const int fd)
 int		main()
 {
   char		*str;
-
+  int		i = -1;
   while ((str = gnl(0)))
     {
        printf("%s\n", str);
        free(str);
+       if (++i > 10000)
+	 break;
     }
-  free(str);
+  //  free(str);
 }
+
 */

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Tue Apr 22 18:27:32 2014 chalie_a
+** Last update Mon May  5 16:51:38 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -20,8 +20,8 @@ void		display_tree(t_parse_tree *root)
   t_parse_tree	*tmp;
   t_cmd		*temp;
 
-  tmp = root->next;
-  while (tmp != root)
+    tmp = root->next;
+    /*  while (tmp != root)
     {
       printf("==========================\n");
       printf("token = %s\n", token_tab[tmp->token]);
@@ -44,5 +44,5 @@ void		display_tree(t_parse_tree *root)
 	      }
 	}
       tmp = tmp->next; 
-    }
+      }*/
 }
