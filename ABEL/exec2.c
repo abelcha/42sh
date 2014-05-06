@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Tue May  6 15:46:26 2014 chalie_a
+** Last update Tue May  6 17:16:12 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -34,35 +34,6 @@ static const char	*sig_tab[11] = {"Hangup",
 					" ",
 					"Segmentation Fault"};
 
-static void	close_pipes(int *pipes, int pipe_nbr)
-{
-  int		i;
-
-  i = -1;
-  while (++i < pipe_nbr)
-    close(pipes[i]);
-}
-
-int		do_pipes(int *pipes, int pipe_nbr)
-{
-  int		i;
-
-  i = -1;
-  while (++i < pipe_nbr)
-    {
-      if (pipe(&pipes[i * 2]) < 0)
-	return (FAILURE);
-    }
-  return (SUCCESS);
-}
-
-int		signal_ctz(int sig)
-{
-  printf("Error Wait Failed");
-  exit(FAILURE);
-  return (sig);
-}
-
 int		wait_pipes(int pipe_nbr, int *pid)
 {
   int		i;
@@ -82,23 +53,38 @@ int		wait_pipes(int pipe_nbr, int *pid)
 
 int		exec_each_pipe(t_cmd *cmd, int num_pipes, int *pipefds, int *pid)
 {
-  int		j;
   t_cmd		*tmp;
+  int		pipefd[2];
+  int		prevpipe;
 
   tmp = cmd;
-  j = 0;
+  prevpipe = -1;
   while ((tmp = tmp->next) != cmd)
     {
-      if ((*pid = fork())== 0)
+      if (tmp->next != cmd)
+	pipe(pipefd);
+      if ((*pid = fork()) == 0)
 	{
-	  if (tmp->next != cmd && ((dup2(pipefds[j + 1], STDOUT_FILENO)) < 0))
+	  if (tmp->next != cmd && dup2(pipefd[1], STDOUT_FILENO) < 0)
 	    return (FAILURE);
-	  if (j != 0 && ((dup2(pipefds[j - 2], STDIN_FILENO) < 0)))
+	  if (prevpipe != -1 && dup2(prevpipe, STDIN_FILENO) < 0)
 	    return (FAILURE);
-	  close_pipes(pipefds, num_pipes * 2);
 	  execve(tmp->path, tmp->stock, envp);
+	  close(pipefd[1]);
+	  return (FAILURE);
 	}
-      j += 2;
+      else if (*pid > 0)
+	{
+	  if (prevpipe != -1)
+	    close(prevpipe);
+	  if (tmp->next != cmd)
+	    {
+	      close(pipefd[1]);
+	      prevpipe = pipefd[0];
+	    }
+	}
+      else
+	return (FAILURE);
       ++pid;
     }
   return (SUCCESS);
@@ -112,9 +98,7 @@ int		exec(t_cmd *cmd, int num_pipes)
   memset(pid, 0, 42);
   if (!(pipefds = calloc(2 * num_pipes, sizeof(int))))
     return (FAILURE);
-  do_pipes(pipefds, num_pipes);
   exec_each_pipe(cmd, num_pipes, pipefds, pid);
-  close_pipes(pipefds, num_pipes * 2);
   wait_pipes(num_pipes, pid);
   free(pipefds);
   return (SUCCESS);
