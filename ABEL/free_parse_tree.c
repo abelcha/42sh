@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:42:24 2014 chalie_a
-** Last update Tue Apr 22 06:06:33 2014 chalie_a
+** Last update Tue May  6 11:57:08 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -46,9 +46,11 @@ static void			free_cmd(t_cmd *root)
   while ((tmp = tmp->next) != root)
     {
       free_red(tmp->red);
+      x_free(tmp->prev->path);
       x_free(tmp->prev->stock);
       free(tmp->prev);
     }
+  x_free(save->path);
   x_free(save->stock);
   x_free(save);
 }

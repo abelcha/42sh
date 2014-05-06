@@ -5,11 +5,12 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Mon May  5 17:40:35 2014 chalie_a
+** Last update Tue May  6 12:28:27 2014 chalie_a
 */
 
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "sh.h"
 #include "parser.h"
 #include "tokenizer.h"
@@ -76,7 +77,13 @@ int			main(int ac, char **av, char **env)
       free(str);
       free_tokens(root);
       if (++i > 10000)
-	return (0);
+	{
+	  i = -1;
+	  while (paths[++i])
+	    free(paths[i]);
+	  free(paths);
+	  return (0);
+	}
       write(1, ">", 1);
     }
 }

@@ -1,6 +1,6 @@
 
 
-CC	=	clang -g3
+CC	=	clang -g3 -Wall
 
 NAME	=	42sh
 

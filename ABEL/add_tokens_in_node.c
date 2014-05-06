@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon May  5 17:45:22 2014 chalie_a
+** Last update Tue May  6 11:24:08 2014 chalie_a
 */
 
 #define LAST_PIPE token->next->token == T_EOL ? 1 : 0
@@ -52,7 +52,10 @@ static int		find_path(t_cmd *cmd)
   i = 0;
   if (((cmd->stock[0][0] == '.' && cmd->stock[0][1] == '/') || cmd->stock[0][0] == '/')
       &&  (access(cmd->stock[0], X_OK) == 0))
-    return (strdup(cmd->stock[0]));
+    {
+      cmd->path = strdup(cmd->stock[0]);
+      return (SUCCESS);
+    }
   while (paths[i])
     {
       str = my_strcat(paths[i], cmd->stock[0]);

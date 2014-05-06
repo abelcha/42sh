@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Mon May  5 17:48:35 2014 chalie_a
+** Last update Tue May  6 12:28:58 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -90,19 +90,19 @@ int		exec_each_pipe(t_cmd *cmd, int num_pipes, int *pipefds, int *pid)
   j = 0;
   while ((tmp = tmp->next) != cmd)
     {
-      *pid = fork();
-      if (*pid == 0)
+      if ((*pid = fork())== 0)
 	{
 	  if (tmp->next != cmd && ((dup2(pipefds[j + 1], STDOUT_FILENO)) < 0))
 	    return (FAILURE);
 	  if (j != 0 && ((dup2(pipefds[j - 2], STDIN_FILENO) < 0)))
 	    return (FAILURE);
 	  close_pipes(pipefds, num_pipes * 2);
-	  execvp(tmp->stock[0], tmp->stock);
+	  execve(tmp->path, tmp->stock, envp);
 	}
       j += 2;
       ++pid;
     }
+  return (SUCCESS);
 }
 
 int		exec(t_cmd *cmd, int num_pipes)
@@ -110,26 +110,15 @@ int		exec(t_cmd *cmd, int num_pipes)
   int		*pipefds;
   int		pid[42];
 
+  memset(pid, 0, 42);
   if (!(pipefds = calloc(2 * num_pipes, sizeof(int))))
     return (FAILURE);
    do_pipes(pipefds, num_pipes);
    exec_each_pipe(cmd, num_pipes, pipefds, pid);
    close_pipes(pipefds, num_pipes * 2);
    wait_pipes(num_pipes, pid);
+   free(pipefds);
    return (SUCCESS);
-}
-
-char		***get_stock(t_cmd *root)
-{
-  t_cmd		*tmp;
-  char		***stock;
-  int		x = -1;
-
-  stock = calloc(400, 1);
-  tmp = root;
-  while ((tmp = tmp->next) != root)
-    stock[++x] = tmp->stock;
-  exec(root, x);
 }
 
 int		exec_cmd(t_parse_tree *root)
@@ -139,9 +128,13 @@ int		exec_cmd(t_parse_tree *root)
   return_value = 0;
   tmp = root;
   while ((tmp = tmp->next) != root)
-    if (tmp->prev->token == 0 ||
-	tmp->token == T_SEM ||
-	(tmp->token == T_AND && return_value == 0) ||
-	(tmp->token == T_OR && return_value > 0))
-      exec(tmp->cmd, tmp->nb_pipes + 1);
+    {
+      if (tmp->cmd->next->stock[0])
+	if (tmp->prev->token == 0 ||
+	    tmp->token == T_SEM ||
+	    (tmp->token == T_AND && return_value == 0) ||
+	    (tmp->token == T_OR && return_value > 0))
+	  exec(tmp->cmd, tmp->nb_pipes + 1);
+    }
+  return (SUCCESS);
 }

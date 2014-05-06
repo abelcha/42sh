@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Fri Apr 25 22:29:52 2014 chalie_a
+** Last update Tue May  6 12:29:53 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -35,7 +35,8 @@ typedef struct		s_arch
   t_exe			*exe;
 }			t_arch;
 
+#include "parser.h"
 
 char		*gnl(const int);
-
+int		exec_cmd(t_parse_tree *root);
 #endif /* !SH_H_ */
