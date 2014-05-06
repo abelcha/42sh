@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Tue May  6 12:28:27 2014 chalie_a
+** Last update Tue May  6 15:34:01 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -14,6 +14,8 @@
 #include "sh.h"
 #include "parser.h"
 #include "tokenizer.h"
+
+#define PROMPT		1, "\033[39;31m>\033[0m", 13
 
 char			**paths;
 char			**envp;
@@ -68,8 +70,8 @@ int			main(int ac, char **av, char **env)
 
   envp = env;
   paths = get_paths(get_env(env, "PATH="), ':');
-  write(1, ">", 1);
-  while ((str = gnl(0)))
+
+  while (write(PROMPT) && (str = gnl(0)))
     {
       root = get_tokens(str);
       if ((tree = start_parsing(root)))
@@ -84,6 +86,5 @@ int			main(int ac, char **av, char **env)
 	  free(paths);
 	  return (0);
 	}
-      write(1, ">", 1);
     }
 }

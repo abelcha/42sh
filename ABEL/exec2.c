@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Tue May  6 12:28:58 2014 chalie_a
+** Last update Tue May  6 15:46:26 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -19,7 +19,7 @@
 #include "sh.h"
 #include "parser.h"
 
-extern char **envp;
+extern char	**envp;
 int		return_value;
 
 static const char	*sig_tab[11] = {"Hangup",
@@ -32,7 +32,6 @@ static const char	*sig_tab[11] = {"Hangup",
 					"Floating point exception",
 					"Killed",
 					" ",
-
 					"Segmentation Fault"};
 
 static void	close_pipes(int *pipes, int pipe_nbr)
@@ -109,16 +108,16 @@ int		exec(t_cmd *cmd, int num_pipes)
 {
   int		*pipefds;
   int		pid[42];
-
+  
   memset(pid, 0, 42);
   if (!(pipefds = calloc(2 * num_pipes, sizeof(int))))
     return (FAILURE);
-   do_pipes(pipefds, num_pipes);
-   exec_each_pipe(cmd, num_pipes, pipefds, pid);
-   close_pipes(pipefds, num_pipes * 2);
-   wait_pipes(num_pipes, pid);
-   free(pipefds);
-   return (SUCCESS);
+  do_pipes(pipefds, num_pipes);
+  exec_each_pipe(cmd, num_pipes, pipefds, pid);
+  close_pipes(pipefds, num_pipes * 2);
+  wait_pipes(num_pipes, pid);
+  free(pipefds);
+  return (SUCCESS);
 }
 
 int		exec_cmd(t_parse_tree *root)
