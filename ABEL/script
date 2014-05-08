@@ -1,1 +1,0 @@
-make && echo $1 | ./42sh

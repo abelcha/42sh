@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Mon May  5 18:38:52 2014 chalie_a
+** Last update Thu May  8 11:46:25 2014 chalie_a
 */
 
 #ifndef PARSER_H_
@@ -43,18 +43,19 @@ typedef struct		s_parse_tree
 }			t_parse_tree;
 
 #include "tokenizer.h"
-
+#include "sh.h"
 #define		MEM_POOL	128
 #define		BEFORE		0
 #define		AFTER		1
 
+int		find_path(t_cmd *, t_execution *exe);
 int             lex_error(int, int, int);
 int		create_new_cmd_node(t_cmd *);
 int		create_new_tree_node(t_parse_tree *, t_token *);
-int		add_token_in_node(t_parse_tree *, t_token *);
+int		add_token_in_node(t_parse_tree *, t_token *, t_execution *exe);
 void   		*free_tree(t_parse_tree *);
 void		display_tree(t_parse_tree *);
 int		redirections(t_cmd *, t_token *);
 int		expected_after_pipe();
-
+int		g_exit;
 #endif /* !PARSER_H_ */

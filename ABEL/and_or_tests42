@@ -1,0 +1,17 @@
+bad && ls;
+
+bad && ls;
+
+bad || ls;
+
+ls && bad;
+
+ls || bad;
+
+ls file	&& pwd;
+
+ls file || pwd;
+
+pwd && ls file;
+
+pwd && ls file;

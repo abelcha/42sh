@@ -1,10 +1,12 @@
 
-
 CC	=	clang -g3 -Wall
 
 NAME	=	42sh
 
 SRC	=	./free_parse_tree.c\
+		./main.c		\
+		./exec_loop.c	\
+		./find_cmd_path.c	\
 		./tokeniser.c\
 		./add_tokens_in_list.c\
 		./token_tab.c\
@@ -17,7 +19,7 @@ SRC	=	./free_parse_tree.c\
 		./handle_redirections.c\
 		./main_parsing.c\
 		./get_paths.c	\
-		./exec2.c	\
+		./exec_main.c	\
 
 LIB	=	./gnl.c\
 

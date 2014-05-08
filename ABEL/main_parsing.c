@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Tue May  6 12:30:04 2014 chalie_a
+** Last update Thu May  8 12:50:43 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -27,7 +27,7 @@ static t_parse_tree	*init_tree()
 
 int			lexical_error(t_parse_tree *root, t_token *token)
 {
-  if (token->prev->token != T_CMD  && (IS_MAJOR(token->token)))
+  if (token->prev->token != T_CMD && (IS_MAJOR(token->token)))
     return (lex_error(token->prev->token, BEFORE, token->token));
   if (token->token == T_PIPE && token->prev->token != T_CMD)
     return (lex_error(token->token, AFTER, token->prev->token));
@@ -35,17 +35,17 @@ int			lexical_error(t_parse_tree *root, t_token *token)
 }
 
 static int		add_token_or_create_node(t_parse_tree *root,
-							 t_token *token)
+						 t_token *token, t_execution *exe)
 {
   if (lexical_error(root, token) == FAILURE)
     return (FAILURE);
   if (IS_MAJOR(token->token))
     return (create_new_tree_node(root, token));
   else
-    return (add_token_in_node(root->prev, token));
+    return (add_token_in_node(root->prev, token, exe));
 }
 
-static int		fill_tree(t_parse_tree *root, t_token *beg)
+static int		fill_tree(t_parse_tree *root, t_token *beg, t_execution *exe)
 {
   t_token		*token;
 
@@ -53,27 +53,22 @@ static int		fill_tree(t_parse_tree *root, t_token *beg)
   if (create_new_tree_node(root, token) == FAILURE)
     return (FAILURE);
   while ((token = token->next) != beg)
-    if (add_token_or_create_node(root, token) == FAILURE)
+    if (add_token_or_create_node(root, token, exe) == FAILURE)
       return (FAILURE);
   if (LLG(token->prev->token))
-    {
-      return (lex_error(token->prev->token, BEFORE, token->token));
-      printf("NIKTAMERERERER\n");
-      return (FAILURE);
-    }
+    return (lex_error(token->prev->token, BEFORE, token->token));
   return (SUCCESS);
 }
 
-t_parse_tree		*start_parsing(t_token *token)
+t_parse_tree		*start_parsing(t_token *token, t_execution *exe)
 {
   t_parse_tree		*root;
 
   if (!(root = init_tree()))
     return (NULL);
-  if (fill_tree(root, token) == FAILURE)
+  if (fill_tree(root, token, exe) == FAILURE)
     return (free_tree(root));
   display_tree(root);
-  exec_cmd(root);
   return (root);
 }
 

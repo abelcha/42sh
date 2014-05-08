@@ -5,21 +5,17 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Tue May  6 15:34:01 2014 chalie_a
+** Last update Thu May  8 12:01:52 2014 chalie_a
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include "sh.h"
 #include "parser.h"
+#include "my_color.h"
 #include "tokenizer.h"
-
-#define PROMPT		1, "\033[39;31m>\033[0m", 13
-
-char			**paths;
-char			**envp;
-char			**get_paths(char *, char);
 
 static int		fx(const char *env, const char *info, int len)
 {
@@ -43,7 +39,7 @@ char			*get_env(char **env, char *info)
   while (env && env[i])
     {
       if (fx(env[i], info, j) == 1)
-	return (&env[i][j]);
+	return (strdup(&env[i][j]));		//TEMPORARY STRDUP
       i++;
     }
   return (NULL);
@@ -59,32 +55,4 @@ void			free_tokens(t_token *root)
   while ((tmp = tmp->next) != root)
     free(tmp->prev);
   free(save);
-}
-
-int			main(int ac, char **av, char **env)
-{
-  t_token		*root;
-  t_parse_tree		*tree;
-  char			*str;
-  int			i = 1;
-
-  envp = env;
-  paths = get_paths(get_env(env, "PATH="), ':');
-
-  while (write(PROMPT) && (str = gnl(0)))
-    {
-      root = get_tokens(str);
-      if ((tree = start_parsing(root)))
-	free_tree(tree);
-      free(str);
-      free_tokens(root);
-      if (++i > 10000)
-	{
-	  i = -1;
-	  while (paths[++i])
-	    free(paths[i]);
-	  free(paths);
-	  return (0);
-	}
-    }
 }

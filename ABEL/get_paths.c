@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.net>
 ** 
 ** Started on  Mon Oct 21 11:45:34 2013 chalie_a
-** Last update Wed Apr 23 12:11:54 2014 chalie_a
+** Last update Thu May  8 12:14:59 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -44,7 +44,7 @@ int		count_len(char *str, char c, int flag)
   i = 0;
   if (flag == 0)
     par = 0;
-  while (str[par] != '\0' && str[par] != c)
+  while (str && str[par] != '\0' && str[par] != c)
     {
       i++;
       par++;
@@ -60,7 +60,7 @@ int		count_word(char *str, char c)
 
   i = 0;
   count = 1;
-  while (str[i] != '\0')
+  while (str && str[i] != '\0')
     {
       if (str[i] == c)
 	count++;
@@ -76,6 +76,8 @@ char	**get_paths(char *str, char c)
   char	**tab;
 
   i = 0;
+  if (!str)
+    return (NULL);
   nb = count_word(str, c);
   tab = calloc((nb + 1), sizeof(str));
   while (i < nb)
@@ -84,6 +86,7 @@ char	**get_paths(char *str, char c)
       i++;
     }
   parsing(tab, str, nb, c);
+  free(str);
   return (tab);
 }
 
