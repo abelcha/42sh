@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Thu May  8 11:46:25 2014 chalie_a
+** Last update Thu May  8 23:23:31 2014 chalie_a
 */
 
 #ifndef PARSER_H_
@@ -48,6 +48,14 @@ typedef struct		s_parse_tree
 #define		BEFORE		0
 #define		AFTER		1
 
+int		main(int, char **, char **);
+int		speed_cmp(char *, char *);
+void		free_tokens(t_token *);
+char		**get_paths(char *, char);
+char		*get_env(char **, char *);
+void		free_token(t_token *);
+int		x_free(void *);
+int		execution_loop(t_cmd *, t_execution *);
 int		find_path(t_cmd *, t_execution *exe);
 int             lex_error(int, int, int);
 int		create_new_cmd_node(t_cmd *);
@@ -57,5 +65,4 @@ void   		*free_tree(t_parse_tree *);
 void		display_tree(t_parse_tree *);
 int		redirections(t_cmd *, t_token *);
 int		expected_after_pipe();
-int		g_exit;
 #endif /* !PARSER_H_ */

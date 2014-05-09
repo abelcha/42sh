@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.net>
 ** 
 ** Started on  Mon Oct 21 11:45:34 2013 chalie_a
-** Last update Thu May  8 12:14:59 2014 chalie_a
+** Last update Fri May  9 14:50:13 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -21,7 +21,7 @@ char	**parsing(char **tab, char *str, int nb, char c)
   while (j < nb)
     {
       k = 0;
-      while (str[i] != '\0' && str[i] != c)
+      while (str && str[i] != '\0' && str[i] != c)
 	{
 	  tab[j][k] = str[i];
 	  k++;
@@ -75,9 +75,9 @@ char	**get_paths(char *str, char c)
   int	nb;
   char	**tab;
 
-  i = 0;
+  i = 0;/*
   if (!str)
-    return (NULL);
+  return (NULL);*/
   nb = count_word(str, c);
   tab = calloc((nb + 1), sizeof(str));
   while (i < nb)

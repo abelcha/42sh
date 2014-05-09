@@ -5,21 +5,11 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:42:24 2014 chalie_a
-** Last update Tue May  6 11:57:08 2014 chalie_a
+** Last update Thu May  8 17:08:51 2014 chalie_a
 */
 
 #include <stdlib.h>
 #include "parser.h"
-
-static int			x_free(void *ptr)
-{
-  if (ptr)
-    {
-      free(ptr);
-      ptr = NULL;
-    }
-  return (42);
-}
 
 static void			free_red(t_red *root)
 {

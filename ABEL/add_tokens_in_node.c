@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Thu May  8 11:47:12 2014 chalie_a
+** Last update Thu May  8 16:41:47 2014 chalie_a
 */
 
 #define LAST_PIPE token->next->token == T_EOL ? 1 : 0
@@ -45,11 +45,7 @@ int			cmd_in_background(t_parse_tree *tmp, t_token *token)
   tmp->cmd->prev->background = 1;
   token->prev->next = token->next;                                                                                   
   token->next->prev = token->prev;                                                                                   
-  if (token)                                                                                                         
-    {                                                                                                                
-      free(token);                                                                                                   
-      token = NULL;                                                                                                  
-    } 
+  token->data = NULL;
   return (SUCCESS);
 }
 

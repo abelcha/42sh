@@ -1,16 +1,18 @@
 
-CC	=	clang -g3 -Wall
+CC	=	clang -g3
 
 NAME	=	42sh
 
 SRC	=	./free_parse_tree.c\
 		./main.c		\
 		./exec_loop.c	\
+		./env_dll.c	\
 		./find_cmd_path.c	\
 		./tokeniser.c\
 		./add_tokens_in_list.c\
 		./token_tab.c\
 		./create_new_tree_node.c\
+		./builtins.c		\
 		./semantic_analyser.c\
 		./display.c\
 		./parser_tokenizer.c\
@@ -21,9 +23,10 @@ SRC	=	./free_parse_tree.c\
 		./get_paths.c	\
 		./exec_main.c	\
 
-LIB	=	./gnl.c\
-
-
+LIB	=	./gnl.c		\
+		./free_utils.c	\
+		./strmatch.c	\
+		./my_atoi.c
 OBJ	=	$(SRC:.c=.o) $(LIB:.c=.o)
 
 CFLAGS	=	-I./ #-W -Wall -Wextra -pedantic

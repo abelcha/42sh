@@ -1,0 +1,2 @@
+cat|env|less|sort|less|more|cat|sort -r|cat|less|more|cat||less|more|cat|sort -r|cat|less|more|cat|less|sort
+ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|ls|cat|more|less|cat|less

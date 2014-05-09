@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Thu May  8 13:35:14 2014 chalie_a
+** Last update Fri May  9 14:43:26 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -40,25 +40,29 @@ int		wait_pipes(t_execution *exe)
   int		ret;
 
   i = -1;
-  while (++i < exe->nb_pipes && exe->pid[i] >= 0)
+  while (++i < exe->nb_pipes)
     {
       ret = waitpid(exe->pid[i], &status, 0);
       if (!exe->return_value)
 	exe->return_value = WEXITSTATUS(status);
     }
   if(WIFSIGNALED(status))
-    printf("%s (Core Dumped)\n", sig_tab[(WTERMSIG(status) - 1) % 13]);
+    if(WTERMSIG(status) < 13)
+      printf("%s (Core Dumped)\n", sig_tab[(WTERMSIG(status) - 1) % 13]);
   return (SUCCESS);
 }
 
 
 int		exec(t_cmd *cmd, t_execution *exe)
 {
+  int		ret;
+
   if (!(exe->pid = calloc(exe->nb_pipes, sizeof(int *))))
     return (FAILURE);
   execution_loop(cmd, exe);
-  if (exe->nb_pipes)
+  if (exe->nb_pipes && !exe->exit)
     wait_pipes(exe);
+  printf("end of proccess\n");
   free(exe->pid);
   return (SUCCESS);
 }
@@ -69,7 +73,7 @@ int		exec_cmd(t_parse_tree *root, t_execution *exe)
 
   exe->return_value = 0;
   tmp = root;
-  while ((tmp = tmp->next) != root)
+  while ((tmp = tmp->next) != root && exe->exit == 0)
     {
       exe->nb_pipes = tmp->nb_pipes + 1;
       if (tmp->cmd->next->stock[0])
@@ -79,8 +83,8 @@ int		exec_cmd(t_parse_tree *root, t_execution *exe)
 	    (tmp->token == T_OR && exe->return_value > 0))
 	  {
 	    exec(tmp->cmd, exe);
-	    printf(exe->return_value ? "\033[31mfailure\n" :
-		   "\033[32msuccess\n");
+	    printf(exe->return_value ? "\033[31mfailure %d\n" :
+		   "\033[32msuccess %d\n", exe->return_value);
 	    RST;
 	  }
     }
