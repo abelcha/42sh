@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Wed May 14 05:14:37 2014 chalie_a
+** Last update Wed May 14 21:54:44 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -37,43 +37,35 @@ int		delete_filename_token(t_token *token, int flag)
   return (SUCCESS);
 }
 
-t_red		*init_red()
+int			find_red_token(int token)
 {
-  t_red		*root;
+  static const int	tr_tab[6] = {T_RED_CC, T_RED_C, T_RED_D,
+				     T_RED_DD, T_AMP_R, T_R_AMP};
+  int			i;
 
-  if (!(root = calloc(1, sizeof(t_red))))
-    return (NULL);
-  root->prev = root;
-  root->next = root;
-  return (root);
+  i = -1;
+  while (++i < 6)
+    if (token == tr_tab[i])
+      return (i);
+  return (0);
 }
-
-int			add_elem(t_red *elem)
-{
-  t_red		*newelem;
-
-  if (!(newelem = calloc(1, sizeof(t_red))))
-    return (FAILURE);
-  newelem->prev = elem->prev;
-  newelem->next = elem;
-  elem->prev->next = newelem;
-  elem->prev = newelem;
-  return (SUCCESS);
-}
-
 
 int		redirections(t_cmd *cmd, t_token *token)
 {
+  int		red_token;
+
   if (token->next->token != T_CMD)
     return (error_handling(token->token, token->next->token));
-  if (!cmd->red)
-    if (!(cmd->red = init_red()))
+  red_token = find_red_token(token->token);
+  printf("newtoken = %d\n", red_token);
+  if (!cmd->red[red_token / 2])
+    if (!(cmd->red[red_token / 2] = calloc(1, sizeof(t_red))))
       return (FAILURE);
-  if (add_elem(cmd->red) == FAILURE)
-    return (FAILURE);
+  cmd->red[red_token / 2]->token = red_token;
+  //cmd->red[red_token / 2]->name = token->next->data;
   token->next->data[token->next->data_size] = 0;
-  cmd->red->prev->name = token->next->data;
-  cmd->red->prev->token = token->token;
+  //cmd->red->prev->name = token->next->data;
+  //cmd->red->prev->token = token->token;
   delete_filename_token(token->next, 1);
   delete_filename_token(token, 0);
   return (SUCCESS);

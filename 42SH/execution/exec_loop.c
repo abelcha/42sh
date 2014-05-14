@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Wed May 14 06:06:16 2014 chalie_a
+** Last update Wed May 14 21:09:50 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -87,7 +87,6 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
   tmp = cmd;
   exe->prev_pipe = -1;
   exe->pos = -1;
-  //open_redirections(tmp->red);
   while ((tmp = tmp->next) != cmd && exe->exit == 0)
     {
       exe->return_value = 0;
@@ -103,6 +102,5 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
 	return (FAILURE);
       exe->pid[++exe->pos] = curr_pid;
     }
-  //  close_redirections(tmp->red);
   return (SUCCESS);
 }

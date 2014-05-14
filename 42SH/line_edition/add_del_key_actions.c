@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 21:06:09 2014 chalie_a
-** Last update Tue May 13 00:34:17 2014 chalie_a
+** Last update Wed May 14 20:00:38 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -13,7 +13,7 @@
 #include <termios.h>
 #include "edit.h"
 
-static void		add_char_in_tab(const char c, char *str, const int pos)
+void			add_char_in_tab(const char c, char *str, const int pos)
 {
   int			i;
 

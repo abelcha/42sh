@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Tue May  6 12:31:12 2014 chalie_a
+** Last update Wed May 14 21:10:11 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -20,7 +20,7 @@ void		display_tree(t_parse_tree *root)
   t_parse_tree	*tmp;
   t_cmd		*temp;
 
-    tmp = root->next;
+  /*    tmp = root->next;
     while (tmp != root)
     {
       //  printf("==========================\n");
@@ -44,5 +44,5 @@ void		display_tree(t_parse_tree *root)
 	      }
 	}
       tmp = tmp->next; 
-      }
+      }*/
 }

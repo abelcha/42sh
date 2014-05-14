@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Wed May 14 19:02:18 2014 chalie_a
+** Last update Wed May 14 19:41:31 2014 chalie_a
 */
 
 #include "edit.h"
@@ -75,7 +75,7 @@ void				do_key_actions(t_line *line)
 						  delete_word,
 						  delete_until_start,
 						  delete_until_end,
-						  clear_scr,
+						  delete_word,
 						  clear_scr};
 
   i = -1;

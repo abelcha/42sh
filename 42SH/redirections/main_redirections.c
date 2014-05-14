@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 13 16:57:16 2014 chalie_a
-** Last update Wed May 14 04:13:02 2014 chalie_a
+** Last update Wed May 14 21:12:42 2014 chalie_a
 */
 
 #include <fcntl.h>
@@ -37,29 +37,16 @@ void		fill_red(t_red *red)
 
 static int	open_red(t_red *red)
 {
-  fill_red(red);
-  red->save = dup(red->output);
-  red->fd = open(red->name, red->mode, 0644);
+  // fill_red(red);
+  printf("yoloswa\n");
+  red->save = dup(STDOUT_FILENO);
+  red->fd = open(red->name, SIMPLE_RED__, 0644);
   if (red->fd < 0)
     return (FAILURE);
-  if (dup2(red->fd, red->output) < 0)
+  if (dup2(red->fd, STDOUT_FILENO) < 0)
     return (FAILURE);
   return (SUCCESS);
 }
-
-int		open_redirections(t_red *red)
-{
-  t_red		*tmp;
-  
-  if (!red)
-    return (0);
-  tmp = red->next;
-  while ((tmp = tmp->next) != red->next)
-    if (tmp->token == T_RED_D)
-      open_red(tmp);
-  return (SUCCESS);
-}
-
 int		close_red(t_red *red)
 {
   close(red->output);
@@ -68,15 +55,3 @@ int		close_red(t_red *red)
   return (SUCCESS);
 }
 
-int		close_redirections(t_red *red)
-{
-  t_red		*tmp;
-
-  if (!red)
-    return (0);
-  tmp = red->next;
-  //  while ((tmp = tmp->next) != red->next)
-  // if (tmp->token == T_RED_D)
-  close_red(tmp);
-  return (SUCCESS);
-}
