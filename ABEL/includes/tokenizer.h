@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Fri Apr 18 00:51:03 2014 chalie_a
-** Last update Thu May  8 11:48:41 2014 chalie_a
+** Last update Wed May 14 01:40:20 2014 chalie_a
 */
 
 #ifndef TOKENIZER_H_
@@ -50,6 +50,7 @@ typedef struct		s_token
 #define T_CMD	 12
 #define T_EOL	 13
 #define T_NBR	14
+
 
 #define IN_RED(c)		(c == T_RED_C || c == T_RED_CC) ? 1 : 0
 #define OUT_RED(c)		(c == T_RED_D || c == T_RED_DD || c == 0 || c == 2) ? 1 : 0

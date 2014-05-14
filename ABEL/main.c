@@ -5,13 +5,15 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Fri May  9 23:05:25 2014 chalie_a
+** Last update Mon May 12 23:44:23 2014 chalie_a
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <signal.h>
+#include "edit.h"
 #include "sh.h"
 #include "parser.h"
 #include "my_color.h"
@@ -50,7 +52,6 @@ static void		free_exe(t_env_dll *root)
 
 int			clean_all(t_execution *exe)
 {
-  t_env_dll		*tmp;
   int			i;
   int			exit_value;
 
@@ -64,28 +65,41 @@ int			clean_all(t_execution *exe)
   return (exit_value);
 }
 
+void			init_prompt(t_line *line)
+{
+  line->prompt = "\033[39;31mAbel>$\033[0m";
+  line->p_size = strlen(line->prompt);
+}
+
 int			main(int ac, char **av, char **env)
 {
   t_token		*root;
   t_parse_tree		*tree;
   t_execution		*exe;
-  char			*str;
+  t_line		*line;
   int			i = 1;
 
+  av = NULL;
+  ac = 0;
   if (!(exe = init_exe(env)))
     return (FAILURE);
-  while (write(PROMPT) && (str = gnl(0)))
+  if (!(line = calloc(1, sizeof(t_line))))
+    return (FAILURE);
+  if (init_history(line) == FAILURE)
+    return (FAILURE);
+  init_prompt(line);
+  while (get_line_caps(line) != FAILURE)
     {
-      root = get_tokens(str);
+      root = get_tokens(line->line);
       if ((tree = start_parsing(root, exe)))
 	{
 	  exec_cmd(tree, exe);
 	  free_tree(tree);
 	}
-      free(str);
       free_tokens(root);
       if (exe->exit || ++i > 10000)
 	break ;
     }
+  add_in_history_file(line);
   return (clean_all(exe));
 }

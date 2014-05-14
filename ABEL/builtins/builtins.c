@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 23:49:35 2014 chalie_a
-** Last update Sat May 10 00:39:56 2014 chalie_a
+** Last update Tue May 13 05:04:01 2014 chalie_a
 */
 
 #include <string.h>
@@ -18,8 +18,8 @@
 
 int		my_exit(t_execution *exe, t_cmd *cmd)
 {
-  --(exe->nb_pipes);
-  exe->exit = my_atoi(cmd->stock[1]) + 256;
+  if (exe->nb_pipes == exe->pos + 1)
+    exe->exit = my_atoi(cmd->stock[1]) + 256;
   return (B_SUCCESS);
 }
 
@@ -27,11 +27,12 @@ int		my_env(t_execution *exe, t_cmd *cmd)
 {
   t_env_dll	*tmp;
   int		i = -1;
+
+  (void)cmd;
   tmp = exe->env->env_dll;
-  /*  while ((tmp = tmp->next) != exe->env->env_dll)
-      printf("%s--\n", tmp->name);*/
   while (exe->env->envp[++i])
     printf("%s--\n", exe->env->envp[i]);
+
   return (B_SUCCESS);
 }
 
@@ -120,6 +121,8 @@ int		my_unsetenv(t_execution *exe, t_cmd *cmd)
 
 int		my_echo(t_execution *exe, t_cmd *cmd)
 {
+  (void)exe;
+  (void)cmd;
   printf("yolo\n");
   printf("lalila\n");
   printf("cooucou\n");
@@ -129,5 +132,7 @@ int		my_echo(t_execution *exe, t_cmd *cmd)
 
 int		my_cd(t_execution *exe, t_cmd *cmd)
 {
+  (void)exe;
+  (void)cmd;
   return (B_SUCCESS);
 }

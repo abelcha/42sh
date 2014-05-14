@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Thu May  8 23:23:31 2014 chalie_a
+** Last update Wed May 14 01:40:43 2014 chalie_a
 */
 
 #ifndef PARSER_H_
@@ -13,9 +13,11 @@
 
 typedef struct		s_red
 {
-
   int			token;
+  int			output;
+  int			mode;
   int			fd;
+  int			save;
   char			*name;
   struct s_red		*prev;
   struct s_red		*next;
@@ -42,11 +44,14 @@ typedef struct		s_parse_tree
   struct s_parse_tree	*next;
 }			t_parse_tree;
 
-#include "tokenizer.h"
-#include "sh.h"
-#define		MEM_POOL	128
-#define		BEFORE		0
-#define		AFTER		1
+# include "tokenizer.h"
+# include "sh.h"
+# define MEM_POOL	128
+# define BEFORE		0
+# define AFTER		1
+#  define SIMPLE_RED__	O_CREAT|O_TRUNC|O_WRONLY
+# define __SIMPLE_RED	O_RDONLY
+# define DOUBLE_RED__	O_CREAT|O_APPEND|O_WRONLY 
 
 int		main(int, char **, char **);
 int		speed_cmp(char *, char *);

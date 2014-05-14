@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 21:24:59 2014 chalie_a
-** Last update Sat May 10 00:37:18 2014 chalie_a
+** Last update Mon May 12 23:01:28 2014 chalie_a
 */
 
 #include <string.h>
@@ -72,7 +72,6 @@ int			put_env_in_tab(t_env *env)
 int			put_env_in_dll(char **envp, t_execution *exe)
 {
   int			i;
-  int			j;
 
   i = -1;
   if (!(exe->env->env_dll = init_dll()))

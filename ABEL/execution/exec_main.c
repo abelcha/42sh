@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Fri May  9 14:43:26 2014 chalie_a
+** Last update Mon May 12 23:14:10 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -22,7 +22,7 @@
 
 
 static const char	*sig_tab[11] = {"Hangup",
-					"^C",
+					"SIGINT",
 					"Quit",
 					"Illegal instruction)",
 					"Trace/breakpoint trap",
@@ -48,21 +48,18 @@ int		wait_pipes(t_execution *exe)
     }
   if(WIFSIGNALED(status))
     if(WTERMSIG(status) < 13)
-      printf("%s (Core Dumped)\n", sig_tab[(WTERMSIG(status) - 1) % 13]);
+      printf("%s\n", sig_tab[(WTERMSIG(status) - 1) % 13]);
   return (SUCCESS);
 }
 
 
 int		exec(t_cmd *cmd, t_execution *exe)
 {
-  int		ret;
-
   if (!(exe->pid = calloc(exe->nb_pipes, sizeof(int *))))
     return (FAILURE);
   execution_loop(cmd, exe);
   if (exe->nb_pipes && !exe->exit)
     wait_pipes(exe);
-  printf("end of proccess\n");
   free(exe->pid);
   return (SUCCESS);
 }
@@ -83,8 +80,8 @@ int		exec_cmd(t_parse_tree *root, t_execution *exe)
 	    (tmp->token == T_OR && exe->return_value > 0))
 	  {
 	    exec(tmp->cmd, exe);
-	    printf(exe->return_value ? "\033[31mfailure %d\n" :
-		   "\033[32msuccess %d\n", exe->return_value);
+	    //	    printf(exe->return_value ? "\033[31mfailure %d\n" :
+	    //		   "\033[32msuccess %d\n", exe->return_value);
 	    RST;
 	  }
     }

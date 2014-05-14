@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Thu May  8 16:51:50 2014 chalie_a
+** Last update Mon May 12 23:13:38 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -25,7 +25,7 @@ static t_parse_tree	*init_tree()
   return (root);
 }
 
-int			lexical_error(t_parse_tree *root, t_token *token)
+int			lexical_error(t_token *token)
 {
   if (token->prev->token != T_CMD && (IS_MAJOR(token->token)))
     return (lex_error(token->prev->token, BEFORE, token->token));
@@ -37,7 +37,7 @@ int			lexical_error(t_parse_tree *root, t_token *token)
 static int		add_token_or_create_node(t_parse_tree *root,
 						 t_token *token, t_execution *exe)
 {
-  if (lexical_error(root, token) == FAILURE)
+  if (lexical_error(token) == FAILURE)
     return (FAILURE);
   if (IS_MAJOR(token->token))
     return (create_new_tree_node(root, token));

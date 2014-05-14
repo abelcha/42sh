@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
-** Last update Fri May  9 19:52:10 2014 chalie_a
+** Last update Mon May 12 23:02:12 2014 chalie_a
 */
 
 
@@ -61,7 +61,7 @@ static char		*is_absolut_path(char *cmd)
   return (NULL);
 }
 
-int			is_builtin(t_cmd *cmd, t_execution *exe)
+int			is_builtin(t_cmd *cmd)
 {
   static char		*b_tab[6] = {"exit", "setenv", "unsetenv", "cd",
 				     "env", "echo"};
@@ -93,7 +93,7 @@ static char		*is_in_paths(char *cmd, t_execution *exe)
 
 int			find_path(t_cmd *cmd, t_execution *exe)
 {
-  if ((cmd->builtin = is_builtin(cmd, exe)) > 0)
+  if ((cmd->builtin = is_builtin(cmd)) > 0)
     return (SUCCESS);
   if ((cmd->path = is_absolut_path(cmd->stock[0])) && printf("is lol\n"))
     return (SUCCESS);

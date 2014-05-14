@@ -1,47 +1,78 @@
 
-CC	=	clang -g3
+CC		=	clang -g3
 
-NAME	=	42sh
+NAME		=	42sh
 
-SRC	=	./free_parse_tree.c\
-		./main.c		\
-		./exec_loop.c	\
-		./env_dll.c	\
-		./find_cmd_path.c	\
-		./tokeniser.c\
-		./add_tokens_in_list.c\
-		./token_tab.c\
-		./create_new_tree_node.c\
-		./builtins.c		\
-		./semantic_analyser.c\
-		./display.c\
-		./parser_tokenizer.c\
-		./add_tokens_in_node.c\
-		./create_cmd_node.c\
-		./handle_redirections.c\
-		./main_parsing.c\
-		./get_paths.c	\
-		./exec_main.c	\
+SRC		=	./main.c				\
 
-LIB	=	./gnl.c		\
-		./free_utils.c	\
-		./strmatch.c	\
-		./my_atoi.c
-OBJ	=	$(SRC:.c=.o) $(LIB:.c=.o)
 
-CFLAGS	=	-I./ #-W -Wall -Wextra -pedantic
+LIB		=	./lib/free_utils.c			\
+			./lib/strmatch.c			\
+			./lib/my_atoi.c				\
+			./lib/gnl.c				\
+
+
+PARSER		=	./parser_lexer/free_parse_tree.c	\
+			./parser_lexer/create_new_tree_node.c	\
+			./parser_lexer/semantic_analyser.c	\
+			./parser_lexer/display.c		\
+			./parser_lexer/get_paths.c		\
+			./parser_lexer/create_cmd_node.c	\
+			./parser_lexer/handle_redirections.c	\
+			./parser_lexer/main_parsing.c		\
+			./parser_lexer/find_cmd_path.c		\
+			./parser_lexer/add_tokens_in_node.c	\
+
+TOKEN		=	./tokeniser/tokeniser.c			\
+			./tokeniser/token_tab.c			\
+			./tokeniser/parser_tokenizer.c		\
+			./tokeniser/add_tokens_in_list.c	\
+
+
+RED		=	./redirections/main_redirections.c	\
+
+EXE		=	./execution/exec_main.c			\
+			./execution/exec_loop.c			\
+
+
+LINE		=	./line_edition/add_del_key_actions.c	\
+			./line_edition/get_line_caps.c		\
+			./line_edition/history_key_actions.c	\
+			./line_edition/arrow_key_action.c	\
+			./line_edition/init_termcaps.c		\
+
+HIST		=	./history/init_history.c		\
+			./history/put_in_history.c		\
+
+GLOB		=	#./globbing/main_globbing.c		\
+
+BUILD		=	./builtins/env_dll.c			\
+			./builtins/builtins.c			\
+
+
+OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o) 
+
+P_OBJ		=	$(TOKEN:.c=.o) $(PARSER:.c=.o)
+
+SH_OBJ		=	$(RED:.c=.o) $(BUILD:.c=.o) $(EXE:.c=.o)
+
+B_OBJ		=	$(LINE:.c=.o) $(HIST:.c=.o) $(GLOB:.c=.o)
+
+ALL_OBJ		=	$(OBJ) $(P_OBJ) $(SH_OBJ) $(B_OBJ)
+
+CFLAGS	=	-I./includes -Wall -Wextra -pedantic
 
 RM	=	rm -fr
 
 all	:	$(NAME)
 
-$(NAME)	:	$(OBJ)
+$(NAME)	:	$(ALL_OBJ)
 
-		$(CC) -o $(NAME) $(OBJ)
+		$(CC) -o $(NAME) $(ALL_OBJ) -lncurses
 
 clean	:
 
-		$(RM) $(OBJ)
+		$(RM) $(ALL_OBJ)
 
 fclean	:	clean
 

@@ -5,11 +5,21 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 16:11:57 2014 chalie_a
-** Last update Sat May 10 00:36:15 2014 chalie_a
+** Last update Tue May 13 01:48:34 2014 chalie_a
 */
 
 #include <stdio.h>
 #include <stdlib.h>
+
+int		c_free(char **ptr)
+{
+  if (*ptr)
+    {
+      free(*ptr);
+      *ptr = NULL;
+    }
+  return (42);
+}
 
 int		x_free(void *ptr)
 {
