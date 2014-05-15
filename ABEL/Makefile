@@ -48,6 +48,7 @@ GLOB		=	#./globbing/main_globbing.c		\
 
 BUILD		=	./builtins/env_dll.c			\
 			./builtins/builtins.c			\
+			./builtins/echo.c 				\
 
 
 OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o) 

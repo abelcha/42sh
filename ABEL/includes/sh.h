@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Wed May 14 04:12:20 2014 chalie_a
+** Last update Thu May 15 17:50:37 2014 coutar_a
 */
 
 #ifndef SH_H_
@@ -55,6 +55,12 @@ typedef struct		s_arch
   t_execution		*exe;
 }			t_arch;
 
+typedef struct		s_echo
+{
+  char			second;
+  char			code;
+}			t_echo;
+
 #include "parser.h"
 #include "edit.h"
 typedef int	(*ptrft)(t_execution *exe, t_cmd *cmd);
@@ -83,6 +89,12 @@ int		add_in_history_dll(t_line *line);
 int		init_history(t_line *line);
 int		add_in_history(t_line *line);
 int		add_in_history_file(t_line *line);
+int		my_echo(t_execution *exe, t_cmd *cmd);
+int		find_flags(char **stock, char *flagstatus);
+int		find_strings(char **stock, char *flagstatus);
+int		write_echo(char *str, char *flagstatus, t_echo *esc);
+int		escape_code_parsing(t_echo *g_esc, char *str, int *i);
+int		byte_printer(char *str, int *i);
 
 # define ENV_BUFF	4096
 # define SIMPLE_RED__	O_CREAT|O_TRUNC|O_WRONLY
