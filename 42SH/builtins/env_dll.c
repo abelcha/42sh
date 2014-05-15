@@ -15,9 +15,8 @@
 void			fill_env_struct(t_env_dll *elem, char *env_line)
 {
   int			i;
-  
-  i = -1;
 
+  i = -1;
   while (env_line[++i])
     if (env_line[i] == '=')
       break ;
@@ -25,7 +24,6 @@ void			fill_env_struct(t_env_dll *elem, char *env_line)
   elem->value = &env_line[i + 1];
   elem->size = i;
 }
-
 
 int			add_env_variable(t_env_dll *elem, char *env_line)
 {
