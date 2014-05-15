@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Wed May 14 17:52:18 2014 chalie_a
+** Last update Thu May 15 17:41:18 2014 chalie_a
 */
 
 #ifndef EDIT_H_
@@ -70,6 +70,7 @@ typedef struct		s_line
   int			line_len;
   int			key;
   char			*prompt;
+  int			pre_prompt;
   int			p_size;
   char			*line;
   char			*line_save;

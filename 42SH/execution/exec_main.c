@@ -1,11 +1,11 @@
-HEAD detached at/*
+/*
 ** exec2.c for sh in /home/chalie_a/rendu/PSU_2013_minishell2/execution
 ** 
 ** Made by chalie_a
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Thu May 15 17:34:07 2014 chalie_a
+** Last update Thu May 15 17:39:22 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -61,7 +61,6 @@ int		exec(t_cmd *cmd, t_execution *exe)
   if (!(exe->pid = calloc(exe->nb_pipes, sizeof(int *))))
     return (FAILURE);
   execution_loop(cmd, exe);
-  printf("background = %d\n", cmd->prev->background);
   if (exe->nb_pipes > 0 && !exe->exit && !(cmd->prev->background))
     wait_pipes(exe);
   free(exe->pid);
