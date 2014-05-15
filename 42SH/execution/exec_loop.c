@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Thu May 15 03:35:57 2014 chalie_a
+** Last update Thu May 15 04:23:02 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -45,7 +45,7 @@ int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
    execve(tmp->path, tmp->stock, exe->env->envp);
   else
     {
-      //      handle_redirections(root);
+      handle_redirections(root, exe);
       exec_builtins(tmp, exe);
     }
   close(exe->fdp[1]);
@@ -92,7 +92,7 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
   tmp = cmd;
   exe->prev_pipe = -1;
   exe->pos = -1;
-  handle_redirections(cmd);
+  handle_redirections(cmd, exe);
   while ((tmp = tmp->next) != cmd && exe->exit == 0)
     {
       exe->return_value = 0;
@@ -108,6 +108,6 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
 	return (FAILURE);
       exe->pid[++exe->pos] = curr_pid;
     }
-  close_redirections(cmd);
+  close_redirections(cmd, exe);
   return (SUCCESS);
 }

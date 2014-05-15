@@ -6,22 +6,20 @@ NAME		=	42sh
 SRC		=	./main.c				\
 
 
-LIB		=	./lib/free_utils.c			\
-			./lib/strmatch.c			\
+LIB		=	./lib/gnl.c				\
 			./lib/my_atoi.c				\
-			./lib/gnl.c				\
+			./lib/strmatch.c			\
+			./lib/free_utils.c			\
 
-
-PARSER		=	./parser_lexer/free_parse_tree.c	\
-			./parser_lexer/create_new_tree_node.c	\
-			./parser_lexer/semantic_analyser.c	\
-			./parser_lexer/display.c		\
-			./parser_lexer/get_paths.c		\
-			./parser_lexer/create_cmd_node.c	\
-			./parser_lexer/handle_redirections.c	\
+PARSER		=	./parser_lexer/get_paths.c		\
 			./parser_lexer/main_parsing.c		\
-			./parser_lexer/find_cmd_path.c		\
+			./parser_lexer/free_parse_tree.c	\
+			./parser_lexer/semantic_analyser.c	\
+			./parser_lexer/create_new_tree_node.c	\
+			./parser_lexer/handle_redirections.c	\
 			./parser_lexer/add_tokens_in_node.c	\
+			./parser_lexer/create_cmd_node.c	\
+			./parser_lexer/find_cmd_path.c		\
 
 TOKEN		=	./tokeniser/tokeniser.c			\
 			./tokeniser/token_tab.c			\
@@ -36,27 +34,27 @@ EXE		=	./execution/exec_main.c			\
 
 
 LINE		=	./line_edition/add_del_key_actions.c	\
-			./line_edition/get_line_caps.c		\
 			./line_edition/history_key_actions.c	\
+			./line_edition/start_end_actions.c	\
 			./line_edition/arrow_key_action.c	\
 			./line_edition/init_termcaps.c		\
+			./line_edition/get_line_caps.c		\
 			./line_edition/word_action.c		\
-			./line_edition/start_end_actions.c	\
 			./line_edition/line_utils.c		\
 
-HIST		=	./history/init_history.c		\
-			./history/put_in_history.c		\
+HIST		=	./history/put_in_history.c		\
+			./history/init_history.c		\
 
-GLOB		=	./globbing/main_globbing.c		\
+GLOB		=	./globbing/main_glob.c			\
 			./globbing/tab_glob.c			\
 
-BUILD		=	./builtins/env_dll.c			\
-			./builtins/builtins.c			\
+BUILD		=	./builtins/builtins.c			\
+			./builtins/env_dll.c			\
 
 
 OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o) 
 
-P_OBJ		=	$(TOKEN:.c=.o) $(PARSER:.c=.o)
+P_OBJ		=	$(PARSER:.c=.o) $(TOKEN:.c=.o)
 
 SH_OBJ		=	$(RED:.c=.o) $(BUILD:.c=.o) $(EXE:.c=.o)
 
@@ -64,7 +62,7 @@ B_OBJ		=	$(LINE:.c=.o) $(HIST:.c=.o) $(GLOB:.c=.o)
 
 ALL_OBJ		=	$(OBJ) $(P_OBJ) $(SH_OBJ) $(B_OBJ)
 
-CFLAGS	=	-I./includes # -Wall -Wextra -pedantic
+CFLAGS	=	-I./includes -Wall -Wextra -pedantic
 
 RM	=	rm -fr
 

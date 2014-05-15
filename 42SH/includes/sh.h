@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Thu May 15 02:27:08 2014 chalie_a
+** Last update Thu May 15 04:44:52 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -42,18 +42,11 @@ typedef struct		s_execution
   int			fdp[2];
   int			return_value;
   int			nb_pipes;
+  int			input;
   int			pos;
   int			exit;
   t_env			*env;
 }			t_execution;
-
-typedef struct		s_arch
-{
-  char			**envp;
-  char			*prompt;
-  t_alias		*alias;
-  t_execution		*exe;
-}			t_arch;
 
 #include "parser.h"
 #include "edit.h"
@@ -75,8 +68,8 @@ int		exec_builtins(t_cmd *cmd, t_execution *exe);
 void		double_free(char **);
 void		fill_env_struct(t_env_dll *elem, char *env_line);
 int		add_env_variable(t_env_dll *elem, char *env_line);
-int		open_redirections(t_cmd *);
-int		close_redirections(t_cmd *);
+int		open_redirections(t_cmd *, t_execution *);
+int		close_redirections(t_cmd *, t_execution *);
 void		clear_and_display(t_line *);
 int		x_free(void *ptr);
 void		c_free(char **ptr);
@@ -84,7 +77,8 @@ int		add_in_history_dll(t_line *line);
 int		init_history(t_line *line);
 int		add_in_history(t_line *line);
 int		add_in_history_file(t_line *line);
-
+int		my_strcmp(char *, char *);
+int		handle_redirections(t_cmd *, t_execution *);
 
 # define TMP_FILE	".tmp"
 # define ENV_BUFF	4096

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Thu May 15 02:59:56 2014 chalie_a
+** Last update Thu May 15 04:16:24 2014 chalie_a
 */
 
 #ifndef PARSER_H_
@@ -66,6 +66,6 @@ int		create_new_tree_node(t_parse_tree *, t_token *);
 int		add_token_in_node(t_parse_tree *, t_token *, t_execution *exe);
 void   		*free_tree(t_parse_tree *);
 void		display_tree(t_parse_tree *);
-int		redirections(t_cmd *, t_token *);
+int		redirections(t_cmd *, t_token *, t_execution *);
 int		expected_after_pipe();
 #endif /* !PARSER_H_ */

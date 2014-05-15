@@ -5,26 +5,19 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:42:24 2014 chalie_a
-** Last update Wed May 14 21:11:24 2014 chalie_a
+** Last update Thu May 15 04:10:35 2014 chalie_a
 */
 
 #include <stdlib.h>
 #include "parser.h"
-/*
-static void			free_red(t_red *root)
-{
-  t_red				*tmp;
-  t_red				*save;
 
-  if (!root)
-    return ;
-  save = root->prev;
-  tmp = root;
-  while ((tmp = tmp->next) != root)
-    x_free(tmp->prev);
-  x_free(save);
+static void			free_red(t_red **red)
+{
+  x_free(red[0]);
+  x_free(red[1]);
+  x_free(red[2]);
 }
-*/
+
 
 static void			free_cmd(t_cmd *root)
 {
@@ -37,7 +30,7 @@ static void			free_cmd(t_cmd *root)
   tmp = root;
   while ((tmp = tmp->next) != root)
     {
-      //      free_red(tmp->red);
+      free_red(tmp->red);
       x_free(tmp->prev->path);
       x_free(tmp->prev->stock);
       free(tmp->prev);

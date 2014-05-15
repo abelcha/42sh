@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 13 16:57:16 2014 chalie_a
-** Last update Thu May 15 03:37:50 2014 chalie_a
+** Last update Thu May 15 04:22:32 2014 chalie_a
 */
 
 #include <fcntl.h>
@@ -42,9 +42,9 @@ int		close_red(t_red *red)
   return (SUCCESS);
 }
 
-int		handle_redirections(t_cmd *root)
+int		handle_redirections(t_cmd *root, t_execution *exe)
 {
-  if (is_atty != 1)
+  if (!exe->input)
     return (FAILURE);
   open_red(root->next->red[0]);
   open_red(root->prev->red[1]);
@@ -52,9 +52,9 @@ int		handle_redirections(t_cmd *root)
   return (SUCCESS);
 }
 
-int		close_redirections(t_cmd *root)
+int		close_redirections(t_cmd *root, t_execution *exe)
 {
-  if (is_atty != 1)
+  if (!exe->input)
     return (FAILURE);
   close_red(root->next->red[0]);
   close_red(root->prev->red[1]);

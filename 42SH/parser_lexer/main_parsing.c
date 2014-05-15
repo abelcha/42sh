@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon May 12 23:13:38 2014 chalie_a
+** Last update Thu May 15 04:44:03 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -77,6 +77,5 @@ t_parse_tree		*start_parsing(t_token *token, t_execution *exe)
     return (NULL);
   if (fill_tree(root, token, exe) == FAILURE)
     return (free_tree(root));
-  display_tree(root);
   return (root);
 }

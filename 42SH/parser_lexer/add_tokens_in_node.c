@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Thu May  8 16:41:47 2014 chalie_a
+** Last update Thu May 15 04:12:39 2014 chalie_a
 */
 
 #define LAST_PIPE token->next->token == T_EOL ? 1 : 0
@@ -61,7 +61,7 @@ int			add_token_in_node(t_parse_tree *tmp, t_token *token, t_execution *exe)
       ++(tmp->nb_pipes);
     }
   else if (IN_RED(token->token) || OUT_RED(token->token))
-    result = redirections(tmp->cmd->prev, token);
+    result = redirections(tmp->cmd->prev, token, exe);
   else if (token->token == T_CMD)
     result = add_data_in_cmd(tmp->cmd->prev, token, exe);
   else

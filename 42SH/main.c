@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Thu May 15 03:42:55 2014 chalie_a
+** Last update Thu May 15 04:43:12 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -33,6 +33,7 @@ t_execution		*init_exe(char **env)
     return (NULL);
   if (!(exe->env->paths = get_paths(get_env(env, "PATH="), ':')))
     return (NULL);
+  exe->input = isatty(0);
   return (exe);
 }
 
@@ -71,6 +72,18 @@ void			init_prompt(t_line *line)
   line->p_size = strlen(line->prompt);
 }
 
+t_line 			*init_sline()
+{
+  t_line		*line;
+
+  if (!(line = calloc(1, sizeof(t_line))))
+    return (NULL);
+  if (init_history(line) == FAILURE)
+    return (NULL);
+  init_prompt(line);
+  return (line);
+}
+
 int			main(int ac, char **av, char **env)
 {
   t_token		*root;
@@ -79,15 +92,10 @@ int			main(int ac, char **av, char **env)
   t_line		*line;
   int			i = 1;
 
-  av = NULL;
-  ac = 0;
-  if (!(exe = init_exe(env)))
+  (void)av;
+  (void)ac;
+  if (!(line = init_sline()) || !(exe = init_exe(env)))
     return (FAILURE);
-  if (!(line = calloc(1, sizeof(t_line))))
-    return (FAILURE);
-  if (init_history(line) == FAILURE)
-    return (FAILURE);
-  init_prompt(line);
   while (get_line_caps(line) != FAILURE)
     {
       root = get_tokens(line->line);

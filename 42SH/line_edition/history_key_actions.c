@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 20:49:22 2014 chalie_a
-** Last update Wed May 14 04:08:23 2014 chalie_a
+** Last update Thu May 15 04:05:05 2014 chalie_a
 */
 
 #include <termios.h>
@@ -42,8 +42,8 @@ void		go_prev(t_line *line)
 	return ;
       line->curr_pos = line->history;
       strcpy(line->line_save, line->line);
-      if (!(line->line = calloc(BUFF_LINE, sizeof(char))))
-	return ;
+      // if (!(line->line = calloc(BUFF_LINE, sizeof(char))))		WHY THE FUCK DID I'VE DONE THAT ??
+      //	return ;
     }
   if (line->curr_pos->prev == line->history)
     return ;
