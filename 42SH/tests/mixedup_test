@@ -1,0 +1,1 @@
+echo coucou >test; < test ls | cat -e| wc -c >> test && >> test echo success ;cat test
