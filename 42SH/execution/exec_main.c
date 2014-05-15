@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Thu May 15 02:36:03 2014 chalie_a
+** Last update Thu May 15 17:16:50 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -47,8 +47,11 @@ int		wait_pipes(t_execution *exe)
 	exe->return_value = WEXITSTATUS(status);
     }
   if(status < 1000 && WIFSIGNALED(status))
-    if(WTERMSIG(status) < 13)
-      printf("%s\n", sig_tab[(WTERMSIG(status) - 1) % 13]);
+    {
+      if(WTERMSIG(status) < 13)
+	printf("%s", sig_tab[(WTERMSIG(status) - 1) % 13]);
+      printf(WCOREDUMP(status) ? " (Core Dumped)\n" : "\n");
+    }
   return (SUCCESS);
 }
 
@@ -58,7 +61,8 @@ int		exec(t_cmd *cmd, t_execution *exe)
   if (!(exe->pid = calloc(exe->nb_pipes, sizeof(int *))))
     return (FAILURE);
   execution_loop(cmd, exe);
-  if (exe->nb_pipes > 0 && !exe->exit)
+  printf("background = %d\n", cmd->prev->background);
+  if (exe->nb_pipes > 0 && !exe->exit && !(cmd->prev->background))
     wait_pipes(exe);
   free(exe->pid);
   return (SUCCESS);

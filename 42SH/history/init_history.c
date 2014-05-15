@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 22:21:05 2014 chalie_a
-** Last update Wed May 14 04:12:33 2014 chalie_a
+** Last update Thu May 15 17:22:13 2014 chalie_a
 */
 
 #include <fcntl.h>
@@ -59,17 +59,12 @@ int		init_history(t_line *line)
 
 int		add_in_history_dll(t_line *line)
 {
-  int		fd;
-
-  if ((fd = open("./.42sh_history", (O_RDWR | O_CREAT | O_APPEND), 0777)) < 0)
-    return (FAILURE);
-  if (add_elem_in_history(line->history) != FAILURE)
-    {
-      line->history->prev->len = line->line_len;
-      if (!(line->history->prev->data = strdup(line->line)))
-	return (FAILURE);
-    }
-    close(fd);
+  if (my_strcmp(line->line, line->history->prev->data))
+    if (add_elem_in_history(line->history) != FAILURE)
+      {
+	line->history->prev->len = line->line_len;
+	if (!(line->history->prev->data = strdup(line->line)))
+	  return (FAILURE);
+      }
   return (SUCCESS);
-
 }

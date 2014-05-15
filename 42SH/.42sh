@@ -1,0 +1,13 @@
+<< toto cat > toto ; << EOF cat | sed s/toto/0/g > ma_note ; /bin/echo -n ma_note: ; < ma_note cat
+
+<< toto cat > toto ;
+<< EOF cat | sed s/toto/0/g > ma_note ;
+/bin/echo -n ma_note: ;
+< ma_note cat
+
+
+out redirections --> only in the first pipe
+int redirections --> only in the last pipe
+
+only onels -lRa ../../ | cat | cat | cat | tr -s 42 | cat | cat | cat | wc -l
+cat /etc/passwd | grep 42 | wc -l
