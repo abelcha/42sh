@@ -5,11 +5,13 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Wed May 14 04:10:26 2014 chalie_a
+** Last update Thu May 15 03:43:24 2014 chalie_a
 */
 
 #include "sh.h"
 #include "edit.h"
+
+int			is_atty;
 
 void			x_read_line(t_line *line)
 {
@@ -45,22 +47,26 @@ int			init_line(t_line *line)
 int			get_line_caps(t_line *line)
 {
   if (!isatty(0) || set_termcaps(line) == FAILURE)
-    line->line = gnl(0);
+    {
+      is_atty = 1;
+      line->line = gnl(0);
+    }
   else if (init_line(line) == SUCCESS)
     {
       write(1, line->prompt, line->p_size);
       x_read_line(line);
-      /*if (line->line != line->line_save)
+      if (line->line != line->line_save)
 	{
-	  printf("tamere\n");
 	  c_free(&(line->line_save));
-	  }*/ 
-     if (line)
+	}
+      if (line && strlen(line->line))
 	add_in_history_dll(line);
       tcsetattr(0, TCSANOW, &(line->save));
     }
   else
     return (FAILURE);
   write(1, "\n", 1);
+  if (line->line)
+    return(SUCCESS);
   return (line->line ? SUCCESS : FAILURE);
 }

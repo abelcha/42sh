@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Wed May 14 21:54:44 2014 chalie_a
+** Last update Thu May 15 03:42:25 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -13,6 +13,7 @@
 #include "tokenizer.h"
 #include "parser.h"
 
+extern int			is_atty;
 extern const char		*token_tab[T_NBR + 1];
 
 int		error_handling(int tk1, int tk2)
@@ -21,7 +22,7 @@ int		error_handling(int tk1, int tk2)
     return(error_handling(tk1, tk2 + 1));
   fprintf(stderr, "Syntax Error : unexpected token ");
   fprintf(stderr, "'%s' after '%s' redirection token\n",
-    token_tab[tk2], token_tab[tk1]);
+	  token_tab[tk2], token_tab[tk1]);
   return(FAILURE);
 }
 
@@ -47,7 +48,60 @@ int			find_red_token(int token)
   while (++i < 6)
     if (token == tr_tab[i])
       return (i);
-  return (0);
+  return (-1);
+}
+
+static int	read_while(t_red *red)
+{
+  char		*s;
+  int		fd;
+
+  fd = open(TMP_FILE, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+  if (fd < 0)
+    return (_ERROR("Cannot Read File"));
+  write(1, ">", 1);
+  while ((s = gnl(0)))
+    {
+      if (!my_strcmp(red->name, s))
+	break ;
+      else
+	write(fd, s, strlen(s));
+      write(fd, "\n", 1);
+      write(1, ">", 1);
+      free(s);
+    }
+  free(s);
+  close(fd);
+  return (SUCCESS);
+}
+
+int		double_left(t_red *red)
+{
+  if (read_while(red) == FAILURE)
+    return (FAILURE);
+  red->token = 1;
+  red->name = TMP_FILE;
+  return (SUCCESS);
+}
+
+int		fill_red_struct(t_token *token, t_cmd *cmd, int red_token)
+{
+  t_red		*tmp;
+  static int	op_tab[6] = {0, READ_ONLY, TRUNC, APPEND, TRUNC, APPEND};
+
+  if (!cmd->red[red_token / 2] && 
+      !(cmd->red[red_token / 2] = calloc(1, sizeof(t_red))))
+    return (FAILURE);
+  tmp = cmd->red[red_token / 2];
+  tmp->name = token->next->data;
+  tmp->name[token->next->data_size] = 0;
+  tmp->token = red_token;
+  printf("tty = %d\n", is_atty);
+  if (red_token <= 0 && is_atty != 1)
+    double_left(tmp);
+  else if ((tmp->fd = open(tmp->name, op_tab[tmp->token], 0644)) != -1)
+    close(tmp->fd);
+  return (SUCCESS);
 }
 
 int		redirections(t_cmd *cmd, t_token *token)
@@ -57,15 +111,8 @@ int		redirections(t_cmd *cmd, t_token *token)
   if (token->next->token != T_CMD)
     return (error_handling(token->token, token->next->token));
   red_token = find_red_token(token->token);
-  printf("newtoken = %d\n", red_token);
-  if (!cmd->red[red_token / 2])
-    if (!(cmd->red[red_token / 2] = calloc(1, sizeof(t_red))))
-      return (FAILURE);
-  cmd->red[red_token / 2]->token = red_token;
-  //cmd->red[red_token / 2]->name = token->next->data;
-  token->next->data[token->next->data_size] = 0;
-  //cmd->red->prev->name = token->next->data;
-  //cmd->red->prev->token = token->token;
+  if (fill_red_struct(token, cmd, red_token) == FAILURE)
+    return (FAILURE);
   delete_filename_token(token->next, 1);
   delete_filename_token(token, 0);
   return (SUCCESS);

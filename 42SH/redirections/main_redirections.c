@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 13 16:57:16 2014 chalie_a
-** Last update Wed May 14 21:12:42 2014 chalie_a
+** Last update Thu May 15 03:37:50 2014 chalie_a
 */
 
 #include <fcntl.h>
@@ -14,44 +14,51 @@
 #include "sh.h"
 #include "parser.h"
 
-/* UGLY FUNTION */
+extern int		is_atty;
 
-void		fill_red(t_red *red)
+static int		open_red(t_red *red)
 {
-  if (red->token == T_RED_D || red->token == T_RED_DD)
-    red->output = STDOUT_FILENO;
-  else if (red->token == T_RED_C || red->token == T_RED_CC)
-    {
-      red->mode = __SIMPLE_RED;
-      red->output = STDIN_FILENO;
-    }
-  else if (red->token == T_AMP_R || red->token == T_R_AMP)
-    red->output = STDERR_FILENO;
+  static const int	mode[6] = {READ_ONLY, READ_ONLY, TRUNC,
+				   APPEND, TRUNC, APPEND};
 
-  if (red->token == T_RED_D)
-    red->mode = SIMPLE_RED__;
-  if (red->token == T_RED_DD)
-    red->mode = DOUBLE_RED__;
-}
-/* UGLY FUNTION A REFAIRE*/
-
-static int	open_red(t_red *red)
-{
-  // fill_red(red);
-  printf("yoloswa\n");
-  red->save = dup(STDOUT_FILENO);
-  red->fd = open(red->name, SIMPLE_RED__, 0644);
+  if (!red)
+    return (SUCCESS);
+  red->fd = open(red->name, mode[red->token], 0644);
   if (red->fd < 0)
-    return (FAILURE);
-  if (dup2(red->fd, STDOUT_FILENO) < 0)
-    return (FAILURE);
+    return (_ERROR("Error : Cannot open `%s'\n", red->name));
+  red->save = dup(red->token / 2);
+  if (dup2(red->fd, red->token / 2) < 0)
+    return (_ERROR("Error : Dup Failed\n"));
   return (SUCCESS);
 }
+
 int		close_red(t_red *red)
 {
-  close(red->output);
-  dup2(red->save, red->output);
+  if (!(red))
+    return (FAILURE);
+  close(red->token / 2);
+  dup2(red->save, red->token / 2);
   close(red->save);
+  return (SUCCESS);
+}
+
+int		handle_redirections(t_cmd *root)
+{
+  if (is_atty != 1)
+    return (FAILURE);
+  open_red(root->next->red[0]);
+  open_red(root->prev->red[1]);
+  open_red(root->prev->red[2]);
+  return (SUCCESS);
+}
+
+int		close_redirections(t_cmd *root)
+{
+  if (is_atty != 1)
+    return (FAILURE);
+  close_red(root->next->red[0]);
+  close_red(root->prev->red[1]);
+  close_red(root->prev->red[2]);
   return (SUCCESS);
 }
 

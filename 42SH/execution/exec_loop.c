@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Wed May 14 21:09:50 2014 chalie_a
+** Last update Thu May 15 03:35:57 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -26,6 +26,8 @@ int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe)
 {
   _ERROR("Error : `%s' command not found\n", tmp->stock[0]);
   exe->return_value = 512;
+  if (exe->prev_pipe != -1)
+    close(exe->prev_pipe);
   --(exe->nb_pipes);
   return (SUCCESS);
 }
@@ -42,7 +44,10 @@ int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
   if (tmp->builtin == -1)
    execve(tmp->path, tmp->stock, exe->env->envp);
   else
-    exec_builtins(tmp, exe);
+    {
+      //      handle_redirections(root);
+      exec_builtins(tmp, exe);
+    }
   close(exe->fdp[1]);
   return (SUCCESS);
 }
@@ -55,7 +60,7 @@ int		signal_ctz(int sig)
 
 int		exec_in_son(t_cmd *root, t_cmd *tmp, t_execution *exe) 
 {
-  //  signal(SIGINT, (__sighandler_t) signal_ctz);
+  signal(SIGINT, (__sighandler_t) signal_ctz);
   if (exe->prev_pipe != -1)
     close(exe->prev_pipe);
   if (tmp->next != root)
@@ -87,6 +92,7 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
   tmp = cmd;
   exe->prev_pipe = -1;
   exe->pos = -1;
+  handle_redirections(cmd);
   while ((tmp = tmp->next) != cmd && exe->exit == 0)
     {
       exe->return_value = 0;
@@ -102,5 +108,6 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
 	return (FAILURE);
       exe->pid[++exe->pos] = curr_pid;
     }
+  close_redirections(cmd);
   return (SUCCESS);
 }

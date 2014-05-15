@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Wed May 14 19:01:09 2014 chalie_a
+** Last update Thu May 15 03:42:55 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -97,8 +97,9 @@ int			main(int ac, char **av, char **env)
 	  free_tree(tree);
 	}
       free_tokens(root);
+      free(line->line);
       if (exe->exit || ++i > 10000)
-	break ;
+	  break ;
     }
   add_in_history_file(line);
   return (clean_all(exe));

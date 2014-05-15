@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Wed May 14 04:12:20 2014 chalie_a
+** Last update Thu May 15 02:27:08 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -57,6 +57,7 @@ typedef struct		s_arch
 
 #include "parser.h"
 #include "edit.h"
+
 typedef int	(*ptrft)(t_execution *exe, t_cmd *cmd);
 
 char		*gnl(const int);
@@ -74,8 +75,8 @@ int		exec_builtins(t_cmd *cmd, t_execution *exe);
 void		double_free(char **);
 void		fill_env_struct(t_env_dll *elem, char *env_line);
 int		add_env_variable(t_env_dll *elem, char *env_line);
-int		open_redirections(t_red *);
-int		close_redirections(t_red *);
+int		open_redirections(t_cmd *);
+int		close_redirections(t_cmd *);
 void		clear_and_display(t_line *);
 int		x_free(void *ptr);
 void		c_free(char **ptr);
@@ -84,10 +85,12 @@ int		init_history(t_line *line);
 int		add_in_history(t_line *line);
 int		add_in_history_file(t_line *line);
 
-# define ENV_BUFF	4096
-# define SIMPLE_RED__	O_CREAT|O_TRUNC|O_WRONLY
-# define __SIMPLE_RED	O_RDONLY
-# define DOUBLE_RED__	O_CREAT|O_APPEND|O_WRONLY
-# define _ERROR(...)	fprintf(stderr, __VA_ARGS__) ? -1 : FAILURE
 
+# define TMP_FILE	".tmp"
+# define ENV_BUFF	4096
+# define TRUNC		O_CREAT|O_TRUNC|O_WRONLY
+# define READ_ONLY	O_RDONLY
+# define APPEND		O_CREAT|O_APPEND|O_WRONLY
+# define _ERROR(...)	fprintf(stderr, __VA_ARGS__) ? -1 : FAILURE
+# define B_ERROR(...)	fprintf(stderr, __VA_ARGS__) ? B_FAILURE : B_FAILURE
 #endif /* !SH_H_ */

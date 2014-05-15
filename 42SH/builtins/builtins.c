@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 23:49:35 2014 chalie_a
-** Last update Tue May 13 05:04:01 2014 chalie_a
+** Last update Thu May 15 02:25:59 2014 chalie_a
 */
 
 #include <string.h>
@@ -85,7 +85,7 @@ int		my_setenv(t_execution *exe, t_cmd *cmd)
   t_env_dll	*tmp;
 
   if (!cmd->stock[1] || !cmd->stock[2] || cmd->stock[3])
-    return (_ERROR("Error, USAGE : setenv [Name] [Value]\n"));
+    return (B_ERROR("Error, USAGE : setenv [Name] [Value]\n"));
   if (!(str = get_env_line(cmd->stock[1], cmd->stock[2])))
     return (B_FAILURE);
   if (!(tmp = search_for_env_variable(cmd->stock[1], exe->env->env_dll)))
@@ -123,9 +123,11 @@ int		my_echo(t_execution *exe, t_cmd *cmd)
 {
   (void)exe;
   (void)cmd;
-  printf("yolo\n");
-  printf("lalila\n");
-  printf("cooucou\n");
+  int		i;
+
+  i = 0;
+  while (cmd->stock[++i])
+    printf("%s\n", cmd->stock[i]);
   return (B_SUCCESS);
 }
 
