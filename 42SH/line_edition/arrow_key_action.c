@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Thu May 15 19:22:30 2014 chalie_a
+** Last update Fri May 16 09:59:09 2014 chalie_a
 */
 
 #include "edit.h"
@@ -28,7 +28,8 @@ static const int		key_tab[AK_NB] = {K_LEFT,
 						  CTRL_U,
 						  CTRL_K,
 						  CTRL_W,
-						  CTRL_L};
+						  CTRL_L,
+						  ALT_I};
 
 
 static void			move_left(t_line *line)
@@ -57,6 +58,11 @@ void				clear_scr(t_line *line)
       CAP("nd");
 }
 
+void				real_tab(t_line *line)
+{
+  line->key = '\t';
+  add_char(line);
+}
 
 void				do_key_actions(t_line *line)
 {
@@ -77,7 +83,8 @@ static const t_ak		act_tab[AK_NB] = {move_left,
 						  delete_until_start,
 						  delete_until_end,
 						  delete_word,
-						  clear_scr};
+						  clear_scr,
+						  real_tab};
 
   i = -1;
   //  printf("\n%d\n", line->key);

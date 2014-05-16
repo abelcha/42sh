@@ -1,0 +1,17 @@
+ls | ls | ls | ls -la -h | ls | ls
+ls | ls > toto
+ls ; ls ; ls
+ls $VAR -la
+ls toto&
+ls && ls || ls && ls
+ls && (ls >> toto ; cd ; pwd)
+echo "salut je suis la ; cd"
+echo `ls -la`
+echo 'salut je suis la ; cd'
+echo "toto 'titi"toto'
+ls > titi
+ls >> titi
+ls < titi
+ls << yes
+!l > file
+echo \n

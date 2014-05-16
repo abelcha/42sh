@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Sun Apr 20 23:26:50 2014 chalie_a
+** Last update Fri May 16 10:04:39 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -23,7 +23,7 @@ static int		get_data_len(const char *str)
   j = -1;
   while (str[++i] && (j = -1))
     while (++j < T_CHAR_NBR)
-      if (str[i] == token_char[j] || !str[i] || str[i] == ' ')
+      if (str[i] == token_char[j] || !str[i] || str[i] == ' ' || str[i] == '\t')
 	return (i);
   return (i);
 }

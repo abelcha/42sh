@@ -5,7 +5,7 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Thu May 15 21:02:04 2014 coutar_a
+** Last update Fri May 16 12:59:59 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -58,11 +58,12 @@ int	find_strings(char **stock, char *flagstatus)
 	{
 	  write_echo(stock[i++], flagstatus, g_esc);
 	  if (stock[i] != NULL)
-	    printf(" ");
+	    write(1, " ", 1);
 	}
     }
   if (flagstatus[0] == 0)
-    printf("\n");
+    write(1, "\n", 1);
+    //printf("tamere\n");		 //<<--C'est quoi ce truc qui fout la merde .
   return (0);
 }
 
@@ -75,14 +76,14 @@ int	write_echo(char	*str, char *flagstatus, t_echo *g_esc)
     {
       while (str[++i] != 0)
 	{
-	  if (str[i] == 92)
+	   if (str[i] == 92)
 	    escape_code_parsing(g_esc, str, &i);
 	  else
-	    printf("%c", str[i]);
+	    write(1, &str[i], 1);
 	}
     }
-  else
-    printf(str);
+    else
+      write(1, str, strlen(str));
   return (0);
 }
 

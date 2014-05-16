@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 13 16:57:16 2014 chalie_a
-** Last update Fri May 16 02:01:54 2014 chalie_a
+** Last update Fri May 16 07:42:28 2014 chalie_a
 */
 
 #include <fcntl.h>
@@ -45,11 +45,12 @@ int		close_red(t_red *red)
 int		handle_redirections(t_cmd *root, t_execution *exe)
 {
   if (!exe->input)
-    return (FAILURE);
-  open_red(root->next->red[0]);
-  open_red(root->prev->red[1]);
-  open_red(root->prev->red[2]);
-  return (SUCCESS);
+    return (SUCCESS);
+    if (open_red(root->next->red[0]) == FAILURE ||
+      open_red(root->prev->red[1]) == FAILURE ||
+      open_red(root->prev->red[2]) == FAILURE)
+      return (FAILURE);
+    return (SUCCESS);
 }
 
 int		close_redirections(t_cmd *root, t_execution *exe)

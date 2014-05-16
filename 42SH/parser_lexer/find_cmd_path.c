@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
-** Last update Mon May 12 23:02:12 2014 chalie_a
+** Last update Fri May 16 12:29:04 2014 chalie_a
 */
 
 
@@ -95,7 +95,7 @@ int			find_path(t_cmd *cmd, t_execution *exe)
 {
   if ((cmd->builtin = is_builtin(cmd)) > 0)
     return (SUCCESS);
-  if ((cmd->path = is_absolut_path(cmd->stock[0])) && printf("is lol\n"))
+  if ((cmd->path = is_absolut_path(cmd->stock[0])))
     return (SUCCESS);
   if ((cmd->path = is_in_paths(cmd->stock[0], exe)))
     return (SUCCESS);

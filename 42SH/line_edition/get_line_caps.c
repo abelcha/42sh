@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Fri May 16 03:15:10 2014 chalie_a
+** Last update Fri May 16 09:57:57 2014 chalie_a
 */
 
 #include "sh.h"
@@ -48,11 +48,11 @@ int			init_line(t_line *line)
 int			get_line_caps(t_line *line)
 {
   lx = line;
-  signal(SIGINT, (__sighandler_t) signal_ctz);
   if (!isatty(0) || set_termcaps(line) == FAILURE)
     line->line = gnl(0);
   else if (init_line(line) == SUCCESS)
     {
+      signal(SIGINT, (__sighandler_t) signal_ctz);
       write(1, line->prompt, line->p_size);
       x_read_line(line);
       if (line->line != line->line_save)

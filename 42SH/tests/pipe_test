@@ -1,2 +1,2 @@
-ls -lRa ../../ | cat | cat | cat | tr -s 42 | cat | cat | cat | wc -l
-cat /etc/passwd | grep 42 | wc -l
+ls | cat | ls | cat | ls | ls | cat | wc -l
+ls -lR / | cat -e

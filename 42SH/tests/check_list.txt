@@ -1,0 +1,42 @@
+####################
+## PARTIE OBLI #####
+####################
+
+- recuperation de la ligne de cmd :	OK.
+- affichage d'un prompt basique : 	OK.
+- execution d'une cmd avec ses params : OK.
+- gestion correcte des ' ' & '\'t :   	Ok.
+- gestion du PATH :			OK.
+- gestion des erreurs & valeur de ret : OK.
+- Les redirection (<<, <, >, >>) :    	OK.
+- Les pipes et multi pipes : 	 	OK.
+- les builtins (cd, echo, exit):	OK.
+- Les separateur (;, &&, ||):		OK.
+
+
+####################
+## PARTIE BONUS ####
+####################
+
+- les inhibiteurs (' \" ') :		A confirmer.
+- les globing :	     	   		OK (a tester de facon avancer)
+- Le background :			NON.
+- la gestion correcte des quotes :	OK
+- les () :   	      	  	 	NON
+- les variables d'ENV :			OK
+- les variables local :			NON
+- history :	      			OK
+- alias :				OK
+- edition de ligne de cmd :		OK
+- job control :				NON
+- scripting:				NON
+- fichier de conf :			OK
+
+
+######
+ERREUR
+######
+
+"cat << EOF" return une erreur alors que normalement non;
+"cat < fichier_qui_nexiste_pas" ne return pas d'erreur;
+"broken pipe" pas de retour d'erreur

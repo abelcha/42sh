@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Thu May 15 17:39:22 2014 chalie_a
+** Last update Fri May 16 12:28:49 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -60,7 +60,7 @@ int		exec(t_cmd *cmd, t_execution *exe)
     return (FAILURE);
   execution_loop(cmd, exe);
   if (exe->nb_pipes > 0 && !exe->exit && !(cmd->prev->background))
-    wait_pipes(exe);
+  wait_pipes(exe);
   free(exe->pid);
   return (SUCCESS);
 }

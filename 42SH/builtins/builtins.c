@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 23:49:35 2014 chalie_a
-** Last update Thu May 15 16:42:45 2014 coutar_a
+** Last update Fri May 16 13:12:43 2014 chalie_a
 */
 
 #include <string.h>
@@ -18,8 +18,7 @@
 
 int		my_exit(t_execution *exe, t_cmd *cmd)
 {
-  if (exe->nb_pipes == exe->pos + 1)
-    exe->exit = my_atoi(cmd->stock[1]) + 256;
+  exe->exit = my_atoi(cmd->stock[1]) + 256;
   return (B_SUCCESS);
 }
 
@@ -133,7 +132,5 @@ int		my_echo(t_execution *exe, t_cmd *cmd)
 
 int		my_cd(t_execution *exe, t_cmd *cmd)
 {
-  (void)exe;
-  (void)cmd;
   return (B_SUCCESS);
 }

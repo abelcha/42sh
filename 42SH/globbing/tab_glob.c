@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Fri May 16 03:17:41 2014 chalie_a
+** Last update Fri May 16 13:30:45 2014 chalie_a
 */
 
 #include <glob.h>
@@ -24,12 +24,28 @@ int			get_cols()
   return (w.ws_col);
 }
 
+int			is_doublon(char *str, t_glob *root)
+{
+  t_glob		*tmp;
+
+  tmp = root;
+  while ((tmp = tmp->next) != root)
+    {
+      //printf("tamere = %s lol = %s\n", str, tmp->data);
+      if (!my_strcmp(str, tmp->data))
+	return (1);
+    }
+  return (0);
+}
+
 int			add_glob(t_gb *root, char *data, int len)
 {
   t_glob		*newelem;
   t_glob		*elem;
 
   elem = root->g;
+  if (is_doublon(&data[len], root->g))
+    return (SUCCESS);
   if (!(newelem = calloc(1, sizeof(t_glob))))
     return (FAILURE);
   if (!(newelem->data = strdup(&data[len])))
@@ -175,11 +191,11 @@ void		display_pos(t_gb *root, t_line *line)
   write(1, "\n", 1);
   maxlen = bigger_len(root->g);
   len = 0;
-  tmp = root->g->next;
+  tmp = root->g;
   while ((tmp = tmp->next) != root->g)
     {
       len += maxlen;
-      if (len > (cols - maxlen + 2))
+      if (len > (cols - maxlen + 1))
 	{
 	  write(1, "\n", 1);
 	  len = 0;
@@ -224,5 +240,6 @@ void		tab_glob(t_line *line)
     display_pos(gb, line);
   else
     line->tab_flag = 1;
+  // printf("total = %d\n", gb->total);
   clear_and_display(line);
 }

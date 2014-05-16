@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Fri May 16 03:13:28 2014 chalie_a
+** Last update Fri May 16 09:59:21 2014 chalie_a
 */
 
 #ifndef EDIT_H_
@@ -24,7 +24,7 @@
 ** Ctrl-l	Clear the screen
 */
 
-# define AK_NB		17
+# define AK_NB		18
 # define K_LEFT		4479771
 # define K_RIGHT	4414235
 # define K_DEL		127
@@ -43,7 +43,7 @@
 # define CTRL_K		11
 # define CTRL_W		23
 # define CTRL_L		12
-
+# define ALT_I		26907
 # define BUFF_LINE	4096
 #include <stdio.h>
 
