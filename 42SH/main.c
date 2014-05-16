@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Thu May 15 17:53:29 2014 chalie_a
+** Last update Thu May 15 23:12:18 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -84,6 +84,12 @@ t_line 			*init_sline()
   return (line);
 }
 
+void			link_all_structs(t_execution *exe, t_line *line)
+{
+  exe->line = line;
+  line->exe = exe;
+}
+
 int			main(int ac, char **av, char **env)
 {
   t_token		*root;
@@ -96,6 +102,7 @@ int			main(int ac, char **av, char **env)
   (void)ac;
   if (!(line = init_sline()) || !(exe = init_exe(env)))
     return (FAILURE);
+  link_all_structs(exe, line);
   while (get_line_caps(line) != FAILURE)
     {
       root = get_tokens(line->line);
@@ -106,7 +113,7 @@ int			main(int ac, char **av, char **env)
 	}
       free_tokens(root);
       free(line->line);
-      if (exe->exit || ++i > 10000)
+      if (exe->exit || ++i > 100000)
 	  break ;
     }
   add_in_history_file(line);

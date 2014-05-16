@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Thu May 15 04:23:02 2014 chalie_a
+** Last update Fri May 16 01:58:44 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -52,7 +52,7 @@ int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
   return (SUCCESS);
 }
 
-int		signal_ctz(int sig)
+int		kill_son(int sig)
 {
   kill(curr_pid, SIGINT);
   return (sig);
@@ -60,7 +60,7 @@ int		signal_ctz(int sig)
 
 int		exec_in_son(t_cmd *root, t_cmd *tmp, t_execution *exe) 
 {
-  signal(SIGINT, (__sighandler_t) signal_ctz);
+  signal(SIGINT, (__sighandler_t) kill_son);
   if (exe->prev_pipe != -1)
     close(exe->prev_pipe);
   if (tmp->next != root)

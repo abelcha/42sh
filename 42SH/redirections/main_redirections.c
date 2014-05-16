@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 13 16:57:16 2014 chalie_a
-** Last update Thu May 15 04:22:32 2014 chalie_a
+** Last update Fri May 16 02:01:54 2014 chalie_a
 */
 
 #include <fcntl.h>
@@ -34,7 +34,7 @@ static int		open_red(t_red *red)
 
 int		close_red(t_red *red)
 {
-  if (!(red))
+  if (!(red) || red->fd == -1)
     return (FAILURE);
   close(red->token / 2);
   dup2(red->save, red->token / 2);
@@ -61,4 +61,3 @@ int		close_redirections(t_cmd *root, t_execution *exe)
   close_red(root->prev->red[2]);
   return (SUCCESS);
 }
-

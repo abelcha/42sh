@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Wed May 14 19:41:31 2014 chalie_a
+** Last update Thu May 15 19:22:30 2014 chalie_a
 */
 
 #include "edit.h"
@@ -29,6 +29,7 @@ static const int		key_tab[AK_NB] = {K_LEFT,
 						  CTRL_K,
 						  CTRL_W,
 						  CTRL_L};
+
 
 static void			move_left(t_line *line)
 {
@@ -60,7 +61,7 @@ void				clear_scr(t_line *line)
 void				do_key_actions(t_line *line)
 {
   int				i;
-  static const t_ak		act_tab[AK_NB] = {move_left,
+static const t_ak		act_tab[AK_NB] = {move_left,
 						  move_right, 
 						  delete_char,
 						  go_prev,
@@ -79,6 +80,7 @@ void				do_key_actions(t_line *line)
 						  clear_scr};
 
   i = -1;
+  //  printf("\n%d\n", line->key);
   while (++i < AK_NB)
     {
       if (line->key == key_tab[i])

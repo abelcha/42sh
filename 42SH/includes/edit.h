@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Thu May 15 17:41:18 2014 chalie_a
+** Last update Fri May 16 03:13:28 2014 chalie_a
 */
 
 #ifndef EDIT_H_
@@ -53,7 +53,7 @@
 #include <term.h>
 #include <sys/ioctl.h>
 #include <string.h>
-#include <fcntl.h>                    
+#include <fcntl.h>
 
 typedef struct		s_history
 {
@@ -62,6 +62,22 @@ typedef struct		s_history
   struct s_history	*prev;
   struct s_history	*next;
 }			t_history;
+
+typedef struct		s_glob
+{
+  int			len;
+  char			*data;
+  struct s_glob		*prev;
+  struct s_glob		*next;
+}			t_glob;
+
+typedef struct		s_gb
+{
+  t_glob		*g;
+  char			*word;
+  int			total;
+
+}			t_gb;
 
 
 typedef struct		s_line
@@ -74,11 +90,21 @@ typedef struct		s_line
   int			p_size;
   char			*line;
   char			*line_save;
+  int			tab_flag;
+  struct s_execution	*exe;
   struct s_history	*curr_pos;
   struct s_history	*history;
   struct termios	save;
   struct termios	new;
 }			t_line;
+
+/*
+**     For Signals Only
+**		|
+**		v
+*/
+
+extern t_line		*lx;
 
 typedef			void(*t_ak)(t_line *line);
 
@@ -99,7 +125,7 @@ void	do_key_actions(t_line *line);
 int	get_term_caps(t_line *line);
 int	set_termcaps(t_line *line);
 char	*gnl(int);
-
+int	signal_ctz(int);
 void	tab_glob(t_line *line);
 void	move_to_start(t_line *line);
 void	move_to_end(t_line *line);

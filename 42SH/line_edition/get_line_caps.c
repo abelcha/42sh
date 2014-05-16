@@ -5,19 +5,21 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Thu May 15 17:44:45 2014 chalie_a
+** Last update Fri May 16 03:15:10 2014 chalie_a
 */
 
 #include "sh.h"
 #include "edit.h"
 
+t_line			*lx;
 
 void			x_read_line(t_line *line)
 {
+  line->tab_flag = 0;
   while (line->key != K_RET)
     {
       line->key = 0;
-      if (read(0, &(line->key), 4) < 0)
+      if (read(0, &(line->key), 4) < 0 && line->line)
 	{
 	  line->line = NULL;
 	  return ;
@@ -32,7 +34,7 @@ int			init_line(t_line *line)
 
   i = -2;
   CAP("dl");
-  while (++i < (line->p_size))
+  while (++i < (line->p_size - line->pre_prompt))
     CAP("le");
   line->curr_pos = NULL;
   line->line_len = 0;
@@ -45,6 +47,8 @@ int			init_line(t_line *line)
 
 int			get_line_caps(t_line *line)
 {
+  lx = line;
+  signal(SIGINT, (__sighandler_t) signal_ctz);
   if (!isatty(0) || set_termcaps(line) == FAILURE)
     line->line = gnl(0);
   else if (init_line(line) == SUCCESS)

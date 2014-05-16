@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Thu May 15 04:28:35 2014 chalie_a
+** Last update Fri May 16 01:58:23 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -98,7 +98,7 @@ int		fill_red_struct(t_token *token, t_cmd *cmd, int red_token, t_execution *exe
   if (red_token <= 0 && exe->input)
     double_left(tmp);
   else if ((tmp->fd = open(tmp->name, op_tab[tmp->token], 0644)) != -1)
-    close(tmp->fd);
+  close(tmp->fd);
   return (SUCCESS);
 }
 

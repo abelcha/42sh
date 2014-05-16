@@ -5,7 +5,7 @@ CC		=	clang -g3
 NAME		=	42sh
 
 SRC		=	./main.c				\
-
+			./signal.c				\
 
 LIB		=	./lib/gnl.c				\
 			./lib/my_atoi.c				\
@@ -63,7 +63,7 @@ B_OBJ		=	$(LINE:.c=.o) $(HIST:.c=.o) $(GLOB:.c=.o)
 
 ALL_OBJ		=	$(OBJ) $(P_OBJ) $(SH_OBJ) $(B_OBJ)
 
-CFLAGS	=	-I./includes -Wall -Wextra -pedantic
+CFLAGS	=	-I./includes ## -Wall -Wextra -pedantic
 
 RM	=	rm -fr
 
