@@ -20,13 +20,12 @@
 #include "parser.h"
 #include "my_color.h"
 
-
 static const char	*sig_tab[11] = {"Hangup",
 					"SIGINT",
 					"Quit",
 					"Illegal instruction)",
 					"Trace/breakpoint trap",
-					"Aborted", 
+					"Aborted",
 					"Bus Error",
 					"Floating point exception",
 					"Killed",
@@ -46,15 +45,14 @@ int		wait_pipes(t_execution *exe)
       if (!exe->return_value)
 	exe->return_value = WEXITSTATUS(status);
     }
-  if(status < 1000 && WIFSIGNALED(status))
+  if (status < 1000 && WIFSIGNALED(status))
     {
-      if(WTERMSIG(status) < 13)
+      if (WTERMSIG(status) < 13)
 	printf("%s", sig_tab[(WTERMSIG(status) - 1) % 13]);
       printf(WCOREDUMP(status) ? " (Core Dumped)\n" : "\n");
     }
   return (SUCCESS);
 }
-
 
 int		exec(t_cmd *cmd, t_execution *exe)
 {

@@ -49,9 +49,9 @@ HIST		=	./history/put_in_history.c		\
 GLOB		=	./globbing/main_glob.c			\
 			./globbing/tab_glob.c			\
 
-BUILD		=	./builtins/builtins.c			\
-			./builtins/env_dll.c			\
-
+BUILD		=	./builtins/env_dll.c			\
+			./builtins/builtins.c			\
+			./builtins/echo.c 			\
 
 OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o) 
 
