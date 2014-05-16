@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Fri May 16 12:26:58 2014 chalie_a
+** Last update Sat May 17 01:20:50 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -19,6 +19,7 @@
 #include "sh.h"
 #include "parser.h"
 #include "my_color.h"
+#define	LAST_PIPE	(exe->nb_pipes == exe->pos + 2)
 
 static int	curr_pid;
 
@@ -93,12 +94,12 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
   exe->pos = -1;
   if (handle_redirections(cmd, exe) == FAILURE)
     return (FAILURE);
-  while ((tmp = tmp->next) != cmd && exe->exit == 0)
+  while ((tmp = tmp->next) != cmd && exe->exit == 0) 
     {
       exe->return_value = 0;
-      if (!tmp->path && tmp->builtin == -1 && exe->nb_pipes == exe->pos + 2)
+      if (!tmp->path && tmp->builtin == -1 && LAST_PIPE)
 	cmd_not_in_paths(tmp, exe);
-      else if (tmp->builtin >= 0 && tmp->builtin < 4 && exe->nb_pipes == exe->pos + 2)
+      else if (tmp->builtin >= 0 && tmp->builtin < 4 && LAST_PIPE)
 	exec_builtins(tmp, exe);
       else if (pipe(exe->fdp) != 42 && (curr_pid = fork()) == 0)
 	exec_in_father(cmd, tmp, exe);

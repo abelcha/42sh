@@ -5,14 +5,14 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Fri May 16 12:59:59 2014 chalie_a
+** Last update Sat May 17 00:55:24 2014 chalie_a
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "sh.h"
 
-const static t_echo	g_esc[] =
+static t_echo	g_esc[] =
   {
     {'\\', '\\'},
     {'a', '\a'},
@@ -63,7 +63,6 @@ int	find_strings(char **stock, char *flagstatus)
     }
   if (flagstatus[0] == 0)
     write(1, "\n", 1);
-    //printf("tamere\n");		 //<<--C'est quoi ce truc qui fout la merde .
   return (0);
 }
 
