@@ -48,6 +48,9 @@ HIST		=	./history/put_in_history.c		\
 
 GLOB		=	./globbing/main_glob.c			\
 			./globbing/tab_glob.c			\
+			./globbing/get_cmd_data.c		\
+			./globbing/display_results.c		\
+			./globbing/get_data_type.c		\
 
 BUILD		=	./builtins/env_dll.c			\
 			./builtins/builtins.c			\

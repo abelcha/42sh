@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Fri May 16 09:59:21 2014 chalie_a
+** Last update Sat May 17 01:50:20 2014 chalie_a
 */
 
 #ifndef EDIT_H_
@@ -45,15 +45,16 @@
 # define CTRL_L		12
 # define ALT_I		26907
 # define BUFF_LINE	4096
-#include <stdio.h>
-
-#include <stdlib.h>
-#include <signal.h>
-#include <unistd.h>
-#include <term.h>
-#include <sys/ioctl.h>
-#include <string.h>
-#include <fcntl.h>
+# define ARG		12
+# define CMD		42
+# include <stdio.h>
+# include <stdlib.h>
+# include <signal.h>
+# include <unistd.h>
+# include <term.h>
+# include <sys/ioctl.h>
+# include <string.h>
+# include <fcntl.h>
 
 typedef struct		s_history
 {
