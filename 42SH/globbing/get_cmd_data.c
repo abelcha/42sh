@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Thu May 15 21:44:05 2014 chalie_a
+** Last update Sat May 17 05:02:30 2014 chalie_a
 */
 
 #include <glob.h>
@@ -48,7 +48,6 @@ int		get_data(char *path, char *word, t_gb *gb)
   if (!(temp = get_fusion(path, word, &len)))
     return (FAILURE);
   check_match(temp, gb, len);
-  //  printf("temp = %s\n", temp);
   glob(temp, 0, NULL, &gl);
   if (gl.gl_pathc <= 0)
     return (FAILURE);

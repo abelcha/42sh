@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Sat May 17 01:20:50 2014 chalie_a
+** Last update Sat May 17 09:50:46 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -21,7 +21,8 @@
 #include "my_color.h"
 #define	LAST_PIPE	(exe->nb_pipes == exe->pos + 2)
 
-static int	curr_pid;
+int	curr_pid;
+int		gpid;
 
 int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe) 
 {
@@ -38,7 +39,13 @@ int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe)
 
 int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
 {
-  setpgid(0, 0);
+  if (tmp->prev == root)
+    {
+      setsid();
+      gpid = getpid();
+      setpgid(getpid(), gpid);
+    }
+  setpgid(getpid(), gpid);
   if (!tmp->path && tmp->builtin == -1)
     return (cmd_not_in_paths(tmp, exe));
   if (tmp->next != root && dup2(exe->fdp[1], STDOUT_FILENO) < 0)
@@ -62,7 +69,6 @@ int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
 
 int		exec_in_son(t_cmd *root, t_cmd *tmp, t_execution *exe) 
 {
-  setpgid(curr_pid, curr_pid);
   if (exe->prev_pipe != -1)
     close(exe->prev_pipe);
   if (tmp->next != root)

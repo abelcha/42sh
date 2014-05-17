@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Sat May 17 01:50:20 2014 chalie_a
+** Last update Sat May 17 05:57:32 2014 chalie_a
 */
 
 #ifndef EDIT_H_
@@ -76,8 +76,9 @@ typedef struct		s_gb
 {
   t_glob		*g;
   char			*word;
+  int			word_len;
   int			total;
-
+  int			part_match;
 }			t_gb;
 
 

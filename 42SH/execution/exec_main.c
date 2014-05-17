@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Fri May 16 12:28:49 2014 chalie_a
+** Last update Sat May 17 08:53:23 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -19,6 +19,8 @@
 #include "sh.h"
 #include "parser.h"
 #include "my_color.h"
+
+extern int curr_pid;
 
 static const char	*sig_tab[11] = {"Hangup",
 					"SIGINT",
@@ -59,7 +61,9 @@ int		exec(t_cmd *cmd, t_execution *exe)
   if (!(exe->pid = calloc(exe->nb_pipes, sizeof(int *))))
     return (FAILURE);
   execution_loop(cmd, exe);
-  if (exe->nb_pipes > 0 && !exe->exit && !(cmd->prev->background))
+  if (cmd->prev->background)
+    setpgid(curr_pid, curr_pid);
+  else if (exe->nb_pipes > 0 && !exe->exit)
   wait_pipes(exe);
   free(exe->pid);
   return (SUCCESS);
