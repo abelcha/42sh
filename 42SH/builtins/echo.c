@@ -5,7 +5,7 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Sat May 17 00:55:24 2014 chalie_a
+** Last update Sat May 17 14:15:42 2014 coutar_a
 */
 
 #include <unistd.h>
@@ -66,7 +66,7 @@ int	find_strings(char **stock, char *flagstatus)
   return (0);
 }
 
-int	write_echo(char	*str, char *flagstatus, t_echo *g_esc)
+int	write_echo(char	*str, char *flagstatus, const t_echo g_esc[])
 {
   int	i;
 
@@ -96,8 +96,8 @@ int	byte_printer(char *str, int *i)
     {
       hex[0] = str[(*i) + 2];
       hex[1] = str[(*i) + 3];
-      byte = strtol(hex, &hex[2], 16);
-      printf("%c", byte);
+      byte = strtol(hex, 0, 16);
+      write(1, &byte, 1);
       (*i) = (*i) + 3;
       return (0);
     }
@@ -106,14 +106,14 @@ int	byte_printer(char *str, int *i)
       oct[0] = str[(*i) + 2];
       oct[1] = str[(*i) + 3];
       oct[2] = str[(*i) + 4];
-      byte = strtol(oct, &oct[3], 8);
-      printf("%c", byte);
+      byte = strtol(oct, 0, 8);
+      write(1, &byte, 1);
       (*i) = (*i) + 4;
     }
   return (0);
 }
 
-int	escape_code_parsing(t_echo *g_esc, char *str, int *i)
+int	escape_code_parsing(const t_echo g_esc[], char *str, int *i)
 {
   int	j;
   char	escape_code[2];
