@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Sun May 18 08:42:17 2014 chalie_a
+** Last update Sun May 18 14:11:56 2014 chalie_a
 */
 
 #include <string.h>
@@ -21,12 +21,13 @@ static int			add_data_in_cmd(t_cmd *cmd,
 						const t_token *token)
 {
   if (!cmd)
-    return (0);
-  if (!cmd->stock)
     return (FAILURE);
+  if (!cmd->stock || cmd->size >= cmd->realloc_cpt)
+    if (!(cmd->stock = realloc(cmd->stock, ++(cmd->realloc_cpt) * MEM_POOL)))
+      return (FAILURE);
   cmd->stock[cmd->size] = token->data;
   cmd->stock[cmd->size][token->data_size] = 0;
-  ++(cmd->size);
+  cmd->stock[++(cmd->size)] = NULL;
   return (SUCCESS);
 }
 

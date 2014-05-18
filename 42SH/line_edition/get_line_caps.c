@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Sun May 18 12:22:09 2014 chalie_a
+** Last update Sun May 18 15:25:08 2014 chalie_a
 */
 
 #include "sh.h"
@@ -16,7 +16,7 @@ t_line			*lx;
 int			x_read_line(t_line *line)
 {
   line->tab_flag = 0;
-  while (line->key != K_RET)
+  while (line->key != K_RET && line->pos < BUFF_LINE)
     {
       line->key = 0;
       if (read(0, &(line->key), 4) <= 0 || line->key == CTRL_D)

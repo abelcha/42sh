@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Sun May 18 08:02:07 2014 chalie_a
+** Last update Sun May 18 15:47:49 2014 chalie_a
 */
 
 #ifndef EDIT_H_

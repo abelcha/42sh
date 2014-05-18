@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:57:23 2014 chalie_a
-** Last update Sun May 18 07:08:30 2014 chalie_a
+** Last update Sun May 18 14:53:31 2014 chalie_a
 */
 
 #ifndef TYPEDEFS_H_
@@ -31,6 +31,7 @@ typedef struct		s_cmd
   char			**stock;
   int			builtin;
   int			background;
+  int			realloc_cpt;
   struct s_red		*red[3];
   struct s_cmd		*prev;
   struct s_cmd		*next;
@@ -73,6 +74,8 @@ typedef struct		s_env_dll
 
 typedef struct		s_env
 {
+  int			total_nb;
+  int			realloc_cpt;
   char			**paths;
   char			**envp;
   struct s_env_dll	*env_dll;

@@ -5,17 +5,28 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 20:49:22 2014 chalie_a
-** Last update Thu May 15 04:05:05 2014 chalie_a
+** Last update Sun May 18 15:46:21 2014 chalie_a
 */
 
 #include <termios.h>
 #include "edit.h"
 #include "sh.h"
 
+void		safecpy(char *dest, char *str)
+{
+  int		i;
+
+  i = -1;
+  while (str[++i] && i < BUFF_LINE)
+    dest[i] = str[i];
+  dest[i] = 0;
+}
+
 
 void		back_to_the_future(t_line *line, char *new_line, int new_len)
 {
-  strcpy(line->line, new_line);
+  if (strlen(new_line) < BUFF_LINE)
+    strcpy(line->line, new_line);
   replace_cursor(line->pos, new_len);
   line->pos = new_len;
   line->line_len = new_len;

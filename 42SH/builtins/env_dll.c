@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 21:24:59 2014 chalie_a
-** Last update Sun May 18 07:29:36 2014 chalie_a
+** Last update Sun May 18 15:20:46 2014 chalie_a
 */
 
 #include <string.h>
@@ -60,7 +60,7 @@ int			put_env_in_tab(t_env *env)
 
   i = -1;
   tmp = env->env_dll;
-  if (!env->envp && !(env->envp = calloc(ENV_BUFF + 1, sizeof(char **))))
+  if (!(env->envp = calloc(ENV_BUFF, sizeof(char *))))
     return (FAILURE);
   while ((tmp = tmp->next) != env->env_dll && ++i < ENV_BUFF)
     env->envp[i] = tmp->name;

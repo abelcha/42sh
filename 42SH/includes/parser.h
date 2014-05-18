@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Sun May 18 07:08:32 2014 chalie_a
+** Last update Sun May 18 14:13:11 2014 chalie_a
 */
 
 #ifndef PARSER_H_
@@ -13,8 +13,9 @@
 
 # include "tokenizer.h"
 # include "sh.h"
+
 # define LAST_PIPE	(token->next->token == T_EOL ? 1 : 0)
-# define MEM_POOL	128
+# define MEM_POOL	(16 * sizeof(char *))
 # define BEFORE		0
 # define AFTER		1
 #  define SIMPLE_RED__	O_CREAT|O_TRUNC|O_WRONLY
@@ -38,4 +39,5 @@ void   		*free_tree(t_parse_tree *);
 void		display_tree(t_parse_tree *);
 int		redirections(t_cmd *, t_token *, t_execution *);
 int		expected_after_pipe();
+
 #endif /* !PARSER_H_ */
