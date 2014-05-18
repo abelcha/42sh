@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 22:21:05 2014 chalie_a
-** Last update Sun May 18 15:45:08 2014 chalie_a
+** Last update Sun May 18 17:40:33 2014 chalie_a
 */
 
 #include <fcntl.h>
@@ -52,8 +52,8 @@ int		init_history(t_line *line)
     else
       {
 	line->history->prev->data = str;
-	if ((line->history->prev->len = strlen(str)) > BUFF_LINE)
-	  return (FAILURE);
+	if ((line->history->prev->len = strlen(str)) > BUFF_LINE);
+	//	  return (FAILURE);
       }
   close(fd);
   return (SUCCESS);

@@ -5,28 +5,34 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 20:49:22 2014 chalie_a
-** Last update Sun May 18 15:46:21 2014 chalie_a
+** Last update Sun May 18 18:02:53 2014 chalie_a
 */
 
 #include <termios.h>
 #include "edit.h"
 #include "sh.h"
 
-void		safecpy(char *dest, char *str)
+int		safecpy(t_line *line, char *str)
 {
   int		i;
 
   i = -1;
-  while (str[++i] && i < BUFF_LINE)
-    dest[i] = str[i];
-  dest[i] = 0;
+  while (str[++i])
+    {
+      if (i >= (BUFF_LINE * line->realloc_cpt))
+        if (line_realloc(line) == FAILURE)
+	  return (FAILURE);
+      line->line[i] = str[i];
+    }
+  line->line[i] = 0;
+  return (SUCCESS);
 }
 
 
 void		back_to_the_future(t_line *line, char *new_line, int new_len)
 {
-  if (strlen(new_line) < BUFF_LINE)
-    strcpy(line->line, new_line);
+  if (safecpy(line, new_line) == FAILURE)
+    return ;
   replace_cursor(line->pos, new_len);
   line->pos = new_len;
   line->line_len = new_len;
@@ -53,8 +59,6 @@ void		go_prev(t_line *line)
 	return ;
       line->curr_pos = line->history;
       strcpy(line->line_save, line->line);
-      // if (!(line->line = calloc(BUFF_LINE, sizeof(char))))		WHY THE FUCK DID I'VE DONE THAT ??
-      //	return ;
     }
   if (line->curr_pos->prev == line->history)
     return ;

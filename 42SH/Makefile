@@ -11,6 +11,7 @@ LIB		=	./lib/gnl.c				\
 			./lib/my_atoi.c				\
 			./lib/strmatch.c			\
 			./lib/free_utils.c			\
+			./lib/my_strlen.c			\
 
 PARSER		=	./parser_lexer/get_paths.c		\
 			./parser_lexer/main_parsing.c		\

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:57:23 2014 chalie_a
-** Last update Sun May 18 14:53:31 2014 chalie_a
+** Last update Sun May 18 17:36:14 2014 chalie_a
 */
 
 #ifndef TYPEDEFS_H_
@@ -147,6 +147,7 @@ typedef struct		s_line
   int			p_size;
   char			*line;
   char			*line_save;
+  int			realloc_cpt;
   int			tab_flag;
   struct s_execution	*exe;
   struct s_history	*curr_pos;
