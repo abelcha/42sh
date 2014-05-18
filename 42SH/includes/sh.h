@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Sun May 18 06:30:59 2014 chalie_a
+** Last update Sun May 18 06:51:23 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -84,6 +84,8 @@ int		exec_builtins(t_cmd *cmd, t_execution *exe);
 void		double_free(char **);
 void		fill_env_struct(t_env_dll *elem, char *env_line);
 int		add_env_variable(t_env_dll *elem, char *env_line);
+char		*get_env_line(char *s1, char *s2);
+t_env_dll	*search_for_env_variable(char *str, t_env_dll *root);
 int		open_redirections(t_cmd *, t_execution *);
 int		close_redirections(t_cmd *, t_execution *);
 void		clear_and_display(t_line *);
@@ -96,11 +98,22 @@ int		add_in_history_file(t_line *line);
 int		my_echo(t_execution *exe, t_cmd *cmd);
 int		find_flags(char **stock, char *flagstatus);
 int		find_strings(char **stock, char *flagstatus);
-int		write_echo(char *str, char *flagstatus, t_echo *esc);
-int		escape_code_parsing(t_echo *g_esc, char *str, int *i);
+int		write_echo(char *str, char *flagstatus, const t_echo esc[]);
+int		escape_code_parsing(const t_echo g_esc[], char *str, int *i);
 int		byte_printer(char *str, int *i);
 int		my_strcmp(char *, char *);
 int		handle_redirections(t_cmd *, t_execution *);
+int		cd_home(t_execution *exe, t_cmd *cmd);
+int		cd_other(t_execution *exe, t_cmd *cmd, int check);
+int		cd_home(t_execution *exe, t_cmd *cmd);
+int		cd_progressive(t_execution *exe, t_cmd *cmd);
+int		cd_absolute(t_execution *exe, t_cmd *cmd);
+int		cd_regressive(t_execution *exe, t_cmd *cmd);
+int		cd_other(t_execution *exe, t_cmd *cmd, int check);
+char		*cd_arbor_regress(char *str);
+char		*allocstrcat(char *dest, char *src);
+char		*supercat(char *str1, char *str2, char *str3);
+int		cd_chdir_error(void);
 
 # define LASTPIPE	(exe->nb_pipes == exe->pos + 2) 
 # define B_SUCCESS	0

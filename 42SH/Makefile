@@ -55,8 +55,10 @@ BUILD		=	./builtins/env_dll.c			\
 			./builtins/env_builtins.c		\
 			./builtins/builtins.c			\
 			./builtins/echo.c 			\
+			./builtins/cd.c				\
+			./builtins/filestructure.c		\
 
-OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o) 
+OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o)
 
 P_OBJ		=	$(PARSER:.c=.o) $(TOKEN:.c=.o)
 
