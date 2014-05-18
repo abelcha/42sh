@@ -5,7 +5,7 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Sat May 17 17:10:24 2014 coutar_a
-** Last update Sat May 17 17:59:52 2014 coutar_a
+** Last update Sun May 18 14:31:46 2014 coutar_a
 */
 
 #include <string.h>
@@ -14,25 +14,13 @@
 
 char	*cd_arbor_regress(char *str)
 {
-  char	*ret;
-  int	i;
   int	stop;
 
-  i = 0;
   stop = strlen(str);
   while (str[stop] != '/')
     stop--;
-  stop++;
-  if ((ret = malloc((stop) * sizeof(char))) == NULL)
-    return (NULL);
-  while (i != stop)
-    {
-      ret[i] = str[i];
-      i++;
-    }
-  i = i - 1;
-  ret[i] = '\0';
-  return (ret);
+  str[stop] = '\0';
+  return (str);
 }
 
 char	*allocstrcat(char *dest, char *src)
@@ -77,4 +65,23 @@ int	cd_chdir_error(void)
 {
   printf("Error, file is not a directory.\n");
   return (-1);
+}
+
+int	cd_env_setting(t_execution *exe, char *pwd, t_env_dll *tmp)
+{
+  t_env_dll	*tmp2;
+  char		*oldpwd;
+
+  oldpwd = get_env_line("OLDPWD", tmp->value);
+  free(tmp->name);
+  fill_env_struct(tmp, pwd);
+  if(!(tmp2 = search_for_env_variable("OLDPWD", exe->env->env_dll)))
+    add_env_variable(exe->env->env_dll, oldpwd);
+  else
+    {
+      free(tmp2->name);
+      fill_env_struct(tmp2, oldpwd);
+    }
+  put_env_in_tab(exe->env);
+  return (0);
 }
