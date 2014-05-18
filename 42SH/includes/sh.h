@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Sun May 18 08:36:05 2014 chalie_a
+** Last update Sun May 18 15:44:38 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -68,7 +68,7 @@ char		*get_env(char **, char *);
 # define B_SUCCESS	0
 # define B_FAILURE	2
 # define TMP_FILE	".tmp"
-# define ENV_BUFF	4096
+# define ENV_BUFF	256
 # define TRUNC		O_CREAT|O_TRUNC|O_WRONLY
 # define READ_ONLY	O_RDONLY
 # define APPEND		O_CREAT|O_APPEND|O_WRONLY
