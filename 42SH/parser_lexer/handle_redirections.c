@@ -5,9 +5,12 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Fri May 16 01:58:23 2014 chalie_a
+** Last update Sun May 18 12:08:01 2014 chalie_a
 */
 
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "tokenizer.h"
@@ -106,11 +109,11 @@ int		redirections(t_cmd *cmd, t_token *token, t_execution *exe)
 {
   int		red_token;
 
-  if (token->next->token != T_CMD)
+    if (token->next->token != T_CMD)
     return (error_handling(token->token, token->next->token));
   red_token = find_red_token(token->token);
-  if (fill_red_struct(token, cmd, red_token, exe) == FAILURE)
-    return (FAILURE);
+  // if (fill_red_struct(token, cmd, red_token, exe) == FAILURE)
+  // return (FAILURE);
   delete_filename_token(token->next, 1);
   delete_filename_token(token, 0);
   return (SUCCESS);

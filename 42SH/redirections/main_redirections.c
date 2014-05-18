@@ -5,16 +5,15 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 13 16:57:16 2014 chalie_a
-** Last update Fri May 16 07:42:28 2014 chalie_a
+** Last update Sun May 18 07:29:20 2014 chalie_a
 */
 
+#include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "sh.h"
 #include "parser.h"
-
-extern int		is_atty;
 
 static int		open_red(t_red *red)
 {

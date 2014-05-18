@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Tue May  6 12:31:05 2014 chalie_a
+** Last update Sat May 17 18:59:00 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -19,7 +19,8 @@ static t_cmd		*init_cmd()
   
   if (!(root = calloc(1, sizeof(t_cmd))))
     return (NULL);
-  root->stock = calloc(MEM_POOL, sizeof(char));
+  if (!(root->stock = calloc(MEM_POOL, sizeof(char))))
+    return (NULL);
   root->prev = root;
   root->next = root;
   return (root);

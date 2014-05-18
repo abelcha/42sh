@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Sun May 18 14:56:40 2014 coutar_a
+** Last update Sun May 18 07:11:38 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -49,22 +49,18 @@ int		byte_printer(char *str, int *i);
 int		my_strcmp(char *, char *);
 int		handle_redirections(t_cmd *, t_execution *);
 int		cd_home(t_execution *exe, t_cmd *cmd);
+int		cd_other(t_execution *exe, t_cmd *cmd, int check);
+int		cd_home(t_execution *exe, t_cmd *cmd);
 int		cd_progressive(t_execution *exe, t_cmd *cmd);
 int		cd_absolute(t_execution *exe, t_cmd *cmd);
 int		cd_regressive(t_execution *exe, t_cmd *cmd);
-int		cd_other(t_execution *exe, t_cmd *cmd, char check);
+int		cd_other(t_execution *exe, t_cmd *cmd, int check);
 char		*cd_arbor_regress(char *str);
 char		*allocstrcat(char *dest, char *src);
 char		*supercat(char *str1, char *str2, char *str3);
 int		cd_chdir_error(void);
-int		cd_env_setting(t_execution *exe, char *pwd, t_env_dll *tmp);
-int		is_dir(const char *);
-int		my_strcmp(char *, char *);
-char		**get_paths(char *, char);
-int		actualise_path(t_execution *, char *);
-char		*get_env(char **, char *);
 
-# define LASTPIPE	(exe->nb_pipes == exe->pos + 2)
+# define LASTPIPE	(exe->nb_pipes == exe->pos + 2) 
 # define B_SUCCESS	0
 # define B_FAILURE	2
 # define TMP_FILE	".tmp"

@@ -1,6 +1,6 @@
 
 
-CC		=	clang -g3
+CC		=	gcc -lefence -g3
 
 NAME		=	42sh
 
@@ -33,7 +33,6 @@ RED		=	./redirections/main_redirections.c	\
 EXE		=	./execution/exec_main.c			\
 			./execution/exec_loop.c			\
 
-
 LINE		=	./line_edition/add_del_key_actions.c	\
 			./line_edition/history_key_actions.c	\
 			./line_edition/start_end_actions.c	\
@@ -53,6 +52,7 @@ GLOB		=	./globbing/main_glob.c			\
 			./globbing/get_data_type.c		\
 
 BUILD		=	./builtins/env_dll.c			\
+			./builtins/env_builtins.c		\
 			./builtins/builtins.c			\
 			./builtins/echo.c 			\
 			./builtins/cd.c				\
@@ -68,7 +68,7 @@ B_OBJ		=	$(LINE:.c=.o) $(HIST:.c=.o) $(GLOB:.c=.o)
 
 ALL_OBJ		=	$(OBJ) $(P_OBJ) $(SH_OBJ) $(B_OBJ)
 
-CFLAGS	=	-I./includes ## -Wall -Wextra -pedantic
+CFLAGS	=	-I./includes  -Wall -Wextra #-pedantic
 
 RM	=	rm -fr
 

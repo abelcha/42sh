@@ -5,13 +5,13 @@ CMD=(
 	'/bin/ls -l'
 	'echo 42sh'
 	'cd /'
-	'cd'
+	'cd'		#
 	'cd -'
 	'exit 0'
 #	'/bin/kill -11 0'
-	'cd /root'
-	'| ls'
-	''
+	'cd /root'	#
+	'| ls'		#
+	''		#
 	'unsetenv PATH; ls'
 	'ls > test'
 	'cat < test'
@@ -25,13 +25,13 @@ CMD=(
 	'setenv USER toto | wc -l'
 	'ls | less | wc -c'
 	'echo hello | tr -d o | cat -e'
-	'cat /etc/passwd | grep 42 | wc -l'
-	'ls -lRa ../../ | cat | cat | cat | tr -s 42 | cat | cat | cat | wc -l'
-	'badcommand && echo ne_doit_pas_safficher'
-	'cd /root && echo ne_doit_pas_safficher'
-	'ls && echo doit_safficher'
-	'badcommand || echo doit_safficher'
-#	'/bin/kill -11 0 || echo doit_safficher'
+	'cat /etc/passwd | grep 42 | wc -l'	#
+	'ls -lRa ../../ | cat | cat | cat | tr -s 42 | cat | cat | cat | wc -l'	#
+	'badcommand && echo ne_doit_pas_safficher'				#
+	'cd /root && echo ne_doit_pas_safficher'				#
+	'ls && echo doit_safficher'						#
+	'badcommand || echo doit_safficher'					#
+	'/bin/kill -11 0 || echo doit_safficher'				#
 	'ls && badcommad && echo ne_doit_pas_safficher'
 	'badcommand || cd . || pwd'
 	'badcommand || echo good_command && echo doit_safficher'

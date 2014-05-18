@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 23:49:35 2014 chalie_a
-** Last update Fri May 16 13:12:43 2014 chalie_a
+** Last update Sun May 18 14:20:36 2014 coutar_a
 */
 
 #include <string.h>
@@ -132,5 +132,27 @@ int		my_echo(t_execution *exe, t_cmd *cmd)
 
 int		my_cd(t_execution *exe, t_cmd *cmd)
 {
+  char		check;
+  char		*str;
+  int		i;
+  int		j;
+
+  i = 0;
+  j = 0;
+  str = "home";
+  check = 0;
+  if (cmd->stock[1] == NULL)
+    cd_home(exe, cmd);
+  else
+    {
+      while (cmd->stock[1][i] != '\0')
+      	{
+      	  if (cmd->stock[1][i] == str[j])
+      	    j++;
+      	  i++;
+      	}
+      check = j == 3 ? 1 : 0;
+      cd_other(exe, cmd, check);
+    }
   return (B_SUCCESS);
 }

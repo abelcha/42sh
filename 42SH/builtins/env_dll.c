@@ -5,11 +5,12 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 21:24:59 2014 chalie_a
-** Last update Mon May 12 23:01:28 2014 chalie_a
+** Last update Sun May 18 07:29:36 2014 chalie_a
 */
 
 #include <string.h>
 #include <stdlib.h>
+#include "parser.h"
 #include "sh.h"
 
 void			fill_env_struct(t_env_dll *elem, char *env_line)

@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.net>
 ** 
 ** Started on  Mon Oct 21 11:45:34 2013 chalie_a
-** Last update Fri May  9 14:50:13 2014 chalie_a
+** Last update Sat May 17 18:35:53 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -79,10 +79,12 @@ char	**get_paths(char *str, char c)
   if (!str)
   return (NULL);*/
   nb = count_word(str, c);
-  tab = calloc((nb + 1), sizeof(str));
+  if (!(tab = calloc((nb + 1), sizeof(str))))
+    return (NULL);
   while (i < nb)
     {
-      tab[i] = calloc((count_len(str, c, i) + 2), sizeof(*str));
+      if (!(tab[i] = calloc(count_len(str, c, i) + 2, sizeof(char))))
+	return (NULL);
       i++;
     }
   parsing(tab, str, nb, c);

@@ -5,7 +5,7 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Sat May 17 14:24:19 2014 coutar_a
-** Last update Sun May 18 14:21:15 2014 coutar_a
+** Last update Sun May 18 14:56:20 2014 coutar_a
 */
 
 #include <string.h>
@@ -22,6 +22,7 @@ int		cd_home(t_execution *exe, t_cmd *cmd)
   t_env_dll	*tmp;
   t_env_dll	*tmp2;
 
+  (void)cmd;
   if (!(tmp = search_for_env_variable("HOME", exe->env->env_dll)) ||
       !(tmp2 = search_for_env_variable("PWD", exe->env->env_dll)))
     return (-1);
@@ -29,7 +30,7 @@ int		cd_home(t_execution *exe, t_cmd *cmd)
   pwd = get_env_line("PWD", tmp->value);
   oldpwd = get_env_line("OLDPWD", tmp2->value);
   free(tmp2->name);
-  fill_env_struct(tmp2, pwd);
+  fill_env_struct(tmp2, pwd);			//<<- SEGFAULT si pwd == NULL
   if(!(tmp = search_for_env_variable("OLDPWD", exe->env->env_dll)))
     add_env_variable(exe->env->env_dll, oldpwd);
   else
@@ -50,7 +51,7 @@ int		cd_progressive(t_execution *exe, t_cmd *cmd)
     return (-1);
   if ((chdir(cmd->stock[1])) == -1)
     return (cd_chdir_error());
-  if (!(pwd = get_env_line("PWD",supercat(tmp->value, "/", cmd->stock[1]))))
+  if (!(pwd = get_env_line("PWD",supercat(tmp->value, "/", cmd->stock[1])))) // <<- SEGFAULT si supercat == NULL
     return (-1);
   cd_env_setting(exe, pwd, tmp);
   return (0);
@@ -80,7 +81,7 @@ int	cd_regressive(t_execution *exe, t_cmd *cmd)
   if (!(tmp = search_for_env_variable("PWD", exe->env->env_dll)))
     return (-1);
   oldpwd = get_env_line("OLDPWD", tmp->value);
-  pwd = get_env_line("PWD", cd_arbor_regress(tmp->value));
+  pwd = get_env_line("PWD", cd_arbor_regress(tmp->value));	 // <<- DOUBLE SEGFAULT
   if ((chdir(cmd->stock[1])) == -1)
     return (cd_chdir_error());
   free(tmp->name);

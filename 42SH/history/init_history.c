@@ -5,12 +5,13 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 22:21:05 2014 chalie_a
-** Last update Thu May 15 17:22:13 2014 chalie_a
+** Last update Sun May 18 08:29:54 2014 chalie_a
 */
 
 #include <fcntl.h>
 #include <stdlib.h>
 #include "edit.h"
+#include "sh.h"
 
 int			add_elem_in_history(t_history *elem)
 {

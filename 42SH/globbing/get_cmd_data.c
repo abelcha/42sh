@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Sat May 17 05:02:30 2014 chalie_a
+** Last update Sun May 18 09:29:41 2014 chalie_a
 */
 
 #include <glob.h>
@@ -48,13 +48,13 @@ int		get_data(char *path, char *word, t_gb *gb)
   if (!(temp = get_fusion(path, word, &len)))
     return (FAILURE);
   check_match(temp, gb, len);
-  glob(temp, 0, NULL, &gl);
+  glob(temp, GLOB_TILDE_CHECK, NULL, &gl);
+  free(temp);
   if (gl.gl_pathc <= 0)
     return (FAILURE);
-  while (++i < gl.gl_pathc)
+  while (++i < (int)gl.gl_pathc)
     if (add_glob(gb, gl.gl_pathv[i], len) == FAILURE)
       return (FAILURE);
-  free(temp);
   globfree(&gl);
   return (SUCCESS);
 }
@@ -62,7 +62,6 @@ int		get_data(char *path, char *word, t_gb *gb)
 int		get_command(char *word, t_line *line, t_gb *gb)
 {
   char		**p_tab;
-  char		*tmp;
   int		i;
 
   i = -1;

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Fri May 16 09:59:09 2014 chalie_a
+** Last update Sat May 17 17:50:41 2014 chalie_a
 */
 
 #include "edit.h"
@@ -87,7 +87,6 @@ static const t_ak		act_tab[AK_NB] = {move_left,
 						  real_tab};
 
   i = -1;
-  //  printf("\n%d\n", line->key);
   while (++i < AK_NB)
     {
       if (line->key == key_tab[i])
