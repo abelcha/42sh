@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Sun May 18 06:44:19 2014 chalie_a
+** Last update Sun May 18 12:28:34 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -63,11 +63,12 @@ int			exec(t_cmd *cmd, t_execution *exe)
   if (!(exe->pid = calloc(exe->nb_pipes, sizeof(int *))))
     return (FAILURE);
   execution_loop(cmd, exe);
-  if (cmd->prev->background)
+  if (cmd->prev->background && !exe->return_value)
     setpgid(exe->curr_pid, exe->curr_pid);
   else if (exe->nb_pipes > 0 && !exe->exit)
   wait_pipes(exe);
   free(exe->pid);
+  exe->pid = NULL;
   return (SUCCESS);
 }
 

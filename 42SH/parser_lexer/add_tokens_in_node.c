@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Sat May 17 19:11:10 2014 chalie_a
+** Last update Sun May 18 08:42:17 2014 chalie_a
 */
 
 #include <string.h>
@@ -28,13 +28,6 @@ static int			add_data_in_cmd(t_cmd *cmd,
   cmd->stock[cmd->size][token->data_size] = 0;
   ++(cmd->size);
   return (SUCCESS);
-}
-
-static int			is_redir(const int t)
-{
-  if (t == 0 || t == 2 || (t >= 8 && t <= 11))
-    return (1);
-  return (0);
 }
 
 static int			cmd_in_background(t_parse_tree *tmp,

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Sat May 17 18:37:12 2014 chalie_a
+** Last update Sun May 18 11:32:53 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -114,7 +114,7 @@ int			main(int ac, char **av, char **env)
 	}
       free_tokens(root);
       free(line->line);
-      if (exe->exit/* || ++i > 10000*/)
+      if (exe->exit || ++i > 100000)
 	  break ;
     }
   add_in_history_file(line);

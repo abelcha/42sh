@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Sat May 17 17:55:57 2014 chalie_a
+** Last update Sun May 18 12:22:09 2014 chalie_a
 */
 
 #include "sh.h"
@@ -51,7 +51,7 @@ int			get_line_caps(t_line *line)
 {
   lx = line;
   if (!isatty(0) || set_termcaps(line) == FAILURE)
-    line->line = gnl(0);
+      line->line = gnl(0);
   else if (init_line(line) == SUCCESS)
     {
       signal(SIGINT, (__sighandler_t) signal_ctz);

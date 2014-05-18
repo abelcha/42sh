@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
-** Last update Sat May 17 10:09:14 2014 chalie_a
+** Last update Sun May 18 11:57:07 2014 chalie_a
 */
 
 
@@ -55,7 +55,7 @@ char			*my_strcat(char *s1, char *s2)
 
 static char		*is_absolut_path(char *cmd)
 {
-  if (((cmd[0] == '.' && cmd[1] == '/') || cmd[0] == '/')
+  if (cmd && ((cmd[0] == '.' && cmd[1] == '/') || cmd[0] == '/')
       &&  IS_EXEC(cmd))
     return (strdup(cmd));
   return (NULL);
@@ -80,7 +80,7 @@ static char		*is_in_paths(char *cmd, t_execution *exe)
   char			*str;
 
   i = 0;
-  while (exe->env->paths && exe->env->paths[i])
+  while (cmd && exe->env->paths && exe->env->paths[i])
     {
       str = my_strcat(exe->env->paths[i], cmd);
       if (IS_EXEC(str))
@@ -99,5 +99,5 @@ int			find_path(t_cmd *cmd, t_execution *exe)
     return (SUCCESS);
   if ((cmd->path = is_in_paths(cmd->stock[0], exe)))
     return (SUCCESS);
-  return (SUCCESS);
+  return (FAILURE);
 }

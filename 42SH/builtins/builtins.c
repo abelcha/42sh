@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 23:49:35 2014 chalie_a
-** Last update Sun May 18 06:45:22 2014 chalie_a
+** Last update Sun May 18 10:19:14 2014 chalie_a
 */
 
 #include <string.h>
@@ -18,6 +18,7 @@
 
 int		my_exit(t_execution *exe, t_cmd *cmd)
 {
+  (void)exe;
   exe->exit = my_atoi(cmd->stock[1]) + 256;
   return (B_SUCCESS);
 }
@@ -64,18 +65,30 @@ int		my_unsetenv(t_execution *exe, t_cmd *cmd)
 
 int		my_echo(t_execution *exe, t_cmd *cmd)
 {
-  /*  char		flagstatus[2];
+  char		flagstatus[2];
 
   (void)exe;
   flagstatus[0] = 0;
   flagstatus[1] = 0;
   find_flags(cmd->stock, flagstatus);
-  find_strings(cmd->stock, flagstatus);*/
+  find_strings(cmd->stock, flagstatus);
   return (B_SUCCESS);
 }
 
 
 int		my_cd(t_execution *exe, t_cmd *cmd)
 {
+ (void)exe;
+ (void)cmd;
+ char		*s;
+
+ s = cmd->stock[1];
+ if (!s || (s[0] == '~' && s[0] == 0))
+   return (cd_home(exe, cmd));
+ // if (s[0] == '-')
+ // return (cd_regressive(exe, cmd));
+ if (s[0] == '/')
+   return (cd_progressive(exe, cmd));
+ return (cd_absolute(exe, cmd));
   return (B_SUCCESS);
 }

@@ -5,18 +5,21 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May 15 20:08:37 2014 chalie_a
-** Last update Sat May 17 04:09:48 2014 chalie_a
+** Last update Sun May 18 12:05:19 2014 chalie_a
 */
 
 #include "edit.h"
 #include "sh.h"
-int		kill_sons(int *pid)
+void		kill_sons(int *pid)
 {
   int		x;
 
   x = -1;
   while (pid[++x])
-    kill(pid[x], 9);
+    {
+      printf("pid = %d\n", pid[x]);
+      kill(pid[x], 9);
+    }
 }
 
 int		signal_ctz(int sig)

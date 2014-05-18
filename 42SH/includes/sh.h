@@ -5,71 +5,16 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Sun May 18 06:51:23 2014 chalie_a
+** Last update Sun May 18 08:36:05 2014 chalie_a
 */
 
 #ifndef SH_H_
 # define SH_H_
 
-typedef struct		s_alias
-{
-  char			*name;
-  char			*cmd;
-  struct s_alias	*prev;
-  struct s_alias	*next;
-}			t_alias;
-
-typedef struct		s_env_dll
-{
-  char			*name;
-  char			*value;
-  int			size;
-  struct s_env_dll	*prev;
-  struct s_env_dll	*next;
-}			t_env_dll;
-
-typedef struct		s_env
-{
-  char			**paths;
-  char			**envp;
-  struct s_env_dll	*env_dll;
-}			t_env;
-
-typedef struct		s_execution
-{
-  int			prev_pipe;
-  int			*pid;
-  int			fdp[2];
-  int			return_value;
-  int			nb_pipes;
-  int			input;
-  int			curr_pid;
-  int			pos;
-  int			exit;
-  struct s_line		*line;
-  t_env			*env;
-}			t_execution;
-
-typedef struct		s_arch
-{
-  char			**envp;
-  char			*prompt;
-  t_alias		*alias;
-  t_execution		*exe;
-}			t_arch;
-
-typedef struct		s_echo
-{
-  char			second;
-  char			code;
-}			t_echo;
-
-#include "parser.h"
-#include "edit.h"
-
-typedef int	(*ptrft)(t_execution *exe, t_cmd *cmd);
+#include "typedefs.h"
 
 char		*gnl(const int);
+int		my_strlen(char *);
 int		exec_cmd(t_parse_tree *root, t_execution *);
 int		my_atoi(char *);
 int		my_exit(t_execution *exe, t_cmd *cmd);
@@ -114,7 +59,11 @@ char		*cd_arbor_regress(char *str);
 char		*allocstrcat(char *dest, char *src);
 char		*supercat(char *str1, char *str2, char *str3);
 int		cd_chdir_error(void);
-
+int		is_dir(const char *);
+int		my_strcmp(char *, char *);
+char		**get_paths(char *, char);
+int		actualise_path(t_execution *, char *);
+char		*get_env(char **, char *);
 # define LASTPIPE	(exe->nb_pipes == exe->pos + 2) 
 # define B_SUCCESS	0
 # define B_FAILURE	2

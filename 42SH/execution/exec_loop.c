@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Sun May 18 06:32:19 2014 chalie_a
+** Last update Sun May 18 12:39:33 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -20,6 +20,8 @@
 #include "sh.h"
 #include "parser.h"
 #include "my_color.h"
+#include <termios.h>
+#include <sys/ioctl.h>
 
 int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe) 
 {
@@ -44,7 +46,7 @@ int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
     return (FAILURE);
   if (tmp->next != root)
     close(exe->fdp[0]);
-  setsid();
+    setsid();
   if (tmp->builtin == -1)
    execve(tmp->path, tmp->stock, exe->env->envp);
   else

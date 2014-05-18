@@ -5,9 +5,10 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Sat May 17 17:10:24 2014 coutar_a
-** Last update Sat May 17 17:59:52 2014 coutar_a
+** Last update Sun May 18 10:11:14 2014 chalie_a
 */
 
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "sh.h"
@@ -20,10 +21,10 @@ char	*cd_arbor_regress(char *str)
 
   i = 0;
   stop = strlen(str);
-  while (str[stop] != '/')
+  while (str[stop] != '/')		// <<- SEGFAULT si PWD=toto
     stop--;
   stop++;
-  if ((ret = malloc((stop) * sizeof(char))) == NULL)
+  if ((ret = malloc((stop) * sizeof(char))) == NULL) //<<- Malloc inutile
     return (NULL);
   while (i != stop)
     {
@@ -67,7 +68,7 @@ char	*supercat(char *str1, char *str2, char *str3)
   char	*swap;
   char	*swap2;
 
-  swap = allocstrcat(str1, str2);
+  swap = allocstrcat(str1, str2);	// <- malloc inutile
   swap2 = allocstrcat(swap, str3);
   free(swap);
   return (swap2);

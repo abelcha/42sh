@@ -5,9 +5,11 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Sun May 18 06:50:53 2014 chalie_a
+** Last update Sun May 18 08:40:42 2014 chalie_a
 */
 
+#include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "sh.h"
@@ -17,8 +19,8 @@ static t_echo	g_esc[] =
     {'\\', '\\'},
     {'a', '\a'},
     {'b', '\b'},
-    {'c', '\c'},
-    {'e', '\e'},
+    {'c', 'c'},
+    {'e', 'e'},
     {'f', '\f'},
     {'n', '\n'},
     {'r', '\r'},
