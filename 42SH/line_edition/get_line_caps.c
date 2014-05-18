@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Sat May 17 03:55:03 2014 chalie_a
+** Last update Sat May 17 17:55:57 2014 chalie_a
 */
 
 #include "sh.h"
@@ -13,19 +13,21 @@
 
 t_line			*lx;
 
-void			x_read_line(t_line *line)
+int			x_read_line(t_line *line)
 {
   line->tab_flag = 0;
   while (line->key != K_RET)
     {
       line->key = 0;
-      if (read(0, &(line->key), 4) < 0 && line->line)
+      if (read(0, &(line->key), 4) <= 0 || line->key == CTRL_D)
 	{
+	  tcsetattr(0, TCSANOW, &(line->save));
 	  line->line = NULL;
-	  return ;
+	  return (FAILURE);
 	}
       do_key_actions(line);
    }
+  return (SUCCESS);
 }
 
 int			init_line(t_line *line)
@@ -54,7 +56,8 @@ int			get_line_caps(t_line *line)
     {
       signal(SIGINT, (__sighandler_t) signal_ctz);
       write(1, line->prompt, line->p_size);
-      x_read_line(line);
+      if (x_read_line(line) == FAILURE)
+	return (FAILURE);
       if (line->line != line->line_save)
 	c_free(&(line->line_save));
       if (line && strlen(line->line))

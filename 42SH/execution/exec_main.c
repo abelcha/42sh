@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Sat May 17 08:53:23 2014 chalie_a
+** Last update Sun May 18 06:44:19 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -20,25 +20,24 @@
 #include "parser.h"
 #include "my_color.h"
 
-extern int curr_pid;
+static const char	*g_sig_tab[11] = {
+  "Hangup",
+  "",
+  "Quit",
+  "Illegal instruction)",
+  "Trace/breakpoint trap",
+  "Aborted",
+  "Bus Error",
+  "Floating point exception",
+  "",
+  "",
+  "Segmentation Fault"};
 
-static const char	*sig_tab[11] = {"Hangup",
-					"SIGINT",
-					"Quit",
-					"Illegal instruction)",
-					"Trace/breakpoint trap",
-					"Aborted",
-					"Bus Error",
-					"Floating point exception",
-					"Killed",
-					" ",
-					"Segmentation Fault"};
-
-int		wait_pipes(t_execution *exe)
+static int		wait_pipes(t_execution *exe)
 {
-  int		i;
-  int		status;
-  int		ret;
+  int			i;
+  int			status;
+  int			ret;
 
   i = -1;
   while (++i < exe->nb_pipes)
@@ -49,20 +48,23 @@ int		wait_pipes(t_execution *exe)
     }
   if (status < 1000 && WIFSIGNALED(status))
     {
+      exe->return_value = status; 
       if (WTERMSIG(status) < 13)
-	printf("%s", sig_tab[(WTERMSIG(status) - 1) % 13]);
+	printf("%s", g_sig_tab[(WTERMSIG(status) - 1) % 11]);
       printf(WCOREDUMP(status) ? " (Core Dumped)\n" : "\n");
     }
   return (SUCCESS);
 }
 
-int		exec(t_cmd *cmd, t_execution *exe)
+int			exec(t_cmd *cmd, t_execution *exe)
 {
+  exe->prev_pipe = -1;
+  exe->pos = -1;
   if (!(exe->pid = calloc(exe->nb_pipes, sizeof(int *))))
     return (FAILURE);
   execution_loop(cmd, exe);
   if (cmd->prev->background)
-    setpgid(curr_pid, curr_pid);
+    setpgid(exe->curr_pid, exe->curr_pid);
   else if (exe->nb_pipes > 0 && !exe->exit)
   wait_pipes(exe);
   free(exe->pid);
@@ -83,12 +85,7 @@ int		exec_cmd(t_parse_tree *root, t_execution *exe)
 	    tmp->token == T_SEM ||
 	    (tmp->token == T_AND && exe->return_value == 0) ||
 	    (tmp->token == T_OR && exe->return_value > 0))
-	  {
-	    exec(tmp->cmd, exe);
-	    // printf(exe->return_value ? "\033[31mfailure %d\n" :
-	    //		   "\033[32msuccess %d\n", exe->return_value);
-	    RST;
-	  }
+	  exec(tmp->cmd, exe);
     }
   return (SUCCESS);
 }

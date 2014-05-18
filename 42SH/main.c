@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Fri May 16 07:43:44 2014 chalie_a
+** Last update Sat May 17 18:37:12 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -105,7 +105,8 @@ int			main(int ac, char **av, char **env)
   link_all_structs(exe, line);
   while (get_line_caps(line) != FAILURE)
     {
-      root = get_tokens(line->line);
+      if (!(root = get_tokens(line->line)))
+	return (FAILURE);
       if ((tree = start_parsing(root, exe)))
 	{
 	  exec_cmd(tree, exe);
@@ -113,7 +114,7 @@ int			main(int ac, char **av, char **env)
 	}
       free_tokens(root);
       free(line->line);
-      if (exe->exit || ++i > 10000)
+      if (exe->exit/* || ++i > 10000*/)
 	  break ;
     }
   add_in_history_file(line);

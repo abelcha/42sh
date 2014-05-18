@@ -5,14 +5,14 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Sat May 17 00:55:24 2014 chalie_a
+** Last update Sun May 18 06:44:39 2014 chalie_a
 */
 
 #include <unistd.h>
 #include <stdlib.h>
 #include "sh.h"
 
-static t_echo	g_esc[] =
+/*static t_echo	g_esc[] =
   {
     {'\\', '\\'},
     {'a', '\a'},
@@ -129,3 +129,4 @@ int	escape_code_parsing(t_echo *g_esc, char *str, int *i)
   (*i)++;
   return (0);
 }
+*/

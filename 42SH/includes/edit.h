@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Sat May 17 05:57:32 2014 chalie_a
+** Last update Sat May 17 17:54:01 2014 chalie_a
 */
 
 #ifndef EDIT_H_
@@ -44,9 +44,11 @@
 # define CTRL_W		23
 # define CTRL_L		12
 # define ALT_I		26907
+# define CTRL_D		4
 # define BUFF_LINE	4096
 # define ARG		12
 # define CMD		42
+
 # include <stdio.h>
 # include <stdlib.h>
 # include <signal.h>
@@ -118,7 +120,7 @@ typedef			void(*t_ak)(t_line *line);
 
 void	delete_char(t_line *line);
 void	add_char(t_line *line);
-void	x_read_line(t_line *line);
+int	x_read_line(t_line *line);
 int	init_line(t_line *line);
 int	get_line_caps(t_line *line);
 void	go_next(t_line *line);

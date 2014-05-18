@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Fri May 16 03:26:29 2014 chalie_a
+** Last update Sun May 18 06:30:59 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -43,6 +43,7 @@ typedef struct		s_execution
   int			return_value;
   int			nb_pipes;
   int			input;
+  int			curr_pid;
   int			pos;
   int			exit;
   struct s_line		*line;
@@ -101,6 +102,9 @@ int		byte_printer(char *str, int *i);
 int		my_strcmp(char *, char *);
 int		handle_redirections(t_cmd *, t_execution *);
 
+# define LASTPIPE	(exe->nb_pipes == exe->pos + 2) 
+# define B_SUCCESS	0
+# define B_FAILURE	2
 # define TMP_FILE	".tmp"
 # define ENV_BUFF	4096
 # define TRUNC		O_CREAT|O_TRUNC|O_WRONLY
@@ -108,4 +112,5 @@ int		handle_redirections(t_cmd *, t_execution *);
 # define APPEND		O_CREAT|O_APPEND|O_WRONLY
 # define _ERROR(...)	fprintf(stderr, __VA_ARGS__) ? -1 : FAILURE
 # define B_ERROR(...)	fprintf(stderr, __VA_ARGS__) ? B_FAILURE : B_FAILURE
+
 #endif /* !SH_H_ */

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Thu May 15 21:46:35 2014 chalie_a
+** Last update Sun May 18 04:04:28 2014 chalie_a
 */
 
 #include <glob.h>
@@ -57,6 +57,25 @@ int		yes_or_no(int total)
       return (FAILURE);
 }
 
+void		print_list(int maxlen, t_glob *root, int cols)
+{
+  int		len;
+  t_glob	*tmp;
+
+  len = 0;
+  tmp = root;
+  while ((tmp = tmp->next) != root)
+    {
+      len += maxlen;
+      if (len > (cols - maxlen + 1))
+	{
+	  write(1, "\n", 1);
+	  len = 0;
+	}
+      write_and_blanks(maxlen, tmp->len, tmp->data);
+    }
+}
+
 void		display_pos(t_gb *root, t_line *line)
 {
   t_glob	*tmp;
@@ -73,20 +92,7 @@ void		display_pos(t_gb *root, t_line *line)
     return ;
   write(1, "\n", 1);
   maxlen = bigger_len(root->g);
-  len = 0;
-  tmp = root->g;
-  while ((tmp = tmp->next) != root->g)
-    {
-      len += maxlen;
-      if (len > (cols - maxlen + 1))
-	{
-	  write(1, "\n", 1);
-	  len = 0;
-	}
-      write_and_blanks(maxlen, tmp->len, tmp->data);
-      free(tmp->prev->data);
-      free(tmp->prev);
-    }
+  print_list(maxlen, root->g, cols);
   write(1, "\n", 1);
   replace_cursor(0, line->pos + 6);
 }

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Thu May 15 04:44:03 2014 chalie_a
+** Last update Sat May 17 19:29:37 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -13,6 +13,8 @@
 #include "tokenizer.h"
 #include "parser.h"
 #include "sh.h"
+
+#define BEG_SEM	(token->prev->token == T_EOL && token->token == T_SEM)
 
 static t_parse_tree	*init_tree()
 {
@@ -27,7 +29,7 @@ static t_parse_tree	*init_tree()
 
 int			lexical_error(t_token *token)
 {
-  if (token->prev->token != T_CMD && (IS_MAJOR(token->token)))
+  if (token->prev->token != T_CMD && (IS_MAJOR(token->token)) && !BEG_SEM)
     return (lex_error(token->prev->token, BEFORE, token->token));
   if (token->token == T_PIPE && token->prev->token != T_CMD)
     return (lex_error(token->token, AFTER, token->prev->token));
@@ -73,7 +75,7 @@ t_parse_tree		*start_parsing(t_token *token, t_execution *exe)
 {
   t_parse_tree		*root;
 
-  if (!(root = init_tree()))
+  if (!token || !(root = init_tree()))
     return (NULL);
   if (fill_tree(root, token, exe) == FAILURE)
     return (free_tree(root));

@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Sat May 17 09:50:46 2014 chalie_a
+** Last update Sun May 18 06:32:19 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -16,13 +16,10 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 #include "sh.h"
 #include "parser.h"
 #include "my_color.h"
-#define	LAST_PIPE	(exe->nb_pipes == exe->pos + 2)
-
-int	curr_pid;
-int		gpid;
 
 int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe) 
 {
@@ -39,13 +36,6 @@ int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe)
 
 int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
 {
-  if (tmp->prev == root)
-    {
-      setsid();
-      gpid = getpid();
-      setpgid(getpid(), gpid);
-    }
-  setpgid(getpid(), gpid);
   if (!tmp->path && tmp->builtin == -1)
     return (cmd_not_in_paths(tmp, exe));
   if (tmp->next != root && dup2(exe->fdp[1], STDOUT_FILENO) < 0)
@@ -54,6 +44,7 @@ int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
     return (FAILURE);
   if (tmp->next != root)
     close(exe->fdp[0]);
+  setsid();
   if (tmp->builtin == -1)
    execve(tmp->path, tmp->stock, exe->env->envp);
   else
@@ -81,7 +72,8 @@ int		exec_in_son(t_cmd *root, t_cmd *tmp, t_execution *exe)
 
 int			exec_builtins(t_cmd *cmd, t_execution *exe)
 {
-  static const ptrft	b_tab[6] = {my_exit, my_setenv, my_unsetenv, my_cd,
+  static const ptrft	b_tab[6] = {my_exit, my_setenv,
+				    my_unsetenv, my_cd,
 				    my_env, my_echo};
 
   --(exe->nb_pipes);
@@ -96,25 +88,23 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
   t_cmd		*tmp;
 
   tmp = cmd;
-  exe->prev_pipe = -1;
-  exe->pos = -1;
   if (handle_redirections(cmd, exe) == FAILURE)
     return (FAILURE);
   while ((tmp = tmp->next) != cmd && exe->exit == 0) 
     {
+      find_path(tmp, exe);
       exe->return_value = 0;
-      if (!tmp->path && tmp->builtin == -1 && LAST_PIPE)
+      if (!tmp->path && tmp->builtin == -1 && LASTPIPE)
 	cmd_not_in_paths(tmp, exe);
-      else if (tmp->builtin >= 0 && tmp->builtin < 4 && LAST_PIPE)
+      else if (tmp->builtin >= 0 && tmp->builtin < 4 && LASTPIPE)
 	exec_builtins(tmp, exe);
-      else if (pipe(exe->fdp) != 42 && (curr_pid = fork()) == 0)
+      else if (pipe(exe->fdp) >= 0 && (exe->curr_pid = fork()) == 0)
 	exec_in_father(cmd, tmp, exe);
-      else if (curr_pid > 0)
+      else if (exe->curr_pid > 0)
 	exec_in_son(cmd, tmp, exe);
       else
 	return (FAILURE);
-      exe->pid[++exe->pos] = curr_pid;
+      exe->pid[++exe->pos] = exe->curr_pid;
     }
-  close_redirections(cmd, exe);
-  return (SUCCESS);
+  return (close_redirections(cmd, exe));
 }

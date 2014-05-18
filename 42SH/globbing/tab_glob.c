@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Sat May 17 08:08:32 2014 chalie_a
+** Last update Sun May 18 06:03:06 2014 chalie_a
 */
 
 #include <glob.h>
@@ -54,9 +54,9 @@ int			add_glob(t_gb *root, char *data, int len)
   newelem->next = elem;
   elem->prev->next = newelem;
   elem->prev = newelem;
-  if (root->part_match)
-    root->part_match = get_partial_matching(newelem->prev->data, newelem->data);
-  //printf("\npart match = %d\n", root->part_match);
+  if (root->part_match - root->word_len)
+    root->part_match = get_partial_matching(newelem->prev->data,
+					    newelem->data);
   return (SUCCESS);
 }
 
@@ -75,20 +75,37 @@ void		remplace_it(t_line *line, t_gb *gb, int start)
 {
   int		oldpos;
 
-  // printf("lol\n");
   oldpos = line->pos;
   strncpy(&line->line[start], gb->g->next->data, gb->part_match);
-  line->pos = start + gb->part_match;
-    if (gb->total == 1)
-      {
-	if (is_dir(gb->g->next->data))
-	  line->line[line->pos] = '/';
-	else
-	  line->line[line->pos] = ' ';
-	++line->pos;
-      }
-    line->line_len = line->pos;
+  line->pos = strlen(line->line);
+  if (gb->total == 1)
+    {
+      if (is_dir(gb->g->next->data))
+	line->line[line->pos] = '/';
+      else
+	line->line[line->pos] = ' ';
+      ++line->pos;
+    }
+  line->line_len = line->pos;
   replace_cursor(oldpos, line->pos);
+}
+
+void		free_glob_list(t_gb *gb)
+{
+  t_glob	*tmp;
+  t_glob	*save;
+
+  tmp = gb->g;
+  save = tmp->prev;
+  while ((tmp = tmp->next) != gb->g)
+    {
+      x_free(tmp->prev->data);
+      x_free(tmp->prev);
+    }
+  x_free(save->data);
+  x_free(save);
+  x_free(gb->word);
+  x_free(gb);
 }
 
 void		tab_glob(t_line *line)
@@ -107,8 +124,7 @@ void		tab_glob(t_line *line)
   if (type == CMD)
     get_command(gb->word, line, gb);
   else
-    get_data("./", gb->word, gb);
-  //  printf("part = %d len = %d\n", gb->part_match, gb->word_len);
+    get_data("", gb->word, gb);
   if (gb->total == 0);
   else if (gb->total == 1 || (gb->part_match - gb->word_len) > 0)
     remplace_it(line, gb, start);
@@ -116,7 +132,6 @@ void		tab_glob(t_line *line)
     display_pos(gb, line);
   else
     line->tab_flag = 1;
-  // printf("\n partial matchin = %d\n", gb->part_match);
-  // printf("total = %d\n", gb->total);
+  free_glob_list(gb);
   clear_and_display(line);
 }

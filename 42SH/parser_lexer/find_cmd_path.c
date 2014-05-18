@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
-** Last update Fri May 16 12:29:04 2014 chalie_a
+** Last update Sat May 17 10:09:14 2014 chalie_a
 */
 
 
@@ -69,7 +69,7 @@ int			is_builtin(t_cmd *cmd)
 
   i = -1;
   while (++i < 6)
-    if (!speed_cmp(b_tab[i], cmd->stock[0]))
+    if (!my_strcmp(b_tab[i], cmd->stock[0]))
       return (i);
   return (-1);
 }

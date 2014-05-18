@@ -1,0 +1,6 @@
+static int			is_redir(const int t)
+{
+  if (t == 0 || t == 2 || (t >= 8 && t <= 11))
+    return (1);
+  return (0);
+}

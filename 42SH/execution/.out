@@ -1,0 +1,32 @@
+int		execution_loop(t_cmd *cmd, t_execution *exe)
+{
+  t_cmd		*tmp;
+
+  tmp = cmd;
+  exe->prev_pipe = -1;
+  exe->pos = -1;
+  if (handle_redirections(cmd, exe) == FAILURE)
+    return (FAILURE);
+  signal(SIGTTOU, SIG_IGN);
+  //  printf("father pid = %d\n", getpid());
+  while ((tmp = tmp->next) != cmd && exe->exit == 0) 
+    {
+      find_path(tmp, exe);
+      exe->return_value = 0;
+      if (!tmp->path && tmp->builtin == -1 && LAST_PIPE)
+	cmd_not_in_paths(tmp, exe);
+      else if (tmp->builtin >= 0 && tmp->builtin < 4 && LAST_PIPE)
+	exec_builtins(tmp, exe);
+      else if (pipe(exe->fdp) != 42 && (curr_pid = fork()) == 0)
+	exec_in_father(cmd, tmp, exe);
+      else if (curr_pid > 0)
+	exec_in_son(cmd, tmp, exe);
+      else
+	return (FAILURE);
+      exe->pid[++exe->pos] = curr_pid;
+      gpid = exe->pid[0];
+    }
+  //  printf("FATHER pid = %d gtpid = %d globpid = %d\n", getpid(), getpgid(getpid()), gpid);
+  close_redirections(cmd, exe);
+  return (SUCCESS);
+}

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Thu May 15 04:16:24 2014 chalie_a
+** Last update Sat May 17 19:03:56 2014 chalie_a
 */
 
 #ifndef PARSER_H_
@@ -44,6 +44,7 @@ typedef struct		s_parse_tree
 
 # include "tokenizer.h"
 # include "sh.h"
+# define LAST_PIPE	(token->next->token == T_EOL ? 1 : 0)
 # define MEM_POOL	128
 # define BEFORE		0
 # define AFTER		1
