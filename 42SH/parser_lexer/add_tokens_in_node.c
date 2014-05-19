@@ -5,18 +5,14 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon May 19 17:26:17 2014 chalie_a
+** Last update Mon May 19 18:15:31 2014 beau_v
 */
 
 #include <string.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <unistd.h>
 #include <sys/stat.h>
-#include "tokenizer.h"
 #include "parser.h"
-#include "sh.h"
-
 
 static int			replace_alias(char **tmp, t_cmd *cmd)
 {

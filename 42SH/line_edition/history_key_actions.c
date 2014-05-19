@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 20:49:22 2014 chalie_a
-** Last update Mon May 19 10:26:15 2014 chalie_a
+** Last update Mon May 19 18:49:01 2014 beau_v
 */
 
 #include <termios.h>
@@ -28,7 +28,6 @@ int		safecpy(t_line *line, char *str)
   return (SUCCESS);
 }
 
-
 void		back_to_the_future(t_line *line, char *new_line, int new_len)
 {
   if (safecpy(line, new_line) == FAILURE)
@@ -50,7 +49,6 @@ void		go_next(t_line *line)
 		       line->sh->curr_pos->next->len);
   line->sh->curr_pos = line->sh->curr_pos->next;
 }
-
 
 void		go_prev(t_line *line)
 {

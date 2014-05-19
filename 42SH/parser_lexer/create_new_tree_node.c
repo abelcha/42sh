@@ -5,18 +5,17 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Sun May 18 13:57:05 2014 chalie_a
+** Last update Mon May 19 18:16:36 2014 beau_v
 */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "tokenizer.h"
 #include "parser.h"
 
 static t_cmd		*init_cmd()
 {
   t_cmd			*root;
-  
+
   if (!(root = calloc(1, sizeof(t_cmd))))
     return (NULL);
   //  if (!(root->stock = calloc(MEM_POOL, sizeof(char))))

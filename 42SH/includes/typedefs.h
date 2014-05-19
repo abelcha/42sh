@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:57:23 2014 chalie_a
-** Last update Mon May 19 13:40:09 2014 chalie_a
+** Last update Mon May 19 18:20:41 2014 beau_v
 */
 
 #ifndef TYPEDEFS_H_
@@ -50,7 +50,7 @@ typedef struct		s_token
 {
   char			*data;
   int			data_size;
-  int			token;  
+  int			token;
   struct s_token	*prev;
   struct s_token	*next;
 }			t_token;
@@ -167,7 +167,6 @@ typedef struct		s_shell
   struct termios	save;
   struct termios	new;
 }			t_shell;
-
 
 typedef void	(*t_conf)(t_shell *sh, char **stock);
 typedef int	(*ptrft)(t_execution *exe, t_cmd *cmd);

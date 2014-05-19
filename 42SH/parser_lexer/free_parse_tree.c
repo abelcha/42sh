@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:42:24 2014 chalie_a
-** Last update Thu May 15 04:10:35 2014 chalie_a
+** Last update Mon May 19 18:22:37 2014 beau_v
 */
 
 #include <stdlib.h>
@@ -50,7 +50,7 @@ void				*free_tree(t_parse_tree *root)
   while ((tmp = tmp->next) != root)
     {
       if (tmp->prev->cmd)
-	free_cmd(tmp->prev->cmd); 
+	free_cmd(tmp->prev->cmd);
       x_free(tmp->prev);
     }
   free_cmd(save->cmd);

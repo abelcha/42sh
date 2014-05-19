@@ -5,12 +5,12 @@
 ** Login   <chalie_a@epitech.net>
 ** 
 ** Started on  Mon Oct 21 11:45:34 2013 chalie_a
-** Last update Sat May 17 18:35:53 2014 chalie_a
+** Last update Mon May 19 18:24:52 2014 beau_v
 */
 
 #include <stdlib.h>
 
-char	**parsing(char **tab, char *str, int nb, char c)
+static char	**parsing(char **tab, char *str, int nb, char c)
 {
   int	i;
   int	j;
@@ -36,7 +36,7 @@ char	**parsing(char **tab, char *str, int nb, char c)
   return (tab);
 }
 
-int		count_len(char *str, char c, int flag)
+static int	count_len(char *str, char c, int flag)
 {
   static int	par;
   int		i;
@@ -53,7 +53,7 @@ int		count_len(char *str, char c, int flag)
   return (i);
 }
 
-int		count_word(char *str, char c)
+static int	count_word(char *str, char c)
 {
   int		i;
   int		count;
@@ -69,13 +69,14 @@ int		count_word(char *str, char c)
   return (count);
 }
 
-char	**get_paths(char *str, char c)
+char		**get_paths(char *str, char c)
 {
-  int	i;
-  int	nb;
-  char	**tab;
+  int		i;
+  int		nb;
+  char		**tab;
 
-  i = 0;/*
+  i = 0;
+  /*
   if (!str)
   return (NULL);*/
   nb = count_word(str, c);

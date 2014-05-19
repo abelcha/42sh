@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Mon May 19 12:12:30 2014 chalie_a
+** Last update Mon May 19 18:47:56 2014 beau_v
 */
 
 #include "sh.h"
@@ -21,7 +21,7 @@ int			line_realloc(t_line *line)
   return (FAILURE);
 }
 
-int			x_read_line(t_line *line)
+static int		x_read_line(t_line *line)
 {
   line->tab_flag = 0;
   while (line->key != K_RET && line->line)
@@ -40,7 +40,7 @@ int			x_read_line(t_line *line)
   return (SUCCESS);
 }
 
-int			init_line(t_line *line)
+static int		init_line(t_line *line)
 {
   int			i;
 

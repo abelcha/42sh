@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:53:32 2014 chalie_a
-** Last update Wed May 14 17:04:03 2014 chalie_a
+** Last update Mon May 19 18:49:38 2014 beau_v
 */
 
 #include "edit.h"
@@ -21,7 +21,6 @@ void		move_to_start(t_line *line)
 
 void		move_to_end(t_line *line)
 {
-  
   while (line->pos < line->line_len)
     {
       ++line->pos;
