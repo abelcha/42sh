@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 16:58:52 2014 chalie_a
-** Last update Sun May 18 15:23:53 2014 chalie_a
+** Last update Mon May 19 12:13:05 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -18,10 +18,10 @@ void		clear_and_display(t_line *line)
   i = -2;
   CAP("sc");
   CAP("dl");
-  while (++i < (line->line_len + line->p_size))
+  while (++i < (line->line_len + line->sh->p_size))
     CAP("le");
   i = 0;
-  write(1, line->prompt, line->p_size);
+  write(1, line->sh->prompt, line->sh->p_size);
   write(1, line->line, line->line_len);
   CAP("rc");
 }

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May 15 20:08:37 2014 chalie_a
-** Last update Mon May 19 10:20:38 2014 chalie_a
+** Last update Mon May 19 12:11:38 2014 chalie_a
 */
 
 #include "edit.h"
@@ -36,10 +36,10 @@ int		signal_ctz(int sig)
   lx->pos = 0;
   lx->line[0] = 0;
   write(1, "^C", 2);
-  while (++i < (lx->p_size))
+  while (++i < (lx->sh->p_size))
     CAP("le");
   printf("\n");
-  write(1, lx->prompt, lx->p_size);
+  write(1, lx->sh->prompt, lx->sh->p_size);
   clear_and_display(lx);
   return (sig);
 }

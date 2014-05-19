@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 22:21:05 2014 chalie_a
-** Last update Mon May 19 11:48:58 2014 chalie_a
+** Last update Mon May 19 12:32:43 2014 chalie_a
 */
 
 #include <fcntl.h>
@@ -41,12 +41,14 @@ int		init_history(t_line *line)
 {
   int		fd;
   char		*str;
+  int		i;
 
+  i = -1;
   if (!(line->sh->history = init_root_history()))
     return (FAILURE);
   if ((fd = open("./.42sh_history", (O_RDWR | O_CREAT | O_APPEND), 0777)) < 0)
     return (FAILURE);
-  while ((str = gnl(fd)))
+  while ((str = gnl(fd)) && ++i < 1000)
     if (add_elem_in_history(line->sh->history) == FAILURE)
       return (FAILURE);
     else

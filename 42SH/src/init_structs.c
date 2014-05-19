@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Mon May 19 10:55:52 2014 chalie_a
+** Last update Mon May 19 12:21:43 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -41,8 +41,6 @@ t_line 			*init_sline()
 
   if (!(line = calloc(1, sizeof(t_line))))
     return (NULL);
-  line->prompt = "\033[39;31m42sh>$\033[0m";
-  line->p_size = strlen(line->prompt);
   return (line);
 }
 
@@ -87,6 +85,5 @@ t_shell			*init_sh(char **env)
     return (NULL);
   if (init_history(sh->line) == FAILURE)
     return (NULL);
-  printf("sh->exe = %p\n", sh->exe);
   return (sh);
 }

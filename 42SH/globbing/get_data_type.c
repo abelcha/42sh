@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Sat May 17 05:01:09 2014 chalie_a
+** Last update Mon May 19 13:55:47 2014 chalie_a
 */
 
 #include <glob.h>
@@ -29,6 +29,8 @@ char		*get_word(char *line, int pos, int *type)
   int		save;
 
   save = pos;
+  if (pos > (BUFF_LINE))
+    return (NULL);
   while (pos > 0 && line[pos] != '|' && line[pos] != ';' && line[pos] != '&')
     {
       if (line[pos] == ' ' || line[pos] == '\t')

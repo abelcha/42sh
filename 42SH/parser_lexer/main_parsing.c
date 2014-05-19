@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Sat May 17 19:29:37 2014 chalie_a
+** Last update Mon May 19 13:00:40 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -37,17 +37,17 @@ int			lexical_error(t_token *token)
 }
 
 static int		add_token_or_create_node(t_parse_tree *root,
-						 t_token *token, t_execution *exe)
+						 t_token *token, t_shell *sh)
 {
   if (lexical_error(token) == FAILURE)
     return (FAILURE);
   if (IS_MAJOR(token->token))
     return (create_new_tree_node(root, token));
   else
-    return (add_token_in_node(root->prev, token, exe));
+    return (add_token_in_node(root->prev, token, sh));
 }
 
-static int		fill_tree(t_parse_tree *root, t_token *beg, t_execution *exe)
+static int		fill_tree(t_parse_tree *root, t_token *beg, t_shell *sh)
 {
   t_token		*token;
   t_token		*save;
@@ -57,7 +57,7 @@ static int		fill_tree(t_parse_tree *root, t_token *beg, t_execution *exe)
     return (FAILURE);
   while (token != beg && (save = token->next->next))
     {
-      if (add_token_or_create_node(root, token, exe) == FAILURE)
+      if (add_token_or_create_node(root, token, sh) == FAILURE)
 	return (FAILURE);
       else if (token && token->data)
 	token = token->next;
@@ -71,13 +71,13 @@ static int		fill_tree(t_parse_tree *root, t_token *beg, t_execution *exe)
   return (SUCCESS);
 }
 
-t_parse_tree		*start_parsing(t_token *token, t_execution *exe)
+t_parse_tree		*start_parsing(t_token *token, t_shell *sh)
 {
   t_parse_tree		*root;
 
   if (!token || !(root = init_tree()))
     return (NULL);
-  if (fill_tree(root, token, exe) == FAILURE)
+  if (fill_tree(root, token, sh) == FAILURE)
     return (free_tree(root));
   return (root);
 }

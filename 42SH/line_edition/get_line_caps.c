@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Mon May 19 10:29:34 2014 chalie_a
+** Last update Mon May 19 12:12:30 2014 chalie_a
 */
 
 #include "sh.h"
@@ -46,7 +46,7 @@ int			init_line(t_line *line)
 
   i = -2;
   CAP("dl");
-  while (++i < (line->p_size - 0))
+  while (++i < (line->sh->p_size))
     CAP("le");
   line->sh->curr_pos = NULL;
   line->line_len = 0;
@@ -66,7 +66,7 @@ int			get_line_caps(t_line *line)
   else if (init_line(line) == SUCCESS)
     {
       signal(SIGINT, (__sighandler_t) signal_ctz);
-      write(1, line->prompt, line->p_size);
+      write(1, line->sh->prompt, line->sh->p_size);
       if (x_read_line(line) == FAILURE)
 	return (FAILURE);
       if (line->line != line->line_save)

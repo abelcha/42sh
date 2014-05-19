@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Mon May 19 10:19:46 2014 chalie_a
+** Last update Mon May 19 13:25:13 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -68,7 +68,12 @@ t_line	 	*init_sline();
 t_jobs		*init_jobs();
 t_alias		*init_alias();
 t_shell		*init_sh();
-
+char		**to_tab(char *, int, char);
+void		add_alias(t_shell *, char **);
+int		line_realloc(t_line *);
+int		parse_config_file(t_shell *);
+int		clean_all(t_shell *);
+char		**is_an_alias(char *, t_shell *);
 # define LASTPIPE	(exe->nb_pipes == exe->pos + 2)
 # define B_SUCCESS	0
 # define B_FAILURE	2

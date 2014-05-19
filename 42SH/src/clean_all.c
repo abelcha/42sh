@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Mon May 19 11:48:39 2014 chalie_a
+** Last update Mon May 19 14:11:22 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -34,6 +34,22 @@ static void		free_exe(t_env_dll *root)
   x_free(save);
 }
 
+void			free_alias(t_alias *root)
+{
+  t_alias		*alias;
+  t_alias		*save;
+
+  save = root->prev;
+  alias = root;
+  while ((alias = alias->next) != root)
+    {
+      double_free(alias->prev->cmd);
+      free(alias->prev);
+    }
+  double_free(save->cmd);
+  free(save);
+}
+
 int			clean_all(t_shell *sh)
 {
   int			i;
@@ -42,6 +58,8 @@ int			clean_all(t_shell *sh)
   i = -1;
   exit_value = sh->exe->exit;
   free_exe(sh->exe->env->env_dll);
+  free_alias(sh->alias);
+  double_free(sh->hist_ign);
   double_free(sh->exe->env->paths);
   double_free(sh->exe->env->envp);
   free(sh->exe->env);

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:57:23 2014 chalie_a
-** Last update Mon May 19 10:15:16 2014 chalie_a
+** Last update Mon May 19 13:40:09 2014 chalie_a
 */
 
 #ifndef TYPEDEFS_H_
@@ -126,8 +126,6 @@ typedef struct		s_line
   int			pos;
   int			line_len;
   int			key;
-  char			*prompt;
-  int			p_size;
   char			*line;
   char			*line_save;
   int			realloc_cpt;
@@ -139,7 +137,7 @@ typedef struct		s_line
 typedef struct		s_alias
 {
   char			*name;
-  char			*cmd;
+  char			**cmd;
   struct s_alias	*prev;
   struct s_alias	*next;
 }			t_alias;
@@ -155,6 +153,11 @@ typedef struct		s_jobs
 
 typedef struct		s_shell
 {
+  char			*prompt;
+  int			p_size;
+  int			p_valid;
+  int			hist_limit;
+  char			**hist_ign;
   struct s_jobs		*jobs;
   struct s_line		*line;
   struct s_alias	*alias;
@@ -166,6 +169,7 @@ typedef struct		s_shell
 }			t_shell;
 
 
+typedef void	(*t_conf)(t_shell *sh, char **stock);
 typedef int	(*ptrft)(t_execution *exe, t_cmd *cmd);
 
 #endif /* !TYPEDEFS_H_ */

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Fri Apr 18 00:51:03 2014 chalie_a
-** Last update Sun May 18 07:05:55 2014 chalie_a
+** Last update Mon May 19 12:57:40 2014 chalie_a
 */
 
 #ifndef TOKENIZER_H_
@@ -49,7 +49,7 @@
 #define OUT_RED(c)		(c == T_RED_D || c == T_RED_DD || c == 0 || c == 2) ? 1 : 0
 #include "parser.h"
 #include "sh.h"
-t_parse_tree	*start_parsing(t_token *, t_execution *exe);
+t_parse_tree	*start_parsing(t_token *, t_shell *sh);
 int		add_token_in_list(t_token *, int);
 t_token		*get_tokens(char *);
 

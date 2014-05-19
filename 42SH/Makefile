@@ -8,12 +8,15 @@ SRC		=	./src/main.c				\
 			./src/signal.c				\
 			./src/init_structs.c			\
 			./src/clean_all.c			\
+			./src/parse_config_file.c		\
+			./src/alias.c				\
 
 LIB		=	./lib/gnl.c				\
 			./lib/my_atoi.c				\
 			./lib/strmatch.c			\
 			./lib/free_utils.c			\
 			./lib/my_strlen.c			\
+			./lib/to_tab.c				\
 
 PARSER		=	./parser_lexer/get_paths.c		\
 			./parser_lexer/main_parsing.c		\
@@ -48,6 +51,8 @@ LINE		=	./line_edition/add_del_key_actions.c	\
 HIST		=	./history/put_in_history.c		\
 			./history/init_history.c		\
 
+PRE		=	./pre_parsing/pre_parsing.c		\
+
 GLOB		=	./globbing/main_glob.c			\
 			./globbing/tab_glob.c			\
 			./globbing/get_cmd_data.c		\
@@ -63,7 +68,7 @@ BUILD		=	./builtins/env_dll.c			\
 
 OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o)
 
-P_OBJ		=	$(PARSER:.c=.o) $(TOKEN:.c=.o)
+P_OBJ		=	$(PRE:.c=.o) $(PARSER:.c=.o) $(TOKEN:.c=.o)
 
 SH_OBJ		=	$(RED:.c=.o) $(BUILD:.c=.o) $(EXE:.c=.o)
 

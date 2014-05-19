@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Sun May 18 14:11:56 2014 chalie_a
+** Last update Mon May 19 17:26:17 2014 chalie_a
 */
 
 #include <string.h>
@@ -17,18 +17,45 @@
 #include "parser.h"
 #include "sh.h"
 
+
+static int			replace_alias(char **tmp, t_cmd *cmd)
+{
+  int				i;
+
+  i = -1;
+  while (tmp[++i])
+    {
+      printf("add%d  %s\n", cmd->size, tmp[i]);
+      cmd->stock[cmd->size] = tmp[i];
+      cmd->size++;
+    }
+  cmd->size--;
+  return (SUCCESS);
+}
+
+static int			fill_data_stock(t_cmd *cmd, t_shell *sh, t_token *token)
+{
+  char				**tmp;
+
+  token->data[token->data_size] = 0;
+  //  if (!(tmp = is_an_alias(token->data, sh)))
+  cmd->stock[cmd->size] = token->data;
+  //  else
+  // replace_alias(tmp, cmd);
+  cmd->stock[++(cmd->size)] = NULL;
+  return (SUCCESS);
+}
+
 static int			add_data_in_cmd(t_cmd *cmd,
-						const t_token *token)
+						t_token *token,
+						t_shell *sh)
 {
   if (!cmd)
     return (FAILURE);
   if (!cmd->stock || cmd->size >= cmd->realloc_cpt)
     if (!(cmd->stock = realloc(cmd->stock, ++(cmd->realloc_cpt) * MEM_POOL)))
       return (FAILURE);
-  cmd->stock[cmd->size] = token->data;
-  cmd->stock[cmd->size][token->data_size] = 0;
-  cmd->stock[++(cmd->size)] = NULL;
-  return (SUCCESS);
+  return (fill_data_stock(cmd, sh, token));
 }
 
 static int			cmd_in_background(t_parse_tree *tmp,
@@ -45,7 +72,7 @@ static int			cmd_in_background(t_parse_tree *tmp,
 
 int				add_token_in_node(t_parse_tree *tmp,
 						  t_token *token,
-						  t_execution *exe)
+						  t_shell *sh)
 {
   int				result;
 
@@ -58,9 +85,9 @@ int				add_token_in_node(t_parse_tree *tmp,
       ++(tmp->nb_pipes);
     }
   else if (IN_RED(token->token) || OUT_RED(token->token))
-    result = redirections(tmp->cmd->prev, token, exe);
+    result = redirections(tmp->cmd->prev, token, sh->exe);
   else if (token->token == T_CMD)
-    result = add_data_in_cmd(tmp->cmd->prev, token);
+    result = add_data_in_cmd(tmp->cmd->prev, token, sh);
   else
     result = SUCCESS;
   return (result);
