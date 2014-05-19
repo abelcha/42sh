@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Mon May 19 18:35:10 2014 beau_v
+** Last update Mon May 19 21:38:14 2014 coutar_a
 */
 
 #ifndef SH_H_
@@ -64,11 +64,15 @@ int		cd_progressive(t_execution *exe, t_cmd *cmd);
 int		cd_absolute(t_execution *exe, t_cmd *cmd);
 int		cd_regressive(t_execution *exe, t_cmd *cmd);
 int		cd_other(t_execution *exe, t_cmd *cmd, char check);
-char		*cd_arbor_regress(char *str);
+char		*cd_arbor_regress(char *str, char *command);
 char		*allocstrcat(char *dest, char *src);
 char		*supercat(char *str1, char *str2, char *str3);
 int		cd_chdir_error(void);
 int		cd_env_setting(t_execution *exe, char *pwd, t_env_dll *tmp);
+int		env_setting_spec(t_execution *, char *, char *, t_env_dll *);
+int		retro_counter(char *command);
+int		cd_oldpwd(t_execution *exe, t_cmd *cmd);
+int		cd_doubleminus(t_execution *exe, t_cmd *cmd);
 int		is_dir(const char *);
 int		my_strcmp(char *, char *);
 char		**get_paths(char *, char);

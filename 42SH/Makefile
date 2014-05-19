@@ -67,6 +67,7 @@ BUILD		=	./builtins/env_dll.c			\
 			./builtins/echo.c 			\
 			./builtins/cd.c				\
 			./builtins/filestructure.c		\
+			./builtins/cd_special_cases.c		\
 
 OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o)
 
