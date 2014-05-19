@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Mon May 19 13:06:33 2014 chalie_a
+** Last update Mon May 19 19:28:50 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -33,6 +33,7 @@ int			main(int ac, char **av, char **env)
   parse_config_file(sh);
   while (get_line_caps(sh->line) != FAILURE)
     {
+      pre_parsing(sh);
       if (!(root = get_tokens(sh->line->line)))
 	return (FAILURE);
       if ((tree = start_parsing(root, sh)))

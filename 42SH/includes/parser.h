@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Mon May 19 12:57:59 2014 chalie_a
+** Last update Mon May 19 19:41:16 2014 chalie_a
 */
 
 #ifndef PARSER_H_
@@ -15,7 +15,7 @@
 # include "sh.h"
 
 # define LAST_PIPE	(token->next->token == T_EOL ? 1 : 0)
-# define MEM_POOL	(16 * sizeof(char *))
+# define MEM_POOL	(4 * sizeof(char *))
 # define BEFORE		0
 # define AFTER		1
 #  define SIMPLE_RED__	O_CREAT|O_TRUNC|O_WRONLY

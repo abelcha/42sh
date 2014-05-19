@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 12:46:55 2014 chalie_a
-** Last update Mon May 19 14:09:03 2014 chalie_a
+** Last update Mon May 19 19:41:53 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -19,7 +19,7 @@ char		**is_an_alias(char *str, t_shell *sh)
   tmp = sh->alias;
   while ((tmp = tmp->next) != sh->alias)
     {
-      printf("%s == %s\n", tmp->name, str);
+      //      printf("%s == %s\n", tmp->name, str);
       if (!my_strcmp(tmp->name, str))
 	return (&tmp->cmd[2]);
     }
