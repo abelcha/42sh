@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Mon May 19 12:57:59 2014 chalie_a
+** Last update Mon May 19 18:35:08 2014 beau_v
 */
 
 #ifndef PARSER_H_
@@ -18,9 +18,9 @@
 # define MEM_POOL	(16 * sizeof(char *))
 # define BEFORE		0
 # define AFTER		1
-#  define SIMPLE_RED__	O_CREAT|O_TRUNC|O_WRONLY
+# define SIMPLE_RED__	O_CREAT|O_TRUNC|O_WRONLY
 # define __SIMPLE_RED	O_RDONLY
-# define DOUBLE_RED__	O_CREAT|O_APPEND|O_WRONLY 
+# define DOUBLE_RED__	O_CREAT|O_APPEND|O_WRONLY
 
 int		main(int, char **, char **);
 int		speed_cmp(char *, char *);
@@ -39,5 +39,8 @@ void   		*free_tree(t_parse_tree *);
 void		display_tree(t_parse_tree *);
 int		redirections(t_cmd *, t_token *, t_execution *);
 int		expected_after_pipe();
+int		delete_filename_token(t_token *token, int flag);
+int		double_left(t_red *red);
+int		read_while(t_red *red);
 
 #endif /* !PARSER_H_ */

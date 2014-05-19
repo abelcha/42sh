@@ -17,6 +17,7 @@ LIB		=	./lib/gnl.c				\
 			./lib/free_utils.c			\
 			./lib/my_strlen.c			\
 			./lib/to_tab.c				\
+			./lib/my_strcat.c			\
 
 PARSER		=	./parser_lexer/get_paths.c		\
 			./parser_lexer/main_parsing.c		\
@@ -24,6 +25,7 @@ PARSER		=	./parser_lexer/get_paths.c		\
 			./parser_lexer/semantic_analyser.c	\
 			./parser_lexer/create_new_tree_node.c	\
 			./parser_lexer/handle_redirections.c	\
+			./parser_lexer/handle_red_del.c		\
 			./parser_lexer/add_tokens_in_node.c	\
 			./parser_lexer/create_cmd_node.c	\
 			./parser_lexer/find_cmd_path.c		\
@@ -76,7 +78,7 @@ B_OBJ		=	$(LINE:.c=.o) $(HIST:.c=.o) $(GLOB:.c=.o)
 
 ALL_OBJ		=	$(OBJ) $(P_OBJ) $(SH_OBJ) $(B_OBJ)
 
-CFLAGS	=	-I./includes #-Wall -Wextra -pedantic
+CFLAGS	=	-I./includes -Wall -Wextra -pedantic
 
 RM	=	rm -fr
 

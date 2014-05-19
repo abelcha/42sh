@@ -5,52 +5,24 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
-** Last update Sun May 18 11:57:07 2014 chalie_a
+** Last update Mon May 19 18:20:51 2014 beau_v
 */
-
 
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/stat.h>
-#include "tokenizer.h"
 #include "parser.h"
-#include "sh.h"
 
 #define IS_EXEC(s)	(!access(s, X_OK) && !is_dir(s) ? 1 : 0)
 
-int		is_dir(const char* target)
+int			is_dir(const char* target)
 {
-  struct	stat statbuf;
+  struct stat		statbuf;
 
   stat(target, &statbuf);
   return (S_ISDIR(statbuf.st_mode));
-}
-
-char			*my_strcat(char *s1, char *s2)
-{
-  char			*new;
-  int			i;
-  int			j;
-  int			len;
-
-  i = 0;
-  j = 0;
-  len = strlen(s1) + strlen(s2);
-  new = malloc((len + 1) * sizeof(char));
-  memset(new, '\0', len + 1);
-  while (s1[i])
-    {
-      new[i] = s1[i];
-      i++;
-    }
-  while (s2[j])
-    {
-      new[i + j] = s2[j];
-      j++;
-    }
-  return (new);
 }
 
 static char		*is_absolut_path(char *cmd)

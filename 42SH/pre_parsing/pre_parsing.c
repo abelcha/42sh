@@ -5,10 +5,10 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 17:25:33 2014 chalie_a
-** Last update Mon May 19 17:33:14 2014 chalie_a
+** Last update Mon May 19 17:56:45 2014 beau_v
 */
 
-#include "sh.h"
+/*#include "sh.h"
 #include "parser.h"
 
 int		parse_line(char *str, t_shell *sh)
@@ -28,3 +28,4 @@ int		pre_parsing(t_shell *sh)
   while (stock[++i])
     parse_line(stock[i], sh);
 }
+*/

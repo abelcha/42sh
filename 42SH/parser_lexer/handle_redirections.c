@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Sun May 18 12:08:01 2014 chalie_a
+** Last update Mon May 19 18:36:23 2014 beau_v
 */
 
 #include <string.h>
@@ -13,32 +13,9 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "tokenizer.h"
 #include "parser.h"
 
-extern const char		*token_tab[T_NBR + 1];
-
-int		error_handling(int tk1, int tk2)
-{
-  if (tk2 == T_EOL)
-    return(error_handling(tk1, tk2 + 1));
-  fprintf(stderr, "Syntax Error : unexpected token ");
-  fprintf(stderr, "'%s' after '%s' redirection token\n",
-	  token_tab[tk2], token_tab[tk1]);
-  return(FAILURE);
-}
-
-int		delete_filename_token(t_token *token, int flag)
-{
-  token->prev->next = token->next;
-  token->next->prev = token->prev;
-  if (flag)
-    free(token);
-  else
-    token->data = NULL;
-  token = NULL;
-  return (SUCCESS);
-}
+extern const char	*token_tab[T_NBR + 1];
 
 int			find_red_token(int token)
 {
@@ -53,7 +30,17 @@ int			find_red_token(int token)
   return (-1);
 }
 
-static int	read_while(t_red *red)
+int		error_handling(int tk1, int tk2)
+{
+  if (tk2 == T_EOL)
+    return(error_handling(tk1, tk2 + 1));
+  fprintf(stderr, "Syntax Error : unexpected token ");
+  fprintf(stderr, "'%s' after '%s' redirection token\n",
+	  token_tab[tk2], token_tab[tk1]);
+  return(FAILURE);
+}
+
+int		read_while(t_red *red)
 {
   char		*s;
   int		fd;
@@ -77,21 +64,13 @@ static int	read_while(t_red *red)
   return (SUCCESS);
 }
 
-int		double_left(t_red *red)
-{
-  if (read_while(red) == FAILURE)
-    return (FAILURE);
-  red->token = 1;
-  red->name = TMP_FILE;
-  return (SUCCESS);
-}
-
-int		fill_red_struct(t_token *token, t_cmd *cmd, int red_token, t_execution *exe)
+int		fill_red_struct(t_token *token, t_cmd *cmd, int red_token,
+				t_execution *exe)
 {
   t_red		*tmp;
   static int	op_tab[6] = {0, READ_ONLY, TRUNC, APPEND, TRUNC, APPEND};
 
-  if (!cmd->red[red_token / 2] && 
+  if (!cmd->red[red_token / 2] &&
       !(cmd->red[red_token / 2] = calloc(1, sizeof(t_red))))
     return (FAILURE);
   tmp = cmd->red[red_token / 2];

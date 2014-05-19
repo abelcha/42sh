@@ -5,14 +5,14 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May  7 20:58:16 2014 chalie_a
-** Last update Wed May  7 21:02:23 2014 chalie_a
+** Last update Mon May 19 18:33:42 2014 beau_v
 */
 
 #ifndef MY_COLOR_H_
 # define MY_COLOR_H_
 
-#define RESET   "\033[0m"
-#define BLACK   "\033[30m"      /* Black */
+#define RESET	"\033[0m"
+#define BLACK	"\033[30m"      /* Black */
 #define RED     "\033[31m"      /* Red */
 #define GREEN   "\033[32m"      /* Green */
 #define YELLOW  "\033[33m"      /* Yellow */

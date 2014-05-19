@@ -5,13 +5,24 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Mon May 19 13:25:13 2014 chalie_a
+** Last update Mon May 19 18:35:10 2014 beau_v
 */
 
 #ifndef SH_H_
 # define SH_H_
 
 #include "typedefs.h"
+
+# define LASTPIPE	(exe->nb_pipes == exe->pos + 2)
+# define B_SUCCESS	0
+# define B_FAILURE	2
+# define TMP_FILE	".tmp"
+# define ENV_BUFF	256
+# define TRUNC		O_CREAT|O_TRUNC|O_WRONLY
+# define READ_ONLY	O_RDONLY
+# define APPEND		O_CREAT|O_APPEND|O_WRONLY
+# define _ERROR(...)	fprintf(stderr, __VA_ARGS__) ? -1 : FAILURE
+# define B_ERROR(...)	fprintf(stderr, __VA_ARGS__) ? B_FAILURE : B_FAILURE
 
 char		*gnl(const int);
 int		my_strlen(char *);
@@ -74,15 +85,6 @@ int		line_realloc(t_line *);
 int		parse_config_file(t_shell *);
 int		clean_all(t_shell *);
 char		**is_an_alias(char *, t_shell *);
-# define LASTPIPE	(exe->nb_pipes == exe->pos + 2)
-# define B_SUCCESS	0
-# define B_FAILURE	2
-# define TMP_FILE	".tmp"
-# define ENV_BUFF	256
-# define TRUNC		O_CREAT|O_TRUNC|O_WRONLY
-# define READ_ONLY	O_RDONLY
-# define APPEND		O_CREAT|O_APPEND|O_WRONLY
-# define _ERROR(...)	fprintf(stderr, __VA_ARGS__) ? -1 : FAILURE
-# define B_ERROR(...)	fprintf(stderr, __VA_ARGS__) ? B_FAILURE : B_FAILURE
+char		*my_strcat(char *s1, char *s2);
 
 #endif /* !SH_H_ */

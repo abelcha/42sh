@@ -5,11 +5,10 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Mon May 19 10:27:03 2014 chalie_a
+** Last update Mon May 19 18:49:11 2014 beau_v
 */
 
 #include "edit.h"
-
 
 int		get_term_caps(t_line *line)
 {

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 00:19:42 2014 chalie_a
-** Last update Sat May 17 18:59:44 2014 chalie_a
+** Last update Mon May 19 18:05:40 2014 beau_v
 */
 
 #include <stdio.h>
@@ -32,7 +32,7 @@ int			create_new_cmd_node(t_cmd *elem)
 {
   t_cmd			*newelem;
 
-  // printf("cmd->token = %d\n",elem->token); 
+  // printf("cmd->token = %d\n",elem->token);
   //if ( elem->prev->size == 0)
   //  expected_after_pipe();
   if (!(newelem = calloc(1, sizeof(t_cmd))))

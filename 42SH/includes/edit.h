@@ -5,13 +5,13 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Mon May 19 13:53:07 2014 chalie_a
+** Last update Mon May 19 18:48:11 2014 beau_v
 */
 
 #ifndef EDIT_H_
 # define EDIT_H_
 
-#include "typedefs.h"
+# include "typedefs.h"
 
 /*
 ** Ctrl-a	Move to the start of the line.
@@ -35,7 +35,7 @@
 # define K_TAB		9
 # define K_RET		10
 # define CTRL_A		1
-# define CTRL_E		5		
+# define CTRL_E		5
 # define CTRL_B		2
 # define ALT_B		25115
 # define CTRL_F		6
@@ -78,8 +78,6 @@ typedef			void(*t_ak)(t_line *line);
 
 void	delete_char(t_line *line);
 void	add_char(t_line *line);
-int	x_read_line(t_line *line);
-int	init_line(t_line *line);
 int	get_line_caps(t_line *line);
 void	go_next(t_line *line);
 void	go_prev(t_line *line);
