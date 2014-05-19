@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Sun May 18 18:07:36 2014 chalie_a
+** Last update Mon May 19 10:29:34 2014 chalie_a
 */
 
 #include "sh.h"
@@ -29,7 +29,7 @@ int			x_read_line(t_line *line)
       line->key = 0;
       if (read(0, &(line->key), 4) <= 0 || line->key == CTRL_D)
 	{
-	  tcsetattr(0, TCSANOW, &(line->save));
+	  tcsetattr(0, TCSANOW, &(line->sh->save));
 	  line->line = NULL;
 	  return (FAILURE);
 	}
@@ -46,9 +46,9 @@ int			init_line(t_line *line)
 
   i = -2;
   CAP("dl");
-  while (++i < (line->p_size - line->pre_prompt))
+  while (++i < (line->p_size - 0))
     CAP("le");
-  line->curr_pos = NULL;
+  line->sh->curr_pos = NULL;
   line->line_len = 0;
   line->key = 0;
   line->pos = 0;
@@ -73,7 +73,7 @@ int			get_line_caps(t_line *line)
 	c_free(&(line->line_save));
       if (line && my_strlen(line->line))
 	add_in_history_dll(line);
-      tcsetattr(0, TCSANOW, &(line->save));
+      tcsetattr(0, TCSANOW, &(line->sh->save));
     }
   else
     return (FAILURE);

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Sun May 18 17:47:28 2014 chalie_a
+** Last update Mon May 19 10:19:46 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -63,6 +63,11 @@ int		my_strcmp(char *, char *);
 char		**get_paths(char *, char);
 int		actualise_path(t_execution *, char *);
 char		*get_env(char **, char *);
+t_execution	*init_exe(char **env);
+t_line	 	*init_sline();
+t_jobs		*init_jobs();
+t_alias		*init_alias();
+t_shell		*init_sh();
 
 # define LASTPIPE	(exe->nb_pipes == exe->pos + 2)
 # define B_SUCCESS	0

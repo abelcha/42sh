@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Sun May 18 17:47:44 2014 chalie_a
+** Last update Mon May 19 08:25:37 2014 chalie_a
 */
 
 #ifndef EDIT_H_
@@ -47,7 +47,7 @@
 # define CTRL_L		12
 # define ALT_I		26907
 # define CTRL_D		4
-# define BUFF_LINE	16
+# define BUFF_LINE	4
 # define ARG		12
 # define CMD		42
 

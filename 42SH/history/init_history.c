@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 22:21:05 2014 chalie_a
-** Last update Sun May 18 17:40:33 2014 chalie_a
+** Last update Mon May 19 11:48:58 2014 chalie_a
 */
 
 #include <fcntl.h>
@@ -42,18 +42,17 @@ int		init_history(t_line *line)
   int		fd;
   char		*str;
 
-  if (!(line->history = init_root_history()))
+  if (!(line->sh->history = init_root_history()))
     return (FAILURE);
   if ((fd = open("./.42sh_history", (O_RDWR | O_CREAT | O_APPEND), 0777)) < 0)
     return (FAILURE);
   while ((str = gnl(fd)))
-    if (add_elem_in_history(line->history) == FAILURE)
+    if (add_elem_in_history(line->sh->history) == FAILURE)
       return (FAILURE);
     else
       {
-	line->history->prev->data = str;
-	if ((line->history->prev->len = strlen(str)) > BUFF_LINE);
-	//	  return (FAILURE);
+	line->sh->history->prev->data = str;
+	line->sh->history->prev->len = strlen(str);
       }
   close(fd);
   return (SUCCESS);
@@ -61,11 +60,11 @@ int		init_history(t_line *line)
 
 int		add_in_history_dll(t_line *line)
 {
-  if (my_strcmp(line->line, line->history->prev->data))
-    if (add_elem_in_history(line->history) != FAILURE)
+  if (my_strcmp(line->line, line->sh->history->prev->data))
+    if (add_elem_in_history(line->sh->history) != FAILURE)
       {
-	line->history->prev->len = line->line_len;
-	if (!(line->history->prev->data = strdup(line->line)))
+	line->sh->history->prev->len = line->line_len;
+	if (!(line->sh->history->prev->data = strdup(line->line)))
 	  return (FAILURE);
       }
   return (SUCCESS);

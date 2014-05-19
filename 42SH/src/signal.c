@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May 15 20:08:37 2014 chalie_a
-** Last update Sun May 18 12:05:19 2014 chalie_a
+** Last update Mon May 19 10:20:38 2014 chalie_a
 */
 
 #include "edit.h"
@@ -28,8 +28,8 @@ int		signal_ctz(int sig)
 
   if (!isatty(0))
     return (0);
-  if (lx->exe->pid)
-    kill_sons(lx->exe->pid);
+  if (lx->sh->exe->pid)
+    kill_sons(lx->sh->exe->pid);
   i = -2;
   lx->line_len = 0;
   lx->key = 0;

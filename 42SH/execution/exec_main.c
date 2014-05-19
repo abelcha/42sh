@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Sun May 18 12:28:34 2014 chalie_a
+** Last update Sun May 18 19:52:20 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -32,6 +32,12 @@ static const char	*g_sig_tab[11] = {
   "",
   "",
   "Segmentation Fault"};
+
+static void		launch_in_background(t_execution *exe)
+{
+  printf("[%d]+ Done\n", 1);
+  setpgid(exe->curr_pid, exe->curr_pid);
+}
 
 static int		wait_pipes(t_execution *exe)
 {
@@ -64,7 +70,7 @@ int			exec(t_cmd *cmd, t_execution *exe)
     return (FAILURE);
   execution_loop(cmd, exe);
   if (cmd->prev->background && !exe->return_value)
-    setpgid(exe->curr_pid, exe->curr_pid);
+    launch_in_background(exe);
   else if (exe->nb_pipes > 0 && !exe->exit)
   wait_pipes(exe);
   free(exe->pid);

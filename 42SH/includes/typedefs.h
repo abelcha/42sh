@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:57:23 2014 chalie_a
-** Last update Sun May 18 17:36:14 2014 chalie_a
+** Last update Mon May 19 10:15:16 2014 chalie_a
 */
 
 #ifndef TYPEDEFS_H_
@@ -55,14 +55,6 @@ typedef struct		s_token
   struct s_token	*next;
 }			t_token;
 
-typedef struct		s_alias
-{
-  char			*name;
-  char			*cmd;
-  struct s_alias	*prev;
-  struct s_alias	*next;
-}			t_alias;
-
 typedef struct		s_env_dll
 {
   char			*name;
@@ -92,17 +84,9 @@ typedef struct		s_execution
   int			curr_pid;
   int			pos;
   int			exit;
-  struct s_line		*line;
-  t_env			*env;
+  struct s_shell	*sh;
+  struct s_env		*env;
 }			t_execution;
-
-typedef struct		s_arch
-{
-  char			**envp;
-  char			*prompt;
-  t_alias		*alias;
-  t_execution		*exe;
-}			t_arch;
 
 typedef struct		s_echo
 {
@@ -143,18 +127,43 @@ typedef struct		s_line
   int			line_len;
   int			key;
   char			*prompt;
-  int			pre_prompt;
   int			p_size;
   char			*line;
   char			*line_save;
   int			realloc_cpt;
   int			tab_flag;
+  struct s_shell	*sh;
+
+}			t_line;
+
+typedef struct		s_alias
+{
+  char			*name;
+  char			*cmd;
+  struct s_alias	*prev;
+  struct s_alias	*next;
+}			t_alias;
+
+typedef struct		s_jobs
+{
+  char			*cmd;
+  int			pid;
+  struct s_jobs		*prev;
+  struct s_jobs		*next;
+}			t_jobs;
+
+
+typedef struct		s_shell
+{
+  struct s_jobs		*jobs;
+  struct s_line		*line;
+  struct s_alias	*alias;
   struct s_execution	*exe;
   struct s_history	*curr_pos;
   struct s_history	*history;
   struct termios	save;
   struct termios	new;
-}			t_line;
+}			t_shell;
 
 
 typedef int	(*ptrft)(t_execution *exe, t_cmd *cmd);

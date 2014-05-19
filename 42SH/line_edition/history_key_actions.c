@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 20:49:22 2014 chalie_a
-** Last update Sun May 18 18:02:53 2014 chalie_a
+** Last update Mon May 19 10:26:15 2014 chalie_a
 */
 
 #include <termios.h>
@@ -41,27 +41,28 @@ void		back_to_the_future(t_line *line, char *new_line, int new_len)
 
 void		go_next(t_line *line)
 {
-  if (!line->curr_pos || line->curr_pos == line->history)
+  if (!line->sh->curr_pos || line->sh->curr_pos == line->sh->history)
     return ;
-  if (line->curr_pos->next == line->history)
+  if (line->sh->curr_pos->next == line->sh->history)
     back_to_the_future(line, line->line_save, strlen(line->line_save));
   else
-    back_to_the_future(line, line->curr_pos->next->data, line->curr_pos->next->len);
-  line->curr_pos = line->curr_pos->next;
+    back_to_the_future(line, line->sh->curr_pos->next->data,
+		       line->sh->curr_pos->next->len);
+  line->sh->curr_pos = line->sh->curr_pos->next;
 }
 
 
 void		go_prev(t_line *line)
 {
-  if (!line->curr_pos)
+  if (!line->sh->curr_pos)
     {
       if (!(line->line_save = calloc(BUFF_LINE, sizeof(char))))
 	return ;
-      line->curr_pos = line->history;
+      line->sh->curr_pos = line->sh->history;
       strcpy(line->line_save, line->line);
     }
-  if (line->curr_pos->prev == line->history)
+  if (line->sh->curr_pos->prev == line->sh->history)
     return ;
-  line->curr_pos = line->curr_pos->prev;
-  back_to_the_future(line, line->curr_pos->data, line->curr_pos->len);
+  line->sh->curr_pos = line->sh->curr_pos->prev;
+  back_to_the_future(line, line->sh->curr_pos->data, line->sh->curr_pos->len);
 }

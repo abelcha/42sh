@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Sun May 18 09:29:41 2014 chalie_a
+** Last update Mon May 19 10:30:18 2014 chalie_a
 */
 
 #include <glob.h>
@@ -65,7 +65,7 @@ int		get_command(char *word, t_line *line, t_gb *gb)
   int		i;
 
   i = -1;
-  p_tab = line->exe->env->paths;
+  p_tab = line->sh->exe->env->paths;
   while (p_tab && p_tab[++i])
     get_data(p_tab[i], word, gb);
   return (SUCCESS);

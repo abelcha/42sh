@@ -4,8 +4,10 @@ CC		=	clang -g3
 
 NAME		=	42sh
 
-SRC		=	./main.c				\
-			./signal.c				\
+SRC		=	./src/main.c				\
+			./src/signal.c				\
+			./src/init_structs.c			\
+			./src/clean_all.c			\
 
 LIB		=	./lib/gnl.c				\
 			./lib/my_atoi.c				\

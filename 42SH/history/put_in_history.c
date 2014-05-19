@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 22:33:37 2014 chalie_a
-** Last update Thu May 15 02:57:21 2014 chalie_a
+** Last update Mon May 19 10:29:56 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -23,11 +23,11 @@ int		add_in_history_file(t_line *line)
   int		i;
 
   i = -1;
-  tmp = line->history;
+  tmp = line->sh->history;
   if ((fd = open("./.42sh_history", (O_RDWR | O_CREAT | O_TRUNC), 0777)) < 0)
     return (FAILURE);
   save = tmp->prev;
-  while ((tmp = tmp->next) != line->history)
+  while ((tmp = tmp->next) != line->sh->history)
     {
       if (++i < HISTORY_LIMIT && tmp->data)
 	{
