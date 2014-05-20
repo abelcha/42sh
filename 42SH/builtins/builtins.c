@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 23:49:35 2014 chalie_a
-** Last update Mon May 19 20:43:26 2014 coutar_a
+** Last update Tue May 20 10:59:59 2014 chalie_a
 */
 
 #include <string.h>
@@ -23,16 +23,14 @@ int		my_exit(t_execution *exe, t_cmd *cmd)
   return (B_SUCCESS);
 }
 
-int		my_setenv(t_execution *exe, t_cmd *cmd)
+int		set_env_tech(t_execution *exe, char *s1, char *s2)
 {
-  char		*str;
   t_env_dll	*tmp;
+  char		*str;
 
-  if (!cmd->stock[1] || !cmd->stock[2] || cmd->stock[3])
-    return (_ERROR("Error, USAGE : setenv [Name] [Value]\n"));
-  if (!(str = get_env_line(cmd->stock[1], cmd->stock[2])))
-    return (B_FAILURE);
-  if (!(tmp = search_for_env_variable(cmd->stock[1], exe->env->env_dll)))
+  if (!(str = get_env_line(s1, s2)))
+    return (B_FAILURE); 
+  if (!(tmp = search_for_env_variable(s1, exe->env->env_dll)))
     add_env_variable(exe->env->env_dll, str);
   else
     {
@@ -42,6 +40,15 @@ int		my_setenv(t_execution *exe, t_cmd *cmd)
   put_env_in_tab(exe->env);
   if (!strncmp(str, "PATH=", 5))
     actualise_path(exe, str);
+  return (B_SUCCESS);
+}
+
+int		my_setenv(t_execution *exe, t_cmd *cmd)
+{
+  if (!cmd->stock[1] || !cmd->stock[2] || cmd->stock[3])
+    return (_ERROR("Error, USAGE : setenv [Name] [Value]\n"));
+  if (set_env_tech(exe, cmd->stock[1], cmd->stock[2]) == B_FAILURE)
+    return (B_FAILURE);
   return (B_SUCCESS);
 }
 
@@ -75,30 +82,3 @@ int		my_echo(t_execution *exe, t_cmd *cmd)
   return (B_SUCCESS);
 }
 
-
-int		my_cd(t_execution *exe, t_cmd *cmd)
-{
-  char		check;
-  char		*str;
-  int		i;
-  int		j;
-
-  i = 0;
-  j = 0;
-  str = "home";
-  check = 0;
-  if (cmd->stock[1] == NULL)
-    cd_home(exe, cmd);
-  else
-    {
-      while (cmd->stock[1][i] != '\0')
-      	{
-      	  if (cmd->stock[1][i] == str[j])
-      	    j++;
-      	  i++;
-      	}
-      check = j == 3 ? 1 : 0;
-      cd_other(exe, cmd, check);
-    }
-  return (B_SUCCESS);
-}

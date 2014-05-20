@@ -1,129 +1,110 @@
 /*
-** cd.c for 42sh in /home/coutar_a/rendu/42sh/42SH/builtins
+** cd.c for Project-Master in /home/tovazm/rendu/42sh/42SH/builtins
 ** 
-** Made by coutar_a
-** Login   <coutar_a@epitech.net>
+** Made by chalie_a
+** Login   <abel@chalier.me>
 ** 
-** Started on  Sat May 17 14:24:19 2014 coutar_a
-** Last update Mon May 19 20:45:13 2014 coutar_a
+** Started on  Tue May 20 10:03:48 2014 chalie_a
+** Last update Tue May 20 11:21:32 2014 chalie_a
 */
 
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
 #include <errno.h>
+#include "parser.h"
 #include "sh.h"
 
-int		cd_home(t_execution *exe, t_cmd *cmd)
+int		change_dir(char *newdir, t_cmd *cmd)
 {
-  char		*oldpwd;
-  char		*pwd;
-  t_env_dll	*tmp;
-  t_env_dll	*tmp2;
-
-  (void)cmd;
-  if (!(tmp = search_for_env_variable("HOME", exe->env->env_dll)) ||
-      !(tmp2 = search_for_env_variable("PWD", exe->env->env_dll)))
-    return (-1);
-  if ((chdir(tmp->value)) == -1)
-    {
-      printf("%s\n", strerror(errno));
-      return (-1);
-    }
-  if (!(pwd = get_env_line("PWD", tmp->value))
-      || !(oldpwd = get_env_line("OLDPWD", tmp2->value)))
-    return (-1);
-  env_setting_spec(exe, pwd, oldpwd, tmp2);
-  return (0);
+  if ((access(newdir, F_OK | R_OK)) == -1)
+    return (B_ERROR("%s\n", strerror(errno)));
+  if (chdir(newdir) == FAILURE)
+    return(B_ERROR("%s\n", strerror(errno)));
+  return (B_SUCCESS);
 }
 
-int		cd_progressive(t_execution *exe, t_cmd *cmd)
+char		*cd_back(t_execution *exe, t_cmd *cmd)
 {
-  char		*pwd;
-  t_env_dll	*tmp;
-  char		*swap;
+  t_env_dll	*env_tmp;
 
-  if (!(tmp = search_for_env_variable("PWD", exe->env->env_dll)))
-    return (-1);
-  if ((chdir(cmd->stock[1])) == -1)
-    {
-      printf("%s\n", strerror(errno));
-      return (-1);
-    }
-  if (!(swap = supercat(tmp->value, "/", cmd->stock[1])))
-    return (-1);
-  if (!(pwd = get_env_line("PWD", swap))) // <<- SEGFAULT si supercat == NULL
-    return (-1);
-  cd_env_setting(exe, pwd, tmp);
-  return (0);
+  if ((env_tmp = search_for_env_variable("OLDPWD", exe->env->env_dll)))
+    return (env_tmp->value);
+  B_ERROR("Error : OLDPWD variable is not set\n");
+  return (NULL);
 }
 
-int	cd_absolute(t_execution *exe, t_cmd *cmd)
+char		*cd_progressive(t_execution *exe, t_cmd *cmd)
 {
+  t_env_dll	*env_tmp;
+  char		*tmpdir;
+
+  if (!(env_tmp = search_for_env_variable("PWD", exe->env->env_dll)))
+    {
+      B_ERROR("Cant find current directory, try with an absolut path\n");
+      return (NULL);
+    }
+  if (!(tmpdir = calloc(1, strlen(env_tmp->value) + strlen(cmd->stock[1]) + 3)))
+    return (NULL);
+  strcpy(tmpdir, env_tmp->value);
+  strcat(tmpdir, "/");
+  strcat(tmpdir, cmd->stock[1]);
+  return (tmpdir);
+}
+
+char		*cd_home(t_execution *exe, t_cmd *cmd)
+{
+  t_env_dll	*env_tmp;
+
+  if ((env_tmp = search_for_env_variable("HOME", exe->env->env_dll)))
+    return (env_tmp->value);
+  B_ERROR("Error : HOME variable is not set\n");
+  return (NULL);
+}
+
+char		*get_current_dir(int cpt)
+{
+  char		*pwd;
+
+  if (!(pwd = calloc(cpt, _MEM_POOL)))
+    return (NULL);
+  if (!(getcwd(pwd, cpt * _MEM_POOL)))
+    return (errno == EINVAL ? get_current_dir(++cpt) : NULL);
+  return (pwd);
+}
+
+int		actualise_pwd(t_execution *exe)
+{
+  char		*new_pwd;
   char		*pwd;
   t_env_dll	*tmp;
 
-  if (!(tmp = search_for_env_variable("PWD", exe->env->env_dll)))
-    return (-1);
-  if ((chdir(cmd->stock[1])) == -1)
-    {
-      printf("%s\n", strerror(errno));
-      return (-1);
-    }
-  if (!(pwd = get_env_line("PWD", cmd->stock[1])))
-    return (-1);
-  cd_env_setting(exe, pwd, tmp);
-  return (0);
+  if (!(new_pwd = calloc(1, 1024)))
+    return (B_FAILURE);
+  if ((tmp = search_for_env_variable("PWD", exe->env->env_dll)))
+    set_env_tech(exe, "OLDPWD", tmp->value);
+  if (!(new_pwd = get_current_dir(1)))
+    return (B_FAILURE);
+  set_env_tech(exe, "PWD", new_pwd);
+  return (SUCCESS);
 }
 
-int	cd_regressive(t_execution *exe, t_cmd *cmd)
+int		my_cd(t_execution *exe, t_cmd *cmd)
 {
-  char		*pwd;
-  char		*swap;
-  char		*oldpwd;
-  t_env_dll	*tmp;
-  int		errno;
+  char		*tmpdir;
 
-  errno = 0;
-  if (!(tmp = search_for_env_variable("PWD", exe->env->env_dll)))
-    return (-1);
-  if (!(oldpwd = get_env_line("OLDPWD", tmp->value)))
-    return (-1);
-  if (!(swap = cd_arbor_regress(tmp->value, cmd->stock[1])))
-    return (-1);
-  if (!(pwd = get_env_line("PWD", swap)))
-    return (-1);
-  if ((chdir(cmd->stock[1])) == -1)
-    {
-      printf("%s\n", strerror(errno));
-      return (-1);
-    }
-  env_setting_spec(exe, pwd, oldpwd, tmp);
-  return (0);
-}
-
-int	cd_other(t_execution *exe, t_cmd *cmd, char check)
-{
-  int	errno;
-  int	retro;
-
-  errno = 0;
-  retro = retro_counter(cmd->stock[1]);
-  if (strcmp(cmd->stock[1], "-") == 0)
-    return (cd_oldpwd(exe, cmd));
-  else if (strcmp(cmd->stock[1], "--") == 0)
-    return (cd_doubleminus(exe, cmd));
-  if ((access(cmd->stock[1], F_OK | R_OK)) == -1)
-    {
-      printf("%s\n", strerror(errno));
-      return (-1);
-    }
-  if (retro == 0)
-    {
-      if (check == 1)
-	return (cd_absolute(exe, cmd));
-      return (cd_progressive(exe, cmd));
-    }
-  return(cd_regressive(exe, cmd));
+  tmpdir = NULL;
+  if (!cmd->stock[1] || cmd->stock[1][0] == '~')
+    tmpdir = cd_home(exe, cmd);
+  else if (cmd->stock[1][0] == '-' && cmd->stock[1][0])
+    tmpdir = cd_back(exe, cmd);
+  else if (cmd->stock[1][0] != '/')
+    tmpdir = cd_progressive(exe, cmd);
+  else
+    tmpdir = strdup(cmd->stock[1]);
+  if (!(tmpdir) || change_dir(tmpdir, cmd) == B_FAILURE)
+    return (B_FAILURE);
+  return (actualise_pwd(exe));
 }

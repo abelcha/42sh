@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Mon May 19 08:34:48 2014 chalie_a
+** Last update Tue May 20 09:20:49 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -26,7 +26,7 @@
 int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe) 
 {
   _ERROR("Error : `%s' command not found\n", tmp->stock[0]);
-  exe->return_value = 512;
+  exe->return_value = 514;
   if (exe->prev_pipe != -1)
     close(exe->prev_pipe);
   if (exe->nb_pipes != exe->pos + 2)

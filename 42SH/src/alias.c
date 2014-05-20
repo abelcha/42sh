@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 12:46:55 2014 chalie_a
-** Last update Mon May 19 21:26:24 2014 chalie_a
+** Last update Tue May 20 09:03:41 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -23,14 +23,6 @@ char		**is_an_alias(char *str, t_shell *sh)
       return (&tmp->cmd[2]);
   return (NULL);
 }
-/*
-void		find_double_alias(t_alias *alias, t_alias *curr)
-{
-  int		i;
-  t_alias	*tmp;
-  i = 0;
-  while (
-  }*/
 
 void		add_alias(t_shell *sh, char **stock)
 {

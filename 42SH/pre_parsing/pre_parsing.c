@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 17:25:33 2014 chalie_a
-** Last update Mon May 19 22:20:22 2014 chalie_a
+** Last update Tue May 20 09:40:58 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -46,12 +46,43 @@ int		add_in_buffer(char **stock, t_line *line)
   return (SUCCESS);
 }
 
+int		dollar_sign(char *str, t_shell *sh)
+{
+  char		*tmp;
+  t_env_dll	*env_tmp;
+
+  if (str[1] == '?' && (tmp = my_itoa(sh->exe->return_value % 256)))
+    return (safe_joint(sh->line, tmp));
+  if ((env_tmp = search_for_env_variable(&str[1], sh->exe->env->env_dll)))
+    return (safe_joint(sh->line, env_tmp->value));
+  return (safe_joint(sh->line, str));
+}
+
+int		history_find(char *str, t_shell *sh)
+{
+  t_history	*tmp;
+  int		nbr;
+  int		i;
+
+  i = -1;
+  if ((nbr = my_atoi(&str[1])) <= 0)
+    return (safe_joint(sh->line, str));
+  tmp = sh->history;
+  while ((tmp = tmp->next) != sh->history && ++i < nbr);
+  printf("hist = %s\n", tmp->data);
+  return (safe_joint(sh->line, tmp->data));
+}
+
 int		parse_line(char *str, t_shell *sh)
 {
   char		**tmp;
 
   if ((tmp = is_an_alias(str, sh)))
     return (add_in_buffer(tmp, sh->line));
+  if (*str == '$' && str[1])
+    return (dollar_sign(str, sh));
+  if (*str == '!' && str[1])
+    return (history_find(str, sh));
   return (safe_joint(sh->line, str));
 }
 
@@ -63,14 +94,13 @@ int		pre_parsing(t_shell *sh)
   i = -1;
   sh->line->realloc_cpt = 0;
   sh->line->pos = 0;
-  sh->line->line = epur_line(sh->line->line);
   if (!(stock = to_tab(sh->line->line, 0, ' ')) || !(*stock[0]))
     return (FAILURE);
   while (stock[++i])
     if (parse_line(stock[i], sh) == FAILURE)
       return (FAILURE);
-  sh->line->line = sh->line->line_save;
+  if (sh->line->line_save)
+    sh->line->line = sh->line->line_save;
   sh->line->line_save = NULL;
-  printf("line = %s\n", sh->line->line);
   return (SUCCESS);
 }

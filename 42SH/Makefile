@@ -18,6 +18,7 @@ LIB		=	./lib/gnl.c				\
 			./lib/my_strlen.c			\
 			./lib/to_tab.c				\
 			./lib/my_strcat.c			\
+			./lib/my_itoa.c				\
 
 PARSER		=	./parser_lexer/get_paths.c		\
 			./parser_lexer/main_parsing.c		\
@@ -66,8 +67,6 @@ BUILD		=	./builtins/env_dll.c			\
 			./builtins/builtins.c			\
 			./builtins/echo.c 			\
 			./builtins/cd.c				\
-			./builtins/filestructure.c		\
-			./builtins/cd_special_cases.c		\
 
 OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o)
 
