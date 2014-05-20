@@ -18,9 +18,9 @@
 # define B_FAILURE	2
 # define TMP_FILE	".tmp"
 # define ENV_BUFF	256
-# define TRUNC		O_CREAT|O_TRUNC|O_WRONLY
+# define TRUNC		O_CREAT | O_TRUNC | O_WRONLY
 # define READ_ONLY	O_RDONLY
-# define APPEND		O_CREAT|O_APPEND|O_WRONLY
+# define APPEND		O_CREAT | O_APPEND | O_WRONLY
 # define R_ERROR(n)	n == 1 ? -1 : 2
 # define X_ERROR(...)	(fprintf(stderr, __VA_ARGS__))
 # define _ERROR(...)	X_ERROR(__VA_ARGS__) ? -1 : R_ERROR(1)

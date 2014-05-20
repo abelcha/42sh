@@ -13,7 +13,6 @@
 
 #include <termios.h>
 
-
 typedef struct		s_red
 {
   int			token;
@@ -94,7 +93,6 @@ typedef struct		s_echo
   char			code;
 }			t_echo;
 
-
 typedef struct		s_history
 {
   int			len;
@@ -119,7 +117,6 @@ typedef struct		s_gb
   int			total;
   int			part_match;
 }			t_gb;
-
 
 typedef struct		s_line
 {
@@ -149,7 +146,6 @@ typedef struct		s_jobs
   struct s_jobs		*prev;
   struct s_jobs		*next;
 }			t_jobs;
-
 
 typedef struct		s_shell
 {
