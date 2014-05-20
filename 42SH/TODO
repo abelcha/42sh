@@ -22,3 +22,6 @@ includes/edit.h a mettre a la norme
 
 
 plus de 5 fonctions dans pre_parsing/pre_parsing.c
+
+Erreur dans arrow_key_action.c a la ligne 54 : Commentaires dans le code
+Erreur dans init_termcaps.c a la ligne 16 : Commentaires dans le code
