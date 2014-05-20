@@ -5,12 +5,13 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 12:46:55 2014 chalie_a
-** Last update Mon May 19 20:02:17 2014 chalie_a
+** Last update Mon May 19 21:26:24 2014 chalie_a
 */
 
 #include <stdlib.h>
 #include "sh.h"
 #include "parser.h"
+
 
 char		**is_an_alias(char *str, t_shell *sh)
 {
@@ -18,13 +19,18 @@ char		**is_an_alias(char *str, t_shell *sh)
 
   tmp = sh->alias;
   while ((tmp = tmp->next) != sh->alias)
-    {
-      //      printf("%s == %s\n", tmp->name, str);
-      if (!my_strcmp(tmp->name, str))
-	return (&tmp->cmd[2]);
-    }
+    if (!my_strcmp(tmp->name, str))
+      return (&tmp->cmd[2]);
   return (NULL);
 }
+/*
+void		find_double_alias(t_alias *alias, t_alias *curr)
+{
+  int		i;
+  t_alias	*tmp;
+  i = 0;
+  while (
+  }*/
 
 void		add_alias(t_shell *sh, char **stock)
 {

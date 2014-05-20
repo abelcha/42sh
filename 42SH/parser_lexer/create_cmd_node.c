@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 00:19:42 2014 chalie_a
-** Last update Mon May 19 18:05:40 2014 beau_v
+** Last update Mon May 19 20:56:42 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -37,7 +37,7 @@ int			create_new_cmd_node(t_cmd *elem)
   //  expected_after_pipe();
   if (!(newelem = calloc(1, sizeof(t_cmd))))
     return (FAILURE);
-  if (!(newelem->stock = calloc(MEM_POOL, sizeof(char *))))
+  if (!(newelem->stock = calloc(_MEM_POOL, sizeof(char *))))
     return (FAILURE);
   newelem->size = 0;
   return (link_tree_nodes(elem, newelem));

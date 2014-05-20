@@ -5,9 +5,10 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 17:25:33 2014 chalie_a
-** Last update Mon May 19 20:02:58 2014 chalie_a
+** Last update Mon May 19 22:20:22 2014 chalie_a
 */
 
+#include <stdlib.h>
 #include <stdio.h>
 #include "sh.h"
 #include "parser.h"
@@ -22,11 +23,9 @@ int		safe_joint(t_line *line, char *s2)
   i = -1;
   while (s2[++i])
     {
-      if (line->pos == line->realloc_cpt * MEM_POOL)
-	{
-	  if (!(s = realloc(s, ++(line->realloc_cpt) * MEM_POOL)))
-	    return (FAILURE);
-	}
+      if (line->pos >= line->realloc_cpt * _MEM_POOL)
+	if (!(s = realloc(s, ++(line->realloc_cpt) * _MEM_POOL + 1024)))
+	  return (FAILURE);
       s[line->pos] = s2[i];
       (line->pos)++;
     }
@@ -64,6 +63,7 @@ int		pre_parsing(t_shell *sh)
   i = -1;
   sh->line->realloc_cpt = 0;
   sh->line->pos = 0;
+  sh->line->line = epur_line(sh->line->line);
   if (!(stock = to_tab(sh->line->line, 0, ' ')) || !(*stock[0]))
     return (FAILURE);
   while (stock[++i])
@@ -72,5 +72,5 @@ int		pre_parsing(t_shell *sh)
   sh->line->line = sh->line->line_save;
   sh->line->line_save = NULL;
   printf("line = %s\n", sh->line->line);
-
+  return (SUCCESS);
 }

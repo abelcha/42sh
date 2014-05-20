@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon May 19 18:15:31 2014 beau_v
+** Last update Mon May 19 21:18:49 2014 chalie_a
 */
 
 #include <string.h>
@@ -21,7 +21,6 @@ static int			replace_alias(char **tmp, t_cmd *cmd)
   i = -1;
   while (tmp[++i])
     {
-      printf("add%d  %s\n", cmd->size, tmp[i]);
       cmd->stock[cmd->size] = tmp[i];
       cmd->size++;
     }
@@ -48,8 +47,8 @@ static int			add_data_in_cmd(t_cmd *cmd,
 {
   if (!cmd)
     return (FAILURE);
-  if (!cmd->stock || cmd->size >= cmd->realloc_cpt)
-    if (!(cmd->stock = realloc(cmd->stock, ++(cmd->realloc_cpt) * MEM_POOL)))
+  if (cmd->size >= (cmd->realloc_cpt * _MEM_POOL))
+    if (!(cmd->stock = realloc(cmd->stock, ++(cmd->realloc_cpt) * _MEM_POOL * 8 + 4)))
       return (FAILURE);
   return (fill_data_stock(cmd, sh, token));
 }

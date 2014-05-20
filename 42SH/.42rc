@@ -3,4 +3,5 @@ ALIAS		ne	emacs -nw
 ALIAS		ll	ls -l
 ALIAS		la	ls -la
 ALIAS		ls	ls --color
+ALIAS		lol	ls&&pwd
 HIST_IGNORE	ls:clear:exit
