@@ -1,6 +1,9 @@
 ## fonctions
 strdup a remplacer dans  tokeniser/tokeniser.c ligne 42
 
+Erreur :
+- echo $TERM va afficher la valeur de $TERMINATOR_UUID au lieu de $TERM car $TERMINATOR_UUID est présent avant $TERM dans l'env
+- echo "test" affiche "test" au lieu de test.
 
 #### To correct
 
