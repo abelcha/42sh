@@ -13,7 +13,6 @@
 #include "sh.h"
 #include "edit.h"
 
-
 char		*get_fusion(char *path, char *word, int *len)
 {
   char		*temp;
