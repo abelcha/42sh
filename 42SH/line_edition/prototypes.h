@@ -1,5 +1,16 @@
+/*
+** prototypes.h for 42sh in /data/tek/projects/42sh/42SH/line_edition
+** 
+** Made by kalatz_a
+** Login   <contact@alpha14.com>
+** 
+** Started on  Wed May 21 01:00:30 2014 kalatz_a
+** Last update Wed May 21 01:00:30 2014 kalatz_a
+*/
+
 #ifndef PROTOTYPES_H_
 # define PROTOTYPES_H_
+
 void	delete_char(t_line *line);
 void	add_char(t_line *line);
 void	move_back_word(t_line *line);
