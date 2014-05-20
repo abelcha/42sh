@@ -1,0 +1,21 @@
+## fonctions
+strdup a remplacer dans  tokeniser/tokeniser.c ligne 42
+
+
+#### To correct
+
+Remove comment in lib/gnl.c
+More than 5 functions in lib/gnl.c
+
+More than 5 functions in globbing/display_results.c
+More than 5 functions in globbing/tab_glob.c
+
+Erreur dans tokenizer.h a la ligne 25 : chaine de plus de 80 caracteres
+Erreur dans tokenizer.h a la ligne 26 : chaine de plus de 80 caracteres
+Erreur dans tokenizer.h a la ligne 27 : chaine de plus de 80 caracteres
+Erreur dans tokenizer.h a la ligne 48 : chaine de plus de 80 caracteres
+
+includes/edit.h a mettre a la norme
+
+
+plus de 5 fonctions dans pre_parsing/pre_parsing.c
