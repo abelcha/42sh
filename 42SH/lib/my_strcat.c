@@ -5,7 +5,7 @@
 ** Login   <victor.beau@epitech.eu>
 ** 
 ** Started on  Mon May 19 18:06:58 2014 beau_v
-** Last update Mon May 19 18:09:43 2014 beau_v
+** Last update Tue May 20 13:04:36 2014 chalie_a
 */
 
 #include <string.h>
@@ -14,7 +14,7 @@
 #include "parser.h"
 #include "sh.h"
 
-char			*my_strcat(char *s1, char *s2)
+char			*my_strjoint(char *s1, char *s2)
 {
   char			*new;
   int			i;
@@ -24,8 +24,8 @@ char			*my_strcat(char *s1, char *s2)
   i = 0;
   j = 0;
   len = strlen(s1) + strlen(s2);
-  new = malloc((len + 1) * sizeof(char));
-  memset(new, '\0', len + 1);
+  if (!(new = calloc((len + 1), sizeof(char))))
+    return (NULL);
   while (s1[i])
     {
       new[i] = s1[i];

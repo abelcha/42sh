@@ -5,18 +5,18 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 17:25:33 2014 chalie_a
-** Last update Tue May 20 09:40:58 2014 chalie_a
+** Last update Tue May 20 14:01:03 2014 chalie_a
 */
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <glob.h>
 #include "sh.h"
 #include "parser.h"
 
 int		safe_joint(t_line *line, char *s2)
 {
   int		i;
-  int		j;
   char		*s;
 
   s = line->line_save;
@@ -69,14 +69,36 @@ int		history_find(char *str, t_shell *sh)
     return (safe_joint(sh->line, str));
   tmp = sh->history;
   while ((tmp = tmp->next) != sh->history && ++i < nbr);
-  printf("hist = %s\n", tmp->data);
+  printf("%d--> %s\n", nbr, tmp->data);
   return (safe_joint(sh->line, tmp->data));
+}
+
+char		**is_globbing(char *str)
+{
+  glob_t	gl;
+  int		i;
+  char		**tmp;
+
+  i = -1;
+  glob(str, 0, NULL, &gl);
+  if (gl.gl_pathc <= 0)
+    return (NULL);
+  if (!(tmp = calloc((int)gl.gl_pathc + 2, sizeof(char *))))
+    return (NULL);
+  while (++i < (int)gl.gl_pathc)
+    if (!(tmp[i] = strdup(gl.gl_pathv[i])))
+      return (NULL);
+  tmp[i] = NULL;
+  globfree(&gl);
+  return (tmp);
 }
 
 int		parse_line(char *str, t_shell *sh)
 {
   char		**tmp;
 
+  if ((tmp = is_globbing(str)))
+    return (add_in_buffer(tmp, sh->line));
   if ((tmp = is_an_alias(str, sh)))
     return (add_in_buffer(tmp, sh->line));
   if (*str == '$' && str[1])

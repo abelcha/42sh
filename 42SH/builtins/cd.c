@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 20 10:03:48 2014 chalie_a
-** Last update Tue May 20 11:21:32 2014 chalie_a
+** Last update Tue May 20 13:31:10 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -17,7 +17,7 @@
 #include "parser.h"
 #include "sh.h"
 
-int		change_dir(char *newdir, t_cmd *cmd)
+int		change_dir(char *newdir)
 {
   if ((access(newdir, F_OK | R_OK)) == -1)
     return (B_ERROR("%s\n", strerror(errno)));
@@ -26,13 +26,13 @@ int		change_dir(char *newdir, t_cmd *cmd)
   return (B_SUCCESS);
 }
 
-char		*cd_back(t_execution *exe, t_cmd *cmd)
+char		*cd_back(t_execution *exe)
 {
   t_env_dll	*env_tmp;
 
   if ((env_tmp = search_for_env_variable("OLDPWD", exe->env->env_dll)))
     return (env_tmp->value);
-  B_ERROR("Error : OLDPWD variable is not set\n");
+  X_ERROR("Error : OLDPWD variable is not set\n");
   return (NULL);
 }
 
@@ -43,7 +43,7 @@ char		*cd_progressive(t_execution *exe, t_cmd *cmd)
 
   if (!(env_tmp = search_for_env_variable("PWD", exe->env->env_dll)))
     {
-      B_ERROR("Cant find current directory, try with an absolut path\n");
+      X_ERROR("Cant find current directory, try with an absolut path\n");
       return (NULL);
     }
   if (!(tmpdir = calloc(1, strlen(env_tmp->value) + strlen(cmd->stock[1]) + 3)))
@@ -54,13 +54,13 @@ char		*cd_progressive(t_execution *exe, t_cmd *cmd)
   return (tmpdir);
 }
 
-char		*cd_home(t_execution *exe, t_cmd *cmd)
+char		*cd_home(t_execution *exe)
 {
   t_env_dll	*env_tmp;
 
   if ((env_tmp = search_for_env_variable("HOME", exe->env->env_dll)))
     return (env_tmp->value);
-  B_ERROR("Error : HOME variable is not set\n");
+  X_ERROR("Error : HOME variable is not set\n");
   return (NULL);
 }
 
@@ -71,14 +71,16 @@ char		*get_current_dir(int cpt)
   if (!(pwd = calloc(cpt, _MEM_POOL)))
     return (NULL);
   if (!(getcwd(pwd, cpt * _MEM_POOL)))
-    return (errno == EINVAL ? get_current_dir(++cpt) : NULL);
+    {
+      free(pwd);
+      return (errno == 34 ? get_current_dir(++cpt) : NULL);
+    }
   return (pwd);
 }
 
 int		actualise_pwd(t_execution *exe)
 {
   char		*new_pwd;
-  char		*pwd;
   t_env_dll	*tmp;
 
   if (!(new_pwd = calloc(1, 1024)))
@@ -88,7 +90,7 @@ int		actualise_pwd(t_execution *exe)
   if (!(new_pwd = get_current_dir(1)))
     return (B_FAILURE);
   set_env_tech(exe, "PWD", new_pwd);
-  return (SUCCESS);
+  return (B_SUCCESS);
 }
 
 int		my_cd(t_execution *exe, t_cmd *cmd)
@@ -97,14 +99,14 @@ int		my_cd(t_execution *exe, t_cmd *cmd)
 
   tmpdir = NULL;
   if (!cmd->stock[1] || cmd->stock[1][0] == '~')
-    tmpdir = cd_home(exe, cmd);
+    tmpdir = cd_home(exe);
   else if (cmd->stock[1][0] == '-' && cmd->stock[1][0])
-    tmpdir = cd_back(exe, cmd);
+    tmpdir = cd_back(exe);
   else if (cmd->stock[1][0] != '/')
     tmpdir = cd_progressive(exe, cmd);
   else
     tmpdir = strdup(cmd->stock[1]);
-  if (!(tmpdir) || change_dir(tmpdir, cmd) == B_FAILURE)
+  if (!(tmpdir) || change_dir(tmpdir) == B_FAILURE)
     return (B_FAILURE);
   return (actualise_pwd(exe));
 }

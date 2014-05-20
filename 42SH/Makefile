@@ -1,6 +1,6 @@
 
 
-CC		=	clang -g3
+CC		=	gcc -g3
 
 NAME		=	42sh
 
@@ -78,7 +78,7 @@ B_OBJ		=	$(LINE:.c=.o) $(HIST:.c=.o) $(GLOB:.c=.o)
 
 ALL_OBJ		=	$(OBJ) $(P_OBJ) $(SH_OBJ) $(B_OBJ)
 
-CFLAGS	=	-I./includes # -Wall -Wextra -pedantic
+CFLAGS	=	-I./includes -Wall -Wextra
 
 RM	=	rm -fr
 

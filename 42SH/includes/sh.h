@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Tue May 20 10:19:35 2014 chalie_a
+** Last update Tue May 20 13:33:07 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -21,8 +21,10 @@
 # define TRUNC		O_CREAT|O_TRUNC|O_WRONLY
 # define READ_ONLY	O_RDONLY
 # define APPEND		O_CREAT|O_APPEND|O_WRONLY
-# define _ERROR(...)	fprintf(stderr, __VA_ARGS__) ? -1 : FAILURE
-# define B_ERROR(...)	fprintf(stderr, __VA_ARGS__) ? B_FAILURE : B_FAILURE
+# define R_ERROR(n)	n == 1 ? -1 : 2
+# define X_ERROR(...)	(fprintf(stderr, __VA_ARGS__))
+# define _ERROR(...)	X_ERROR(__VA_ARGS__) ? -1 : R_ERROR(1)
+# define B_ERROR(...)	X_ERROR(__VA_ARGS__) ? 2 : R_ERROR(2)
 
 char		*gnl(const int);
 int		my_strlen(char *);
@@ -75,6 +77,10 @@ int		line_realloc(t_line *);
 int		parse_config_file(t_shell *);
 int		clean_all(t_shell *);
 char		**is_an_alias(char *, t_shell *);
-char		*my_strcat(char *s1, char *s2);
+char		*my_strjoint(char *s1, char *s2);
+char		*my_itoa(int);
+int		set_env_tech(t_execution *, char *, char *);
+int		my_strlen(char *);
+int		pre_parsing(t_shell *);
 
 #endif /* !SH_H_ */

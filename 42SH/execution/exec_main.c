@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Mon May 19 20:49:16 2014 chalie_a
+** Last update Tue May 20 13:34:46 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -43,12 +43,11 @@ static int		wait_pipes(t_execution *exe)
 {
   int			i;
   int			status;
-  int			ret;
 
   i = -1;
   while (++i < exe->nb_pipes)
     {
-      ret = waitpid(exe->pid[i], &status, 0);
+      waitpid(exe->pid[i], &status, 0);
       if (!exe->return_value)
 	exe->return_value = WEXITSTATUS(status);
     }

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Mon May 19 14:11:22 2014 chalie_a
+** Last update Tue May 20 13:33:37 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -52,10 +52,8 @@ void			free_alias(t_alias *root)
 
 int			clean_all(t_shell *sh)
 {
-  int			i;
   int			exit_value;
 
-  i = -1;
   exit_value = sh->exe->exit;
   free_exe(sh->exe->env->env_dll);
   free_alias(sh->alias);

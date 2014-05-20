@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:05:18 2014 chalie_a
-** Last update Sun May 18 06:05:55 2014 chalie_a
+** Last update Tue May 20 13:34:29 2014 chalie_a
 */
 
 #include <string.h>
@@ -15,11 +15,9 @@
 
 int		my_env(t_execution *exe, t_cmd *cmd)
 {
-  t_env_dll	*tmp;
   int		i = -1;
 
   (void)cmd;
-  tmp = exe->env->env_dll;
   while (exe->env->envp[++i])
     printf("%s\n", exe->env->envp[i]);
   return (B_SUCCESS);

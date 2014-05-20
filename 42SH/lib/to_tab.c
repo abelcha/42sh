@@ -5,10 +5,11 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sat Dec 28 05:44:46 2013 chalie_a
-** Last update Mon May 19 22:22:56 2014 chalie_a
+** Last update Tue May 20 13:07:28 2014 chalie_a
 */
 
 #include <stdlib.h>
+#include "sh.h"
 
 char	**to_tab(char *s, int cpt, char sep)
 {
@@ -31,27 +32,4 @@ char	**to_tab(char *s, int cpt, char sep)
   j = 0;
   while (i < len && (tab[cpt][j++] = s[i++]));
   return (tab);
-}
-
-char	*epur_line(char *str)
-{
-  char	*tmp;
-  int	i;
-  int	j;
-  int	flag;
-
-  i = 0;
-  j = 0;
-  flag = 0;
-  if (!(tmp = calloc(strlen(str), sizeof(char *))))
-    return (str);
-  while (str[i])
-    {
-      if (str[i] == '&' || str[i] == '|' || str[i] == '<' || str[i] == '<' || str[i] == ';')
-	tmp[j++] = ' ';
-      tmp[j] = str[i];
-      ++j;
-      ++i;
-    }
-  return (tmp);
 }
