@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:05:18 2014 chalie_a
-** Last update Tue May 20 13:34:29 2014 chalie_a
+** Last update Wed May 21 16:12:04 2014 kalatz_a
 */
 
 #include <string.h>
@@ -61,7 +61,8 @@ int		actualise_path(t_execution *exe, char *str)
   double_free(exe->env->paths);
   if (!str)
     exe->env->paths = NULL;
-  else if (!(exe->env->paths = get_paths(get_env(exe->env->envp, "PATH="), ':')))
+  else if (!(exe->env->paths =
+	     get_paths(get_env(exe->env->envp, "PATH="), ':')))
     return (B_FAILURE);
   return (B_SUCCESS);
 }
