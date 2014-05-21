@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Mon May 19 12:21:43 2014 chalie_a
+** Last update Wed May 21 16:00:47 2014 kalatz_a
 */
 
 #include <stdio.h>
@@ -65,7 +65,6 @@ t_alias			*init_alias()
   root->next = root;
   return (root);
 }
-
 
 t_shell			*init_sh(char **env)
 {
