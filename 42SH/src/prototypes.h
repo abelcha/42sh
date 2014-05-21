@@ -1,5 +1,16 @@
+/*
+** prototypes.h for 42sh in /data/tek/projects/42sh/42SH/src
+** 
+** Made by kalatz_a
+** Login   <kalatz_a@epitech.net>
+** 
+** Started on  Wed May 21 16:04:50 2014 kalatz_a
+** Last update Wed May 21 16:04:51 2014 kalatz_a
+*/
+
 #ifndef PROTOTYPES_H_
 # define PROTOTYPES_H_
+
 void	kill_sons(int *pid);
 int	signal_ctz(int sig);
 int	clean_all(t_execution *exe);
