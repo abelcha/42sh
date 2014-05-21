@@ -25,3 +25,4 @@ plus de 5 fonctions dans pre_parsing/pre_parsing.c
 
 Erreur dans arrow_key_action.c a la ligne 54 : Commentaires dans le code
 Erreur dans init_termcaps.c a la ligne 16 : Commentaires dans le code
+Erreur dans parser_lexer/create_new_tree_node.c a la ligne 21 : Commentaires dans le code
