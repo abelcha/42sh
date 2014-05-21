@@ -77,7 +77,7 @@ static int		wait_pipes(t_execution *exe)
     }
   if (status < 1000 && WIFSIGNALED(status))
     {
-      exe->return_value = status; 
+      exe->return_value = status;
       if (WTERMSIG(status) < 13)
 	printf("%s", g_sig_tab[(WTERMSIG(status) - 1) % 11]);
       printf(WCOREDUMP(status) ? " (Core Dumped)\n" : "\n");

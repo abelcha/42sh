@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 17:25:33 2014 chalie_a
-** Last update Tue May 20 14:01:03 2014 chalie_a
+** Last update Tue May 20 14:54:35 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -86,7 +86,7 @@ char		**is_globbing(char *str)
   if (!(tmp = calloc((int)gl.gl_pathc + 2, sizeof(char *))))
     return (NULL);
   while (++i < (int)gl.gl_pathc)
-    if (!(tmp[i] = strdup(gl.gl_pathv[i])))
+    if (!(tmp[i] = my_strdup(gl.gl_pathv[i])))
       return (NULL);
   tmp[i] = NULL;
   globfree(&gl);

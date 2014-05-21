@@ -30,5 +30,4 @@
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
 #define RST		write(1, RESET, 4);
 
-
 #endif /* !MY_COLOR_H_ */

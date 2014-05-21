@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:05:18 2014 chalie_a
-** Last update Tue May 20 13:34:29 2014 chalie_a
+** Last update Wed May 21 18:01:10 2014 chalie_a
 */
 
 #include <string.h>
@@ -49,11 +49,9 @@ t_env_dll	*search_for_env_variable(char *str, t_env_dll *root)
   len = strlen(str);
   tmp = root;
   while ((tmp = tmp->next) != root)
-    {
-      if (!strncmp(str, tmp->name, len))
-	return (tmp);
-    }
-  return (NULL);
+    if (!strncmp(str, tmp->name, len) && tmp->name[len] == '=')
+      return (tmp);
+   return (NULL);
 }
 
 int		actualise_path(t_execution *exe, char *str)
@@ -61,7 +59,8 @@ int		actualise_path(t_execution *exe, char *str)
   double_free(exe->env->paths);
   if (!str)
     exe->env->paths = NULL;
-  else if (!(exe->env->paths = get_paths(get_env(exe->env->envp, "PATH="), ':')))
+  else if (!(exe->env->paths =
+	     get_paths(get_env(exe->env->envp, "PATH="), ':')))
     return (B_FAILURE);
   return (B_SUCCESS);
 }

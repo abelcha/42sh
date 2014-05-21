@@ -22,7 +22,7 @@ int		change_dir(char *newdir)
   if ((access(newdir, F_OK | R_OK)) == -1)
     return (B_ERROR("%s\n", strerror(errno)));
   if (chdir(newdir) == FAILURE)
-    return(B_ERROR("%s\n", strerror(errno)));
+    return (B_ERROR("%s\n", strerror(errno)));
   return (B_SUCCESS);
 }
 
@@ -46,7 +46,8 @@ char		*cd_progressive(t_execution *exe, t_cmd *cmd)
       X_ERROR("Cant find current directory, try with an absolut path\n");
       return (NULL);
     }
-  if (!(tmpdir = calloc(1, strlen(env_tmp->value) + strlen(cmd->stock[1]) + 3)))
+  if (!(tmpdir = calloc(1, strlen(env_tmp->value)
+			+ strlen(cmd->stock[1]) + 3)))
     return (NULL);
   strcpy(tmpdir, env_tmp->value);
   strcat(tmpdir, "/");

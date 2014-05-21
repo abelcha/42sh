@@ -1,5 +1,16 @@
+/*
+** prototypes.h for 42sh in /data/tek/projects/42sh/42SH/globbing
+** 
+** Made by kalatz_a
+** Login   <contact@alpha14.com>
+** 
+** Started on  Wed May 21 00:08:57 2014 kalatz_a
+** Last update Wed May 21 00:08:57 2014 kalatz_a
+*/
+
 #ifndef PROTOTYPES_H_
 # define PROTOTYPES_H_
+
 int	get_command(char *word, t_line *line, t_gb *gb);
 int	get_cols();
 int	bigger_len(t_glob *root);

@@ -1,7 +1,7 @@
 HISTORY_LIMIT	1000
-ALIAS		ne	emacs -nw
-ALIAS		ll	ls -l
-ALIAS		la	ls -la
-ALIAS		ls	ls --color
-ALIAS		lol	ls&&pwd
+alias		emacs	 emacs -nw
+alias	    	ne	 emacs
+alias		ll	ls -l
+alias		la	ls -la
+alias		ls	ls --color
 HIST_IGNORE	ls:clear:exit

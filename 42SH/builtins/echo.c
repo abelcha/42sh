@@ -35,7 +35,7 @@ int		find_flags(char **stock, char *flagstatus)
   i = -1;
   while (stock[++i] != NULL)
     {
-      if((strcmp(stock[i], "-n")) == 0)
+      if ((strcmp(stock[i], "-n")) == 0)
 	flagstatus[0] = 1;
       if ((strcmp(stock[i], "-e")) == 0)
 	flagstatus[1] = 1;

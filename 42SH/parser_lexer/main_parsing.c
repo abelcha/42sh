@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon May 19 18:37:18 2014 beau_v
+** Last update Wed May 21 14:35:17 2014 kalatz_a
 */
 
 #include <stdio.h>
@@ -61,7 +61,7 @@ static int		fill_tree(t_parse_tree *root, t_token *beg, t_shell *sh)
 	token = token->next;
       else if (token->token == T_AMP && x_free(token))
 	token = save->prev;
-      else if(x_free(token))
+      else if (x_free(token))
 	token = save;
     }
   if (LLG(token->prev->token))

@@ -29,7 +29,7 @@ int		set_env_tech(t_execution *exe, char *s1, char *s2)
   char		*str;
 
   if (!(str = get_env_line(s1, s2)))
-    return (B_FAILURE); 
+    return (B_FAILURE);
   if (!(tmp = search_for_env_variable(s1, exe->env->env_dll)))
     add_env_variable(exe->env->env_dll, str);
   else

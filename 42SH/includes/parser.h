@@ -18,9 +18,9 @@
 # define _MEM_POOL	(4)
 # define BEFORE		0
 # define AFTER		1
-# define SIMPLE_RED__	O_CREAT|O_TRUNC|O_WRONLY
+# define SIMPLE_RED__	O_CREAT | O_TRUNC | O_WRONLY
 # define __SIMPLE_RED	O_RDONLY
-# define DOUBLE_RED__	O_CREAT|O_APPEND|O_WRONLY
+# define DOUBLE_RED__	O_CREAT | O_APPEND | O_WRONLY
 
 int		main(int, char **, char **);
 int		speed_cmp(char *, char *);

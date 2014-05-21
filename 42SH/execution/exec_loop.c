@@ -17,13 +17,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <termios.h>
+#include <sys/ioctl.h>
 #include "sh.h"
 #include "parser.h"
 #include "my_color.h"
-#include <termios.h>
-#include <sys/ioctl.h>
 
-int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe) 
+int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe)
 {
   fprintf(stderr, "Error : `%s' command not found\n", tmp->stock[0]);
   exe->return_value = 514;
@@ -34,7 +34,6 @@ int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe)
   --(exe->nb_pipes);
   return (SUCCESS);
 }
-
 
 int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
 {
@@ -60,8 +59,7 @@ int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
   return (SUCCESS);
 }
 
-
-int		exec_in_son(t_cmd *root, t_cmd *tmp, t_execution *exe) 
+int		exec_in_son(t_cmd *root, t_cmd *tmp, t_execution *exe)
 {
   if (exe->prev_pipe != -1)
     close(exe->prev_pipe);
@@ -93,7 +91,7 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
   tmp = cmd;
   if (handle_redirections(cmd, exe) == FAILURE)
     return (FAILURE);
-  while ((tmp = tmp->next) != cmd && exe->exit == 0) 
+  while ((tmp = tmp->next) != cmd && exe->exit == 0)
     {
       find_path(tmp, exe);
       exe->return_value = 0;

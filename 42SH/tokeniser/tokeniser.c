@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Mon May 19 18:39:36 2014 beau_v
+** Last update Tue May 20 14:56:01 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -39,7 +39,7 @@ char			*get_env(char **env, char *info)
   while (env && env[i])
     {
       if (fx(env[i], info, j) == 1)
-	return (strdup(&env[i][j]));		//TEMPORARY STRDUP
+	return (&env[i][j]);
       i++;
     }
   return (NULL);

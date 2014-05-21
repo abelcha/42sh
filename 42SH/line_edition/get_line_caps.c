@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Mon May 19 18:47:56 2014 beau_v
+** Last update Wed May 21 09:10:32 2014 chalie_a
 */
 
 #include "sh.h"
@@ -26,6 +26,7 @@ static int		x_read_line(t_line *line)
   line->tab_flag = 0;
   while (line->key != K_RET && line->line)
     {
+      //      printf("%ld\n", line->key);
       line->key = 0;
       if (read(0, &(line->key), 4) <= 0 || line->key == CTRL_D)
 	{

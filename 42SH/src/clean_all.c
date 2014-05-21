@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Tue May 20 13:33:37 2014 chalie_a
+** Last update Wed May 21 16:01:27 2014 kalatz_a
 */
 
 #include <stdio.h>
@@ -18,7 +18,6 @@
 #include "parser.h"
 #include "my_color.h"
 #include "tokenizer.h"
-
 
 static void		free_exe(t_env_dll *root)
 {

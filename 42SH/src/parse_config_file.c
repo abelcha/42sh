@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 12:03:53 2014 chalie_a
-** Last update Mon May 19 22:19:43 2014 chalie_a
+** Last update Wed May 21 11:07:27 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -46,7 +46,7 @@ void			hist_ignore(t_shell *sh, char **stock)
 
 void			add_info(t_shell *sh, char *str)
 {
-  static char		*conf_tab[3] = {"HIST_LIMIT", "HIST_IGNORE", "ALIAS"};
+  static char		*conf_tab[3] = {"HIST_LIMIT", "HIST_IGNORE", "alias"};
   static const t_conf	conf_fct[3] = {hist_limit, hist_ignore, add_alias};
   int			i;
   char			**stock;
@@ -80,5 +80,6 @@ int		parse_config_file(t_shell *sh)
   sh->p_valid = get_valid_len(sh->prompt);
   if (read_config_file(sh) == FAILURE)
     return (_ERROR("Error : Invalid Config File\n\n"));
+  check_double_alias(sh, sh->alias);
   return (SUCCESS);
 }

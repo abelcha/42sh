@@ -31,13 +31,12 @@ int		x_free(void *ptr)
   return (42);
 }
 
-
 void		double_free(char **ptr)
 {
   int		i;
 
   i = -1;
   while (ptr && ptr[++i])
-    x_free(ptr[i]);  
+    x_free(ptr[i]);
   x_free(ptr);
 }

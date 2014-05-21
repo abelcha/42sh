@@ -1,6 +1,6 @@
 
 
-CC		=	gcc -g3
+CC		=	clang -g3
 
 NAME		=	42sh
 
@@ -15,10 +15,10 @@ LIB		=	./lib/gnl.c				\
 			./lib/my_atoi.c				\
 			./lib/strmatch.c			\
 			./lib/free_utils.c			\
-			./lib/my_strlen.c			\
 			./lib/to_tab.c				\
 			./lib/my_strcat.c			\
 			./lib/my_itoa.c				\
+			./lib/my_strings.c			\
 
 PARSER		=	./parser_lexer/get_paths.c		\
 			./parser_lexer/main_parsing.c		\

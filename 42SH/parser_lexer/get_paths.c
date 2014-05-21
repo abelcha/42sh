@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.net>
 ** 
 ** Started on  Mon Oct 21 11:45:34 2013 chalie_a
-** Last update Mon May 19 18:24:52 2014 beau_v
+** Last update Tue May 20 14:55:49 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -76,9 +76,7 @@ char		**get_paths(char *str, char c)
   char		**tab;
 
   i = 0;
-  /*
-  if (!str)
-  return (NULL);*/
+
   nb = count_word(str, c);
   if (!(tab = calloc((nb + 1), sizeof(str))))
     return (NULL);
@@ -89,7 +87,6 @@ char		**get_paths(char *str, char c)
       i++;
     }
   parsing(tab, str, nb, c);
-  free(str);
   return (tab);
 }
 

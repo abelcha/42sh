@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Tue May 20 11:59:19 2014 chalie_a
+** Last update Wed May 21 14:45:41 2014 kalatz_a
 */
 
 #include <string.h>
@@ -33,11 +33,11 @@ int			find_red_token(int token)
 int		error_handling(int tk1, int tk2)
 {
   if (tk2 == T_EOL)
-    return(error_handling(tk1, tk2 + 1));
+    return (error_handling(tk1, tk2 + 1));
   fprintf(stderr, "Syntax Error : unexpected token ");
   fprintf(stderr, "'%s' after '%s' redirection token\n",
 	  token_tab[tk2], token_tab[tk1]);
-  return(FAILURE);
+  return (FAILURE);
 }
 
 int		read_while(t_red *red)
@@ -88,7 +88,7 @@ int		redirections(t_cmd *cmd, t_token *token, t_execution *exe)
 {
   int		red_token;
 
-    if (token->next->token != T_CMD)
+  if (token->next->token != T_CMD)
     return (error_handling(token->token, token->next->token));
   red_token = find_red_token(token->token);
   if (fill_red_struct(token, cmd, red_token, exe) == FAILURE)
