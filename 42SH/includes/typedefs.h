@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:57:23 2014 chalie_a
-** Last update Mon May 19 18:20:41 2014 beau_v
+** Last update Tue May 20 18:24:19 2014 chalie_a
 */
 
 #ifndef TYPEDEFS_H_
@@ -145,6 +145,7 @@ typedef struct		s_alias
 typedef struct		s_jobs
 {
   char			*cmd;
+  int			nbr;
   int			pid;
   struct s_jobs		*prev;
   struct s_jobs		*next;

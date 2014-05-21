@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Tue May 20 13:34:46 2014 chalie_a
+** Last update Tue May 20 18:29:33 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -33,10 +33,34 @@ static const char	*g_sig_tab[11] = {
   "",
   "Segmentation Fault"};
 
+
 static void		launch_in_background(t_execution *exe)
 {
-  printf("[%d]+ Done\n", 1);
+  t_jobs		*newelem;
+  t_jobs		*tmp;
+
   setpgid(exe->curr_pid, exe->curr_pid);
+  if (!(newelem = calloc(1, sizeof(t_jobs))))
+    return ;
+  if (!(newelem->cmd = my_strdup(exe->sh->line->line)))
+    return ;
+  newelem->prev = exe->sh->jobs->prev;
+  newelem->next = exe->sh->jobs;
+  exe->sh->jobs->prev->next = newelem;
+  exe->sh->jobs->prev = newelem;
+  tmp = exe->sh->jobs;
+  newelem->pid = exe->curr_pid;
+  while ((tmp = tmp->next) != exe->sh->jobs)
+    ++(newelem->nbr);
+}
+
+static void		print_jobs(t_jobs *jobs)
+{
+  t_jobs		*tmp;
+
+  tmp = jobs;
+  while ((tmp = tmp->next) != jobs)
+    printf("curr pid = %d -- CMD = '%s'\n", tmp->pid, tmp->cmd);
 }
 
 static int		wait_pipes(t_execution *exe)
@@ -93,5 +117,6 @@ int		exec_cmd(t_parse_tree *root, t_execution *exe)
 	    (tmp->token == T_OR && exe->return_value > 0))
 	  exec(tmp->cmd, exe);
     }
+  print_jobs(exe->sh->jobs);
   return (SUCCESS);
 }

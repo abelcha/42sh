@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 23:49:35 2014 chalie_a
-** Last update Tue May 20 10:59:59 2014 chalie_a
+** Last update Wed May 21 00:19:27 2014 chalie_a
 */
 
 #include <string.h>
@@ -46,7 +46,7 @@ int		set_env_tech(t_execution *exe, char *s1, char *s2)
 int		my_setenv(t_execution *exe, t_cmd *cmd)
 {
   if (!cmd->stock[1] || !cmd->stock[2] || cmd->stock[3])
-    return (_ERROR("Error, USAGE : setenv [Name] [Value]\n"));
+    return (B_ERROR("Error, USAGE : setenv [Name] [Value]\n"));
   if (set_env_tech(exe, cmd->stock[1], cmd->stock[2]) == B_FAILURE)
     return (B_FAILURE);
   return (B_SUCCESS);
@@ -57,9 +57,9 @@ int		my_unsetenv(t_execution *exe, t_cmd *cmd)
   t_env_dll	*tmp;
 
   if (!cmd->stock[1] || cmd->stock[2])
-    return (_ERROR("Error, USAGE : setenv [Name]\n"));
+    return (B_ERROR("Error, USAGE : setenv [Name]\n"));
   if (!(tmp = search_for_env_variable(cmd->stock[1], exe->env->env_dll)))
-    return (_ERROR("Error, Unkown variable `%s'\n", cmd->stock[1]));
+    return (B_ERROR("Error, Unkown variable `%s'\n", cmd->stock[1]));
   tmp->prev->next = tmp->next;
   tmp->next->prev = tmp->prev;
   x_free(tmp->name);

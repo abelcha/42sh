@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Tue May 20 13:33:07 2014 chalie_a
+** Last update Wed May 21 10:56:51 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -82,5 +82,7 @@ char		*my_itoa(int);
 int		set_env_tech(t_execution *, char *, char *);
 int		my_strlen(char *);
 int		pre_parsing(t_shell *);
-
+char		*my_strdup(char *);
+int		alias(t_execution *, t_cmd *);
+int		unalias(t_execution *, t_cmd *);
 #endif /* !SH_H_ */
