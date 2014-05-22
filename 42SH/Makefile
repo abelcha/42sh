@@ -18,7 +18,11 @@ LIB		=	./lib/gnl.c				\
 			./lib/to_tab.c				\
 			./lib/my_strcat.c			\
 			./lib/my_itoa.c				\
+			./lib/get_cols.c			\
+			./lib/t_cap.c				\
+			./lib/my_memset.c			\
 			./lib/my_strings.c			\
+			./lib/my_nstrings.c			\
 
 PARSER		=	./parser_lexer/get_paths.c		\
 			./parser_lexer/main_parsing.c		\
@@ -51,22 +55,26 @@ LINE		=	./line_edition/add_del_key_actions.c	\
 			./line_edition/word_action.c		\
 			./line_edition/line_utils.c		\
 
-HIST		=	./history/put_in_history.c		\
-			./history/init_history.c		\
+HIST		=	./history/add_in_history.c		\
+			./history/read_history_file.c		\
 
 PRE		=	./pre_parsing/pre_parsing.c		\
+			./pre_parsing/pre_parsing_fonctions.c	\
+			./pre_parsing/globbing.c		\
 
-GLOB		=	./globbing/main_glob.c			\
-			./globbing/tab_glob.c			\
+GLOB		=	./globbing/tab_glob.c			\
 			./globbing/get_cmd_data.c		\
 			./globbing/display_results.c		\
 			./globbing/get_data_type.c		\
+			./globbing/add_possibilities.c		\
 
 BUILD		=	./builtins/env_dll.c			\
 			./builtins/env_builtins.c		\
 			./builtins/builtins.c			\
 			./builtins/echo.c 			\
+			./builtins/echo_string.c		\
 			./builtins/cd.c				\
+			./builtins/change_dir.c			\
 
 OBJ		=	$(SRC:.c=.o) $(LIB:.c=.o)
 

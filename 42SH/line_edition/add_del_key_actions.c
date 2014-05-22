@@ -5,12 +5,10 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 21:06:09 2014 chalie_a
-** Last update Mon May 19 18:40:16 2014 beau_v
+** Last update Wed May 21 22:25:30 2014 chalie_a
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <termios.h>
+#include "sh.h"
 #include "edit.h"
 
 static void		add_char_in_tab(const char c, char *str, const int pos)
@@ -19,7 +17,7 @@ static void		add_char_in_tab(const char c, char *str, const int pos)
 
   if (pos < 0)
     return ;
-  i = strlen(str);
+  i = my_strlen(str);
   while (i >= pos)
     {
       str[i + 1] = str[i];
@@ -32,7 +30,7 @@ static void		del_char_in_tab(char *str, int pos)
 {
   int			i;
 
-  i = strlen(str);
+  i = my_strlen(str);
   while (pos < i)
     {
       str[pos] = str[pos + 1];

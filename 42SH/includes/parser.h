@@ -5,14 +5,13 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Tue May 20 14:02:58 2014 chalie_a
+** Last update Wed May 21 19:22:26 2014 chalie_a
 */
 
 #ifndef PARSER_H_
 # define PARSER_H_
 
-# include "tokenizer.h"
-# include "sh.h"
+# include "typedefs.h"
 
 # define LAST_PIPE	(token->next->token == T_EOL ? 1 : 0)
 # define _MEM_POOL	(4)

@@ -5,27 +5,18 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Wed May 21 11:00:36 2014 chalie_a
+** Last update Wed May 21 20:01:15 2014 chalie_a
 */
 
 #include <stdio.h>
 #include <unistd.h>
-#include <fcntl.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <sys/wait.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <termios.h>
-#include <sys/ioctl.h>
 #include "sh.h"
 #include "parser.h"
-#include "my_color.h"
+#include "tokenizer.h"
 
-int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe)
+static int		cmd_not_in_paths(const t_cmd *tmp, t_execution *exe)
 {
-  fprintf(stderr, "Error : `%s' command not found\n", tmp->stock[0]);
+  X_ERROR("Error : `%s' command not found\n", tmp->stock[0]);
   exe->return_value = 514;
   if (exe->prev_pipe != -1)
     close(exe->prev_pipe);
@@ -35,7 +26,24 @@ int		cmd_not_in_paths(t_cmd *tmp, t_execution *exe)
   return (SUCCESS);
 }
 
-int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
+static int		exec_command(t_cmd *root, t_cmd *tmp, t_execution *exe)
+{	      
+  if (tmp->builtin == -1 &&
+      execve(tmp->path, tmp->stock, exe->env->envp) == FAILURE)
+    {
+      exe->exit = FAILURE;
+      return (_ERROR("Error : execve failed\n"));
+    }
+  else
+    {
+      if (exe->nb_pipes != exe->pos + 2)
+	handle_redirections(root, exe);
+      exec_builtins(tmp, exe);
+    }
+  return (SUCCESS);
+}
+
+static int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
 {
   if (!tmp->path && tmp->builtin == -1)
     return (cmd_not_in_paths(tmp, exe));
@@ -47,19 +55,13 @@ int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
     close(exe->fdp[0]);
   if (my_strcmp(tmp->stock[1], "-nw"))
     setsid();
-  if (tmp->builtin == -1)
-   execve(tmp->path, tmp->stock, exe->env->envp);
-  else
-    {
-      if (exe->nb_pipes != exe->pos + 2)
-	handle_redirections(root, exe);
-      exec_builtins(tmp, exe);
-    }
+  exec_command(root, tmp, exe);
   close(exe->fdp[1]);
   return (SUCCESS);
 }
 
-int		exec_in_son(t_cmd *root, t_cmd *tmp, t_execution *exe)
+int			exec_in_son(const t_cmd *root, const t_cmd *tmp,
+				    t_execution *exe)
 {
   if (exe->prev_pipe != -1)
     close(exe->prev_pipe);
@@ -73,13 +75,13 @@ int		exec_in_son(t_cmd *root, t_cmd *tmp, t_execution *exe)
 
 int			exec_builtins(t_cmd *cmd, t_execution *exe)
 {
-  static const ptrft	b_tab[6] = {my_exit, my_setenv,
+  static const t_build	b_tab[6] = {my_exit, my_setenv,
 				    my_unsetenv, my_cd,
 				    my_env, my_echo};
 
   --(exe->nb_pipes);
   exe->return_value = b_tab[cmd->builtin](exe, cmd);
-  if (cmd->builtin > 3 || exe->nb_pipes == exe->pos + 2)
+  if (cmd->builtin > 3 || LASTPIPE)
     exe->exit = (exe->return_value == -1 ? 514 : 512);
   return (exe->return_value);
 }

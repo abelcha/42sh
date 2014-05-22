@@ -5,39 +5,31 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Sun May 18 09:29:01 2014 chalie_a
+** Last update Thu May 22 14:47:32 2014 chalie_a
 */
 
-#include <glob.h>
-#include <string.h>
+#include <unistd.h>
+#include <stdio.h> 
 #include "sh.h"
 #include "edit.h"
 
-int			get_cols()
+static int		bigger_len(t_glob *root)
 {
-  struct winsize	w;
-
-  if (ioctl(0, TIOCGWINSZ, &w) == -1)
-    return (FAILURE);
-  return (w.ws_col);
-}
-
-int		bigger_len(t_glob *root)
-{
-  t_glob	*tmp;
-  int		res;
+  t_glob		*tmp;
+  int			res;
 
   res = 0;
   tmp = root;
   while ((tmp = tmp->next) != root)
-    if ((tmp->len = strlen(tmp->data)) > res)
+    if ((tmp->len = my_strlen(tmp->data)) > res)
       res = tmp->len;
   return (res);
 }
 
-void		write_and_blanks(int maxlen, int len, char *str)
+static void		write_and_blanks(const int maxlen, int len,
+					 const char *str)
 {
-  int		start;
+  int			start;
 
   start = len;
   while (start > 0 && str[start] != '/')
@@ -48,9 +40,9 @@ void		write_and_blanks(int maxlen, int len, char *str)
     CAP("nd");
 }
 
-int		yes_or_no(int total)
+static int		yes_or_no(const int total)
 {
-  char		buffer[1];
+  char			buffer[1];
 
   printf("\nDisplay all %d possibilities ? (y/n)\n", total);
   while (42)
@@ -62,10 +54,11 @@ int		yes_or_no(int total)
       return (FAILURE);
 }
 
-void		print_list(int maxlen, t_glob *root, int cols)
+static void		print_list(int maxlen, t_glob *root,
+				   const int cols)
 {
-  int		len;
-  t_glob	*tmp;
+  int			len;
+  t_glob		*tmp;
 
   len = 0;
   tmp = root;
@@ -95,8 +88,8 @@ void		display_pos(t_gb *root, t_line *line)
     return ;
   write(1, "\n", 1);
   maxlen = bigger_len(root->g) + 1;
-  if (maxlen * root->total < cols)
-    maxlen = cols / (root->total) - maxlen;
+  if (maxlen * root->total - my_strlen(root->word) < cols)
+    maxlen = cols / (root->total) - 5;
   print_list(maxlen, root->g, cols);
   write(1, "\n", 1);
   replace_cursor(0, line->pos + 6);

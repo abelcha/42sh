@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Wed May 21 14:45:41 2014 kalatz_a
+** Last update Wed May 21 19:25:59 2014 chalie_a
 */
 
 #include <string.h>
@@ -13,7 +13,9 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "sh.h"
 #include "parser.h"
+#include "tokenizer.h"
 
 extern const char	*token_tab[T_NBR + 1];
 

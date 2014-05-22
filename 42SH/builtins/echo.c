@@ -5,129 +5,37 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Sun May 18 08:40:42 2014 chalie_a
+** Last update Thu May 22 12:01:17 2014 chalie_a
 */
 
-#include <stdio.h>
 #include <string.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "sh.h"
 
-static t_echo	g_esc[] =
-  {
-    {'\\', '\\'},
-    {'a', '\a'},
-    {'b', '\b'},
-    {'c', 'c'},
-    {'e', 'e'},
-    {'f', '\f'},
-    {'n', '\n'},
-    {'r', '\r'},
-    {'t', '\t'},
-    {'v', '\v'}
-  };
-
-int		find_flags(char **stock, char *flagstatus)
+static int		find_flags(char **stock, char *flagstatus)
 {
-  int		i;
+  int			i;
 
   i = -1;
   while (stock[++i] != NULL)
     {
-      if ((strcmp(stock[i], "-n")) == 0)
+      if ((my_strcmp(stock[i], "-n")) == 0)
 	flagstatus[0] = 1;
-      if ((strcmp(stock[i], "-e")) == 0)
+      if ((my_strcmp(stock[i], "-e")) == 0)
 	flagstatus[1] = 1;
-      if ((strcmp(stock[i], "-E")) == 0)
+      if ((my_strcmp(stock[i], "-E")) == 0)
 	flagstatus[1] = 0;
     }
   return (0);
 }
 
-int	find_strings(char **stock, char *flagstatus)
+int			my_echo(t_execution *exe, t_cmd *cmd)
 {
-  int	i;
+  char			flagstatus[2];
 
-  i = 1;
-  while (stock[i] != NULL)
-    {
-      if ((strcmp(stock[i], "-n")) == 0 ||
-	  (strcmp(stock[i], "-e")) == 0 ||
-	  (strcmp(stock[i], "-E")) == 0)
-	i++;
-      else
-	{
-	  write_echo(stock[i++], flagstatus, g_esc);
-	  if (stock[i] != NULL)
-	    write(1, " ", 1);
-	}
-    }
-  if (flagstatus[0] == 0)
-    write(1, "\n", 1);
-  return (0);
-}
-
-int	write_echo(char	*str, char *flagstatus, const t_echo g_esc[])
-{
-  int	i;
-
-  i = -1;
-  if (flagstatus[1] == 1)
-    {
-      while (str[++i] != 0)
-	{
-	   if (str[i] == 92)
-	    escape_code_parsing(g_esc, str, &i);
-	  else
-	    write(1, &str[i], 1);
-	}
-    }
-    else
-      write(1, str, strlen(str));
-  return (0);
-}
-
-int	byte_printer(char *str, int *i)
-{
-  int	byte;
-  char	oct[3];
-  char	hex[2];
-
-  if (str[(*i) + 1] == 'x')
-    {
-      hex[0] = str[(*i) + 2];
-      hex[1] = str[(*i) + 3];
-      byte = strtol(hex, 0, 16);
-      write(1, &byte, 1);
-      (*i) = (*i) + 3;
-      return (0);
-    }
-  else
-    {
-      oct[0] = str[(*i) + 2];
-      oct[1] = str[(*i) + 3];
-      oct[2] = str[(*i) + 4];
-      byte = strtol(oct, 0, 8);
-      write(1, &byte, 1);
-      (*i) = (*i) + 4;
-    }
-  return (0);
-}
-
-int	escape_code_parsing(const t_echo g_esc[], char *str, int *i)
-{
-  int	j;
-  char	escape_code[2];
-
-  j = -1;
-  escape_code[0] = str[(*i)];
-  escape_code[1] = str[(*i) + 1];
-  if (escape_code[1] == '0' || escape_code[1] == 'x')
-    return (byte_printer(str, i));
-  while (escape_code[1] != g_esc[j].second)
-    j++;
-  printf("%c", g_esc[j].code);
-  (*i)++;
-  return (0);
+  (void)exe;
+  flagstatus[0] = 0;
+  flagstatus[1] = 0;
+  find_flags(cmd->stock, flagstatus);
+  find_strings(cmd->stock, flagstatus);
+  return (B_SUCCESS);
 }

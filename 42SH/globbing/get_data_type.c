@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Mon May 19 13:55:47 2014 chalie_a
+** Last update Thu May 22 12:33:37 2014 chalie_a
 */
 
 #include <glob.h>
@@ -13,7 +13,7 @@
 #include "sh.h"
 #include "edit.h"
 
-int		get_type(char *line, int pos)
+int		get_type(const char *line, int pos)
 {
   while (pos > 0 && line[pos] != '|' && line[pos] != ';' && line[pos] != '&')
     {
@@ -21,7 +21,7 @@ int		get_type(char *line, int pos)
 	return (ARG);
       --pos;
     }
-  return (CMD);
+  return (*line == '/' ? ARG : CMD);
 }
 
 char		*get_word(char *line, int pos, int *type)
@@ -42,5 +42,5 @@ char		*get_word(char *line, int pos, int *type)
     }
   if (pos == 0)
     *type = pos;
-  return (strndup(&line[*type], save - pos));
+  return (my_strndup(&line[*type], save - pos));
 }

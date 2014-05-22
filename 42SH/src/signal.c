@@ -5,19 +5,23 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May 15 20:08:37 2014 chalie_a
-** Last update Tue May 20 14:47:43 2014 chalie_a
+** Last update Thu May 22 09:58:14 2014 chalie_a
 */
 
+#include <unistd.h>
+#include <signal.h>
+#include <stdio.h>
 #include "edit.h"
 #include "sh.h"
 
-void		kill_sons(int *pid)
+int		kill_sons(int *pid)
 {
   int		x;
 
   x = -1;
   while (pid[++x])
     kill(pid[x], 9);
+  return (SUCCESS);
 }
 
 int		signal_ctz(int sig)
@@ -27,7 +31,7 @@ int		signal_ctz(int sig)
   if (!isatty(0))
     return (0);
   if (lx->sh->exe->pid)
-    kill_sons(lx->sh->exe->pid);
+    return (kill_sons(lx->sh->exe->pid));
   i = -2;
   lx->line_len = 0;
   lx->key = 0;

@@ -5,11 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 12:46:55 2014 chalie_a
-<<<<<<< HEAD
-** Last update Wed May 21 11:16:21 2014 chalie_a
-=======
-** Last update Wed May 21 16:06:06 2014 kalatz_a
->>>>>>> 984c7eeeec8645e63a52154fd1a0db80b8fd19e9
+** Last update Wed May 21 22:33:33 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -70,7 +66,6 @@ void		insert_alias(t_alias *t1, int pos, t_alias *t2)
   while (i < pos)
     {
       stock[i] = t1->cmd[i];
-      printf("1) stock[%d] = %s\n", i, stock[i]);
       ++i;
     } 
   k = i + 1;
@@ -78,13 +73,11 @@ void		insert_alias(t_alias *t1, int pos, t_alias *t2)
     {
       if (!(stock[i] = my_strdup(t2->cmd[pos++])))
 	return ;
-      printf("2) stock[%d] = %s\n", i, stock[i]);
       ++i;
     }
   while (t1->cmd[k])
     {
       stock[i] = t1->cmd[k];
-      printf("3) stock[%d] = %s\n", i, stock[i]);
       ++i;
       ++k;
     }
@@ -92,7 +85,7 @@ void		insert_alias(t_alias *t1, int pos, t_alias *t2)
   t1->cmd = stock;
 }
 
-t_alias		*similar_part(t_alias *tmp, t_alias *root)
+void		similar_part(t_alias *tmp, t_alias *root)
 {
   t_alias	*tmp2;
   int		i;
@@ -104,14 +97,13 @@ t_alias		*similar_part(t_alias *tmp, t_alias *root)
       while (tmp->cmd[++i])
 	if ((!my_strcmp(tmp->cmd[i], tmp2->cmd[1]) && tmp != tmp2))
 	  {
-	    printf("----->s1 = %s s2 = %s\n", tmp->cmd[i], tmp2->cmd[1]);
 	    insert_alias(tmp, i, tmp2);
 	    break ;
 	  }
    }
 }
 
-void		check_double_alias(t_shell *sh, t_alias *alias)
+void		check_double_alias(t_alias *alias)
 {
   t_alias	*tmp;
 

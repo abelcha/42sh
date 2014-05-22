@@ -5,12 +5,11 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 21:24:59 2014 chalie_a
-** Last update Sun May 18 15:20:46 2014 chalie_a
+** Last update Thu May 22 11:59:55 2014 chalie_a
 */
 
 #include <string.h>
 #include <stdlib.h>
-#include "parser.h"
 #include "sh.h"
 
 void			fill_env_struct(t_env_dll *elem, char *env_line)
@@ -42,9 +41,9 @@ int			add_env_variable(t_env_dll *elem, char *env_line)
   return (SUCCESS);
 }
 
-t_env_dll		*init_dll()
+static t_env_dll		*init_dll()
 {
-  t_env_dll		*root;
+  t_env_dll			*root;
 
   if (!(root = calloc(1, sizeof(t_env_dll))))
     return (NULL);
@@ -76,10 +75,8 @@ int			put_env_in_dll(char **envp, t_execution *exe)
   if (!(exe->env->env_dll = init_dll()))
     return (FAILURE);
   while (envp[++i])
-    {
-      if (add_env_variable(exe->env->env_dll, strdup(envp[i])) == FAILURE)
-	return (FAILURE);
-    }
+    if (add_env_variable(exe->env->env_dll, my_strdup(envp[i])) == FAILURE)
+      return (FAILURE);
   if (put_env_in_tab(exe->env) == FAILURE)
     return (FAILURE);
   return (SUCCESS);

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
-** Last update Wed May 21 11:01:12 2014 chalie_a
+** Last update Thu May 22 11:58:57 2014 chalie_a
 */
 
 #include <string.h>
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include "parser.h"
+#include "tokenizer.h"
 
 #define IS_EXEC(s)	(!access(s, X_OK) && !is_dir(s) ? 1 : 0)
 
@@ -29,7 +30,7 @@ static char		*is_absolut_path(char *cmd)
 {
   if (cmd && ((cmd[0] == '.' && cmd[1] == '/') || cmd[0] == '/')
       &&  IS_EXEC(cmd))
-    return (strdup(cmd));
+    return (my_strdup(cmd));
   return (NULL);
 }
 

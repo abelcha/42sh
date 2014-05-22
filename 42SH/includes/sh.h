@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Wed May 21 10:56:51 2014 chalie_a
+** Last update Thu May 22 16:00:16 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -14,6 +14,8 @@
 #include "typedefs.h"
 
 # define LASTPIPE	(exe->nb_pipes == exe->pos + 2)
+# define SUCCESS	1
+# define FAILURE	-1
 # define B_SUCCESS	0
 # define B_FAILURE	2
 # define TMP_FILE	".tmp"
@@ -25,9 +27,15 @@
 # define X_ERROR(...)	(fprintf(stderr, __VA_ARGS__))
 # define _ERROR(...)	X_ERROR(__VA_ARGS__) ? -1 : R_ERROR(1)
 # define B_ERROR(...)	X_ERROR(__VA_ARGS__) ? 2 : R_ERROR(2)
+# define ERRNO		_ERROR("%s\n", strerror(errno))
 
+int		change_dir(char *, t_execution *);
+void		my_strcat(char *, char *);
+void		my_strcpy(char *, char *);
+void		my_memset(void *, char, int);
+int		*my_strncmp(char *, char *, int);
 char		*gnl(const int);
-int		my_strlen(char *);
+int		my_strlen(const char *);
 int		exec_cmd(t_parse_tree *root, t_execution *);
 int		my_atoi(char *);
 int		my_exit(t_execution *exe, t_cmd *cmd);
@@ -50,15 +58,10 @@ void		clear_and_display(t_line *);
 int		x_free(void *ptr);
 void		c_free(char **ptr);
 int		add_in_history_dll(t_line *line);
-int		init_history(t_line *line);
 int		add_in_history(t_line *line);
 int		add_in_history_file(t_line *line);
 int		my_echo(t_execution *exe, t_cmd *cmd);
-int		find_flags(char **stock, char *flagstatus);
 int		find_strings(char **stock, char *flagstatus);
-int		write_echo(char *str, char *flagstatus, const t_echo esc[]);
-int		escape_code_parsing(const t_echo g_esc[], char *str, int *i);
-int		byte_printer(char *str, int *i);
 int		my_strcmp(char *, char *);
 int		handle_redirections(t_cmd *, t_execution *);
 int		is_dir(const char *);
@@ -80,9 +83,16 @@ char		**is_an_alias(char *, t_shell *);
 char		*my_strjoint(char *s1, char *s2);
 char		*my_itoa(int);
 int		set_env_tech(t_execution *, char *, char *);
-int		my_strlen(char *);
 int		pre_parsing(t_shell *);
 char		*my_strdup(char *);
 int		alias(t_execution *, t_cmd *);
 int		unalias(t_execution *, t_cmd *);
+void		check_double_alias(t_alias *);
+int		init_history(t_line *);
+char		**is_globbing(char *);
+int		parse_line(char *, t_shell *);
+int		add_glob(t_gb *, char *, int);
+int		get_data(char *, char *, t_gb *);
+char		*my_strndup(char *, int);
+void		my_strncpy(char *, char *, int);
 #endif /* !SH_H_ */

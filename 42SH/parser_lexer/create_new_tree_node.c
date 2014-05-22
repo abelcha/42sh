@@ -5,12 +5,13 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Mon May 19 18:16:36 2014 beau_v
+** Last update Wed May 21 19:25:19 2014 chalie_a
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "parser.h"
+#include "tokenizer.h"
 
 static t_cmd		*init_cmd()
 {

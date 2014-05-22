@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:05:18 2014 chalie_a
-** Last update Wed May 21 18:01:10 2014 chalie_a
+** Last update Thu May 22 11:58:06 2014 chalie_a
 */
 
 #include <string.h>
@@ -49,7 +49,7 @@ t_env_dll	*search_for_env_variable(char *str, t_env_dll *root)
   len = strlen(str);
   tmp = root;
   while ((tmp = tmp->next) != root)
-    if (!strncmp(str, tmp->name, len) && tmp->name[len] == '=')
+    if (!my_strncmp(str, tmp->name, len) && tmp->name[len] == '=')
       return (tmp);
    return (NULL);
 }

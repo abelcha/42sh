@@ -5,15 +5,13 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 22:33:37 2014 chalie_a
-** Last update Mon May 19 10:29:56 2014 chalie_a
+** Last update Wed May 21 20:31:54 2014 chalie_a
 */
 
 #include <unistd.h>
 #include <fcntl.h>
 #include "edit.h"
 #include "sh.h"
-
-#define HISTORY_LIMIT	1000
 
 int		add_in_history_file(t_line *line)
 {
@@ -29,9 +27,9 @@ int		add_in_history_file(t_line *line)
   save = tmp->prev;
   while ((tmp = tmp->next) != line->sh->history)
     {
-      if (++i < HISTORY_LIMIT && tmp->data)
+      if (++i < line->sh->hist_limit && tmp->data)
 	{
-	  write(fd, tmp->data, strlen(tmp->data));
+	  write(fd, tmp->data, my_strlen(tmp->data));
 	  write(fd, "\n", 1);
 	}
       c_free(&(tmp->data));

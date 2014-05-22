@@ -5,9 +5,12 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Wed May 21 09:10:32 2014 chalie_a
+** Last update Wed May 21 22:15:52 2014 chalie_a
 */
 
+#include <unistd.h>
+#include <signal.h>
+#include <stdlib.h> 
 #include "sh.h"
 #include "edit.h"
 

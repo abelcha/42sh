@@ -5,10 +5,10 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 20:49:22 2014 chalie_a
-** Last update Mon May 19 18:49:01 2014 beau_v
+** Last update Wed May 21 22:30:17 2014 chalie_a
 */
 
-#include <termios.h>
+#include <stdlib.h> 
 #include "edit.h"
 #include "sh.h"
 
@@ -43,7 +43,7 @@ void		go_next(t_line *line)
   if (!line->sh->curr_pos || line->sh->curr_pos == line->sh->history)
     return ;
   if (line->sh->curr_pos->next == line->sh->history)
-    back_to_the_future(line, line->line_save, strlen(line->line_save));
+    back_to_the_future(line, line->line_save, my_strlen(line->line_save));
   else
     back_to_the_future(line, line->sh->curr_pos->next->data,
 		       line->sh->curr_pos->next->len);
@@ -57,7 +57,7 @@ void		go_prev(t_line *line)
       if (!(line->line_save = calloc(BUFF_LINE, sizeof(char))))
 	return ;
       line->sh->curr_pos = line->sh->history;
-      strcpy(line->line_save, line->line);
+      my_strcpy(line->line_save, line->line);
     }
   if (line->sh->curr_pos->prev == line->sh->history)
     return ;

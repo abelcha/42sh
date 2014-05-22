@@ -5,15 +5,13 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 13 16:57:16 2014 chalie_a
-** Last update Sun May 18 07:29:20 2014 chalie_a
+** Last update Thu May 22 12:11:33 2014 chalie_a
 */
 
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include <stdlib.h>
 #include "sh.h"
-#include "parser.h"
 
 static int		open_red(t_red *red)
 {
@@ -31,7 +29,7 @@ static int		open_red(t_red *red)
   return (SUCCESS);
 }
 
-int		close_red(t_red *red)
+static int		close_red(t_red *red)
 {
   if (!(red) || red->fd == -1)
     return (FAILURE);
@@ -41,7 +39,7 @@ int		close_red(t_red *red)
   return (SUCCESS);
 }
 
-int		handle_redirections(t_cmd *root, t_execution *exe)
+int			handle_redirections(t_cmd *root, t_execution *exe)
 {
   if (!exe->input)
     return (SUCCESS);
@@ -52,7 +50,7 @@ int		handle_redirections(t_cmd *root, t_execution *exe)
     return (SUCCESS);
 }
 
-int		close_redirections(t_cmd *root, t_execution *exe)
+int			close_redirections(t_cmd *root, t_execution *exe)
 {
   if (!exe->input)
     return (FAILURE);

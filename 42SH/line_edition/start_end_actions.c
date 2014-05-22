@@ -5,9 +5,10 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:53:32 2014 chalie_a
-** Last update Mon May 19 18:49:38 2014 beau_v
+** Last update Wed May 21 22:26:50 2014 chalie_a
 */
 
+#include "sh.h"
 #include "edit.h"
 
 void		move_to_start(t_line *line)
@@ -38,7 +39,7 @@ void		delete_until_start(t_line *line)
   replace_cursor(line->pos, 0);
   while (++i < line->line_len)
     line->line[++j] = line->line[i];
-  memset(&(line->line)[j + 1], 0, line->line_len - j);
+  my_memset(&(line->line)[j + 1], 0, line->line_len - j);
   line->line_len -= line->pos;
   while (++i < (line->line_len - line->pos))
     CAP("le");

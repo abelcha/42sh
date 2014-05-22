@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Tue May 20 14:04:59 2014 chalie_a
+** Last update Wed May 21 19:26:58 2014 chalie_a
 */
 
 #include <string.h>
@@ -13,6 +13,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include "parser.h"
+#include "tokenizer.h"
 
 static int			fill_data_stock(t_cmd *cmd, t_token *token)
 {

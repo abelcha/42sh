@@ -5,7 +5,7 @@
 ** Login   <victor.beau@epitech.eu>
 ** 
 ** Started on  Mon May 19 18:26:20 2014 beau_v
-** Last update Mon May 19 18:27:14 2014 beau_v
+** Last update Wed May 21 19:26:33 2014 chalie_a
 */
 
 #include <string.h>
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "parser.h"
+#include "tokenizer.h"
 
 int		delete_filename_token(t_token *token, int flag)
 {

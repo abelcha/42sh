@@ -5,7 +5,7 @@
 ** Login   <victor.beau@epitech.eu>
 ** 
 ** Started on  Mon May 19 18:06:58 2014 beau_v
-** Last update Tue May 20 13:04:36 2014 chalie_a
+** Last update Thu May 22 13:41:02 2014 chalie_a
 */
 
 #include <string.h>
@@ -23,7 +23,7 @@ char			*my_strjoint(char *s1, char *s2)
 
   i = 0;
   j = 0;
-  len = strlen(s1) + strlen(s2);
+  len = my_strlen(s1) + my_strlen(s2);
   if (!(new = calloc((len + 1), sizeof(char))))
     return (NULL);
   while (s1[i])

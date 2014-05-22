@@ -5,12 +5,14 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Wed May 21 14:35:17 2014 kalatz_a
+** Last update Wed May 21 19:24:26 2014 chalie_a
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include "parser.h"
+#include "tokenizer.h"
+#include "sh.h"
 
 #define BEG_SEM	(token->prev->token == T_EOL && token->token == T_SEM)
 
