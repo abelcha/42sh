@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 22:21:05 2014 chalie_a
-** Last update Wed May 21 22:17:09 2014 chalie_a
+** Last update Fri May 23 21:35:31 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -45,7 +45,7 @@ static int		not_ignored(t_line *line)
   int			i;
 
   i = -1;
-  while (line->sh->hist_ign[++i])
+  while (line->sh->hist_ign && line->sh->hist_ign[++i])
     if (!my_strncmp(line->line, line->sh->hist_ign[i],
 		 my_strlen(line->sh->hist_ign[i])))
       return (0);

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 20 10:03:48 2014 chalie_a
-** Last update Fri May 23 11:18:15 2014 chalie_a
+** Last update Fri May 23 21:35:10 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -49,7 +49,6 @@ static char		*cd_home(t_execution *exe, t_cmd *cmd)
 {
   t_env_dll		*env_tmp;
 
-  printf("stock = %p\n", cmd->stock[1]);
   if ((env_tmp = search_for_env_variable("HOME", exe->env->env_dll)))
     return (!cmd->stock[1] ? env_tmp->value :
 	    my_strjoint(env_tmp->value, &(cmd->stock)[1][1]));
