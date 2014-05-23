@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Fri May 23 17:08:26 2014 chalie_a
+** Last update Fri May 23 19:28:44 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -71,9 +71,9 @@ int			get_line_caps(t_line *line)
       if (line && my_strlen(line->line))
 	add_in_history_dll(line);
       tcsetattr(0, TCSANOW, &(line->sh->save));
+      write(1, "\n", 1);
     }
   else
     return (FAILURE);
-  write(1, "\n", 1);
   return (line->line ? SUCCESS : FAILURE);
 }
