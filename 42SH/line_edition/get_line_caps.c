@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Fri May 23 11:58:28 2014 chalie_a
+** Last update Fri May 23 16:33:54 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -45,9 +45,6 @@ static int		x_read_line(t_line *line)
 
 static int		init_line(t_line *line)
 {
-  int			i;
-
-  i = -2;
   line->sh->curr_pos = NULL;
   line->line_len = 0;
   line->key = 0;
