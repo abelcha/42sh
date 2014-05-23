@@ -5,7 +5,7 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Fri May 23 12:43:31 2014 chalie_a
+** Last update Fri May 23 16:56:23 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -68,7 +68,7 @@ static int		escape_code_parsing(const t_echo g_esc[],
     return (byte_printer(str, i));
   while (escape_code[1] != g_esc[j].second)
     j++;
-  printf("%c", g_esc[j].code);
+  write(1, &(g_esc[j].code), 1);
   (*i)++;
   return (0);
 }
@@ -89,8 +89,8 @@ static int		write_echo(char	*str, char *flagstatus,
 	    write(1, &str[i], 1);
 	}
     }
-    else
-      write(1, str, my_strlen(str));
+  else
+    write(1, str, my_strlen(str));
   return (0);
 }
 

@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Fri May 23 11:47:40 2014 chalie_a
+** Last update Fri May 23 18:26:22 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -36,8 +36,8 @@ static int		exec_command(t_cmd *root, t_cmd *tmp, t_execution *exe)
     }
   else
     {
-      if (exe->nb_pipes != exe->pos + 2)
-	handle_redirections(root, exe);
+       if (exe->nb_pipes != exe->pos + 2)
+	 handle_redirections(root, exe);
       exec_builtins(tmp, exe);
     }
   return (SUCCESS);
@@ -109,5 +109,6 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
 	return (FAILURE);
       exe->pid[++exe->pos] = exe->curr_pid;
     }
-  return (close_redirections(cmd, exe));
+  //  printf("exit = %d\n", exe->exit);
+  return (exe->exit == 512 ? SUCCESS :  close_redirections(cmd, exe));
 }

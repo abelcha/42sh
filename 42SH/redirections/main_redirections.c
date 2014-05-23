@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 13 16:57:16 2014 chalie_a
-** Last update Thu May 22 12:11:33 2014 chalie_a
+** Last update Fri May 23 18:51:05 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -52,7 +52,9 @@ int			handle_redirections(t_cmd *root, t_execution *exe)
 
 int			close_redirections(t_cmd *root, t_execution *exe)
 {
-  if (!exe->input)
+  //  _ERROR("coucou\n");
+  // return (0);
+   if (!exe->input)
     return (FAILURE);
   close_red(root->next->red[0]);
   close_red(root->prev->red[1]);

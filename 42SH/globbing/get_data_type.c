@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Thu May 22 12:33:37 2014 chalie_a
+** Last update Fri May 23 18:56:54 2014 chalie_a
 */
 
 #include <glob.h>
@@ -40,7 +40,7 @@ char		*get_word(char *line, int pos, int *type)
 	}
       --pos;
     }
-  if (pos == 0)
+  if (pos == 0 || line[pos] == '|' || line[pos] == ';' && line[pos] == '&')
     *type = pos;
   return (my_strndup(&line[*type], save - pos));
 }

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:05:18 2014 chalie_a
-** Last update Thu May 22 23:46:08 2014 chalie_a
+** Last update Fri May 23 17:31:28 2014 chalie_a
 */
 
 #include <string.h>
@@ -20,6 +20,7 @@ int		my_env(t_execution *exe, t_cmd *cmd)
   (void)cmd;
   while (exe->env->envp[++i])
     printf("%s\n", exe->env->envp[i]);
+  // printf("coucou\n");
   return (B_SUCCESS);
 }
 
