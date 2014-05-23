@@ -5,7 +5,7 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Thu May 22 12:01:17 2014 chalie_a
+** Last update Fri May 23 19:44:45 2014 chalie_a
 */
 
 #include <string.h>
