@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Fri May 23 19:13:36 2014 chalie_a
+** Last update Fri May 23 19:14:59 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -26,7 +26,7 @@ static int		cmd_not_in_paths(const t_cmd *tmp, t_execution *exe)
   return (SUCCESS);
 }
 
-static int		exec_command(t_cmd *root, t_cmd *tmp, t_execution *exe)
+static int		exec_command(/*t_cmd *root, */t_cmd *tmp, t_execution *exe)
 {	      
   if (tmp->builtin == -1 &&
       execve(tmp->path, tmp->stock, exe->env->envp) == FAILURE)
@@ -55,7 +55,7 @@ static int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
     close(exe->fdp[0]);
   if (my_strcmp(tmp->stock[1], "-nw"))
     setsid();
-  exec_command(root, tmp, exe);
+  exec_command(tmp, exe);
   close(exe->fdp[1]);
   return (SUCCESS);
 }
