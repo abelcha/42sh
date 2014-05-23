@@ -97,6 +97,7 @@ all	:	$(NAME)
 $(NAME)	:	$(ALL_OBJ)
 
 		$(CC) -o $(NAME) $(ALL_OBJ) -lncurses
+		cat header
 
 clean	:
 
