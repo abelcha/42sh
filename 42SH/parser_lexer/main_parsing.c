@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Wed May 21 19:24:26 2014 chalie_a
+** Last update Thu May 22 23:18:11 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -13,8 +13,6 @@
 #include "parser.h"
 #include "tokenizer.h"
 #include "sh.h"
-
-#define BEG_SEM	(token->prev->token == T_EOL && token->token == T_SEM)
 
 static t_parse_tree	*init_tree()
 {
@@ -61,9 +59,9 @@ static int		fill_tree(t_parse_tree *root, t_token *beg, t_shell *sh)
 	return (FAILURE);
       else if (token && token->data)
 	token = token->next;
-      else if (token->token == T_AMP && x_free(token))
+      else if (token->token == T_AMP && XFREE(token))
 	token = save->prev;
-      else if (x_free(token))
+      else if (XFREE(token))
 	token = save;
     }
   if (LLG(token->prev->token))

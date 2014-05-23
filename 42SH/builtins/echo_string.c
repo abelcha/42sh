@@ -5,7 +5,7 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Thu May 22 12:01:07 2014 chalie_a
+** Last update Fri May 23 12:43:31 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -59,7 +59,7 @@ static int		escape_code_parsing(const t_echo g_esc[],
 					    char *str, int *i)
 {
   int			j;
-  char		escape_code[2];
+  char			escape_code[2];
 
   j = -1;
   escape_code[0] = str[(*i)];
@@ -90,13 +90,13 @@ static int		write_echo(char	*str, char *flagstatus,
 	}
     }
     else
-      write(1, str, strlen(str));
+      write(1, str, my_strlen(str));
   return (0);
 }
 
-int	find_strings(char **stock, char *flagstatus)
+int			find_strings(char **stock, char *flagstatus)
 {
-  int	i;
+  int			i;
 
   i = 1;
   while (stock[i] != NULL)

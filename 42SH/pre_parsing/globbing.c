@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 21 21:01:20 2014 chalie_a
-** Last update Wed May 21 21:06:18 2014 chalie_a
+** Last update Thu May 22 21:12:42 2014 chalie_a
 */
 
 #include <glob.h>
@@ -19,7 +19,7 @@ char		**is_globbing(char *str)
   char		**tmp;
 
   i = -1;
-  glob(str, 0, NULL, &gl);
+  glob(str, GLOB_TILDE_CHECK, NULL, &gl);
   if (gl.gl_pathc <= 0)
     return (NULL);
   if (!(tmp = calloc((int)gl.gl_pathc + 2, sizeof(char *))))

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Thu May 22 14:19:11 2014 chalie_a
+** Last update Thu May 22 23:22:08 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -52,7 +52,7 @@ int		get_data(char *path, char *word, t_gb *gb)
     return (FAILURE);
   check_match(temp, gb, len, *path);
   glob(temp, GLOB_TILDE_CHECK, NULL, &gl);
-  free(temp);
+  XFREE(temp);
   if (gl.gl_pathc <= 0)
     return (FAILURE);
   while (++i < (int)gl.gl_pathc)

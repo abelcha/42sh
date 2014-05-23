@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 20 10:03:48 2014 chalie_a
-** Last update Thu May 22 14:00:14 2014 chalie_a
+** Last update Thu May 22 23:13:58 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -24,7 +24,7 @@ static char		*get_current_dir(int cpt)
     return (NULL);
   if (!(getcwd(pwd, cpt * _MEM_POOL)))
     {
-      free(pwd);
+      XFREE(pwd);
       return (errno == 34 ? get_current_dir(++cpt) : NULL);
     }
   return (pwd);

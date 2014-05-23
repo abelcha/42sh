@@ -5,19 +5,10 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Wed May 21 16:01:27 2014 kalatz_a
+** Last update Fri May 23 12:37:24 2014 chalie_a
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <signal.h>
-#include "edit.h"
 #include "sh.h"
-#include "parser.h"
-#include "my_color.h"
-#include "tokenizer.h"
 
 static void		free_exe(t_env_dll *root)
 {
@@ -29,8 +20,8 @@ static void		free_exe(t_env_dll *root)
   save = root->prev;
   tmp = root;
   while ((tmp = tmp->next) != root)
-    x_free(tmp->prev);
-  x_free(save);
+    XFREE(tmp->prev);
+  XFREE(save);
 }
 
 void			free_alias(t_alias *root)
@@ -42,11 +33,11 @@ void			free_alias(t_alias *root)
   alias = root;
   while ((alias = alias->next) != root)
     {
-      double_free(alias->prev->cmd);
-      free(alias->prev);
+      double_free(&alias->prev->cmd);
+      XFREE(alias->prev);
     }
-  double_free(save->cmd);
-  free(save);
+  double_free(&save->cmd);
+  XFREE(save);
 }
 
 int			clean_all(t_shell *sh)
@@ -56,11 +47,11 @@ int			clean_all(t_shell *sh)
   exit_value = sh->exe->exit;
   free_exe(sh->exe->env->env_dll);
   free_alias(sh->alias);
-  double_free(sh->hist_ign);
-  double_free(sh->exe->env->paths);
-  double_free(sh->exe->env->envp);
-  free(sh->exe->env);
-  free(sh->exe);
-  free(sh);
+  double_free(&sh->hist_ign);
+  double_free(&sh->exe->env->paths);
+  double_free(&sh->exe->env->envp);
+  XFREE(sh->exe->env);
+  XFREE(sh->exe);
+  XFREE(sh);
   return (exit_value);
 }

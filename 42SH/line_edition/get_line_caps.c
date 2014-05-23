@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Wed May 21 22:15:52 2014 chalie_a
+** Last update Fri May 23 11:58:28 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -29,7 +29,6 @@ static int		x_read_line(t_line *line)
   line->tab_flag = 0;
   while (line->key != K_RET && line->line)
     {
-      //      printf("%ld\n", line->key);
       line->key = 0;
       if (read(0, &(line->key), 4) <= 0 || line->key == CTRL_D)
 	{
@@ -49,9 +48,6 @@ static int		init_line(t_line *line)
   int			i;
 
   i = -2;
-  CAP("dl");
-  while (++i < (line->sh->p_size))
-    CAP("le");
   line->sh->curr_pos = NULL;
   line->line_len = 0;
   line->key = 0;
@@ -74,7 +70,7 @@ int			get_line_caps(t_line *line)
       if (x_read_line(line) == FAILURE)
 	return (FAILURE);
       if (line->line != line->line_save)
-	c_free(&(line->line_save));
+	XFREE(line->line_save);
       if (line && my_strlen(line->line))
 	add_in_history_dll(line);
       tcsetattr(0, TCSANOW, &(line->sh->save));

@@ -5,18 +5,12 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Mon May 19 21:02:44 2014 chalie_a
+** Last update Fri May 23 12:38:01 2014 chalie_a
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <signal.h>
 #include "edit.h"
 #include "sh.h"
 #include "parser.h"
-#include "my_color.h"
 #include "tokenizer.h"
 
 int			main(int ac, char **av, char **env)
@@ -41,8 +35,10 @@ int			main(int ac, char **av, char **env)
 	  exec_cmd(tree, sh->exe);
 	  free_tree(tree);
 	}
+      else
+	sh->exe->return_value = 2;
       free_tokens(root);
-      free(sh->line->line);
+      XFREE(sh->line->line);
       if (sh->exe->exit || ++i > 100000)
 	  break ;
     }

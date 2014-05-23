@@ -5,17 +5,16 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Wed May 21 19:25:59 2014 chalie_a
+** Last update Fri May 23 12:42:41 2014 chalie_a
 */
 
-#include <string.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "sh.h"
 #include "parser.h"
 #include "tokenizer.h"
+#include "sh.h"
 
 extern const char	*token_tab[T_NBR + 1];
 
@@ -36,8 +35,8 @@ int		error_handling(int tk1, int tk2)
 {
   if (tk2 == T_EOL)
     return (error_handling(tk1, tk2 + 1));
-  fprintf(stderr, "Syntax Error : unexpected token ");
-  fprintf(stderr, "'%s' after '%s' redirection token\n",
+  X_ERROR("Syntax Error : unexpected token ");
+  X_ERROR("'%s' after '%s' redirection token\n",
 	  token_tab[tk2], token_tab[tk1]);
   return (FAILURE);
 }
@@ -56,12 +55,12 @@ int		read_while(t_red *red)
       if (!my_strcmp(red->name, s))
 	break ;
       else
-	write(fd, s, strlen(s));
+	write(fd, s, my_strlen(s));
       write(fd, "\n", 1);
       write(1, ">", 1);
-      free(s);
+      XFREE(s);
     }
-  free(s);
+  XFREE(s);
   close(fd);
   return (SUCCESS);
 }

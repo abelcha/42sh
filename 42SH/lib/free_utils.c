@@ -5,13 +5,13 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 16:11:57 2014 chalie_a
-** Last update Tue May 13 01:48:34 2014 chalie_a
+** Last update Thu May 22 23:45:40 2014 chalie_a
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 
-int		c_free(char **ptr)
+int		safe_free(void **ptr)
 {
   if (*ptr)
     {
@@ -31,12 +31,20 @@ int		x_free(void *ptr)
   return (42);
 }
 
-void		double_free(char **ptr)
+void		double_free(char ***ptr)
 {
   int		i;
 
   i = -1;
-  while (ptr && ptr[++i])
-    x_free(ptr[i]);
-  x_free(ptr);
+  while ((*ptr) && (*ptr)[++i])
+    if ((*ptr)[i])
+      {
+	free((*ptr)[i]);
+	(*ptr)[i] = NULL;
+      }
+  if (*ptr)
+    {      
+      free(*ptr);
+      ptr = NULL;
+    }
 }

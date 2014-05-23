@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Tue May 20 10:03:48 2014 chalie_a
-** Last update Thu May 22 14:00:17 2014 chalie_a
+** Last update Fri May 23 11:18:15 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -51,7 +51,7 @@ static char		*cd_home(t_execution *exe, t_cmd *cmd)
 
   printf("stock = %p\n", cmd->stock[1]);
   if ((env_tmp = search_for_env_variable("HOME", exe->env->env_dll)))
-    return (!cmd->stock[1] ? env_tmp->value : 
+    return (!cmd->stock[1] ? env_tmp->value :
 	    my_strjoint(env_tmp->value, &(cmd->stock)[1][1]));
   X_ERROR("Error : HOME variable is not set\n");
   return (NULL);
@@ -65,7 +65,7 @@ char		*get_current_dir(int cpt)
     return (NULL);
   if (!(getcwd(pwd, cpt * _MEM_POOL)))
     {
-      free(pwd);
+      XFREE(pwd);
       return (errno == 34 ? get_current_dir(++cpt) : NULL);
     }
   return (pwd);

@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:05:18 2014 chalie_a
-** Last update Thu May 22 11:58:06 2014 chalie_a
+** Last update Thu May 22 23:46:08 2014 chalie_a
 */
 
 #include <string.h>
@@ -56,7 +56,7 @@ t_env_dll	*search_for_env_variable(char *str, t_env_dll *root)
 
 int		actualise_path(t_execution *exe, char *str)
 {
-  double_free(exe->env->paths);
+  double_free(&exe->env->paths);
   if (!str)
     exe->env->paths = NULL;
   else if (!(exe->env->paths =

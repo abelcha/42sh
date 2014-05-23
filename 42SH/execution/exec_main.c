@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Wed May 21 20:05:53 2014 chalie_a
+** Last update Fri May 23 12:32:39 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -13,8 +13,8 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include "sh.h"
+#include "parser.h"
 #include "tokenizer.h"
-#include "my_color.h"
 
 static const char	*g_sig_tab[11] = {
   "Hangup",
@@ -62,8 +62,7 @@ static int		exec(t_cmd *cmd, t_execution *exe)
     setpgid(exe->curr_pid, exe->curr_pid);    
   else if (exe->nb_pipes > 0 && !exe->exit)
     wait_pipes(exe);
-  free(exe->pid);
-  exe->pid = NULL;
+  XFREE(exe->pid);
   return (SUCCESS);
 }
 

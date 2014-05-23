@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 17:25:33 2014 chalie_a
-** Last update Thu May 22 12:12:20 2014 chalie_a
+** Last update Fri May 23 00:20:43 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -34,14 +34,20 @@ static int		safe_joint(t_line *line, const char *s2)
   return (SUCCESS);
 }
 
-static int		add_in_buffer(char **stock, t_line *line)
+static int		add_in_buffer(char **stock, t_line *line, int flag)
 {
   int			j;
 
   j = -1;
   while (stock[++j])
-    if (safe_joint(line, stock[j]) == FAILURE)
-      return (FAILURE);
+    {
+      if (safe_joint(line, stock[j]) == FAILURE)
+	return (FAILURE);
+      if (flag)
+      	XFREE(stock[j]);
+    }
+  if (flag)
+    free(stock);
   return (SUCCESS);
 }
 
@@ -77,9 +83,9 @@ int		parse_line(char *str, t_shell *sh)
   char		**tmp;
 
   if ((tmp = is_globbing(str)))
-    return (add_in_buffer(tmp, sh->line));
+    return (add_in_buffer(tmp, sh->line, 0));
   if ((tmp = is_an_alias(str, sh)))
-    return (add_in_buffer(tmp, sh->line));
+    return (add_in_buffer(tmp, sh->line, 0));
   if (*str == '$' && str[1])
     return (dollar_sign(str, sh));
   if (*str == '!' && str[1])

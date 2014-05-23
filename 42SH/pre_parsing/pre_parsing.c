@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 19 17:25:33 2014 chalie_a
-** Last update Wed May 21 21:09:48 2014 chalie_a
+** Last update Fri May 23 10:54:03 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -25,7 +25,11 @@ int		pre_parsing(t_shell *sh)
     if (parse_line(stock[i], sh) == FAILURE)
       return (FAILURE);
   if (sh->line->line_save)
-    sh->line->line = sh->line->line_save;
+    {
+      XFREE(sh->line->line);
+      sh->line->line = sh->line->line_save;
+    }
   sh->line->line_save = NULL;
+  double_free(&stock);
   return (SUCCESS);
 }

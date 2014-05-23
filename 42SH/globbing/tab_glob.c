@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Thu May 22 12:31:17 2014 chalie_a
+** Last update Thu May 22 23:21:54 2014 chalie_a
 */
 
 #include <stdlib.h> 
@@ -54,13 +54,13 @@ static void		free_glob_list(t_gb *gb)
   save = tmp->prev;
   while ((tmp = tmp->next) != gb->g)
     {
-      x_free(tmp->prev->data);
-      x_free(tmp->prev);
+      XFREE(tmp->prev->data);
+      XFREE(tmp->prev);
     }
-  x_free(save->data);
-  x_free(save);
-  x_free(gb->word);
-  x_free(gb);
+  XFREE(save->data);
+  XFREE(save);
+  XFREE(gb->word);
+  XFREE(gb);
 }
 
 void			tab_glob(t_line *line)

@@ -5,17 +5,11 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Tue May 20 14:56:01 2014 chalie_a
+** Last update Fri May 23 12:36:52 2014 chalie_a
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include "sh.h"
-#include "parser.h"
-#include "my_color.h"
-#include "tokenizer.h"
 
 static int		fx(const char *env, const char *info, int len)
 {
@@ -34,7 +28,7 @@ char			*get_env(char **env, char *info)
   int			i;
   int			j;
 
-  j = strlen(info);
+  j = my_strlen(info);
   i = 0;
   while (env && env[i])
     {
@@ -53,6 +47,6 @@ void			free_tokens(t_token *root)
   save = root->prev;
   tmp = root;
   while ((tmp = tmp->next) != root)
-    free(tmp->prev);
-  free(save);
+    XFREE(tmp->prev);
+  XFREE(save);
 }

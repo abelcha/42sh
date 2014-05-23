@@ -1,6 +1,6 @@
 
 
-CC		=	clang -g3
+CC		=	gcc -g3
 
 NAME		=	42sh
 
@@ -9,7 +9,7 @@ SRC		=	./src/main.c				\
 			./src/init_structs.c			\
 			./src/clean_all.c			\
 			./src/parse_config_file.c		\
-			./src/alias.c				\
+			./src/fill_config_file.c		\
 
 LIB		=	./lib/gnl.c				\
 			./lib/my_atoi.c				\
@@ -61,6 +61,8 @@ HIST		=	./history/add_in_history.c		\
 PRE		=	./pre_parsing/pre_parsing.c		\
 			./pre_parsing/pre_parsing_fonctions.c	\
 			./pre_parsing/globbing.c		\
+			./pre_parsing/alias.c			\
+			./pre_parsing/get_double_alias.c	\
 
 GLOB		=	./globbing/tab_glob.c			\
 			./globbing/get_cmd_data.c		\

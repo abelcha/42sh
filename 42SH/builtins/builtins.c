@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Thu May  8 23:49:35 2014 chalie_a
-** Last update Thu May 22 11:36:21 2014 chalie_a
+** Last update Thu May 22 23:14:09 2014 chalie_a
 */
 
 #include <string.h>
@@ -24,7 +24,7 @@ int		set_env_tech(t_execution *exe, char *s1, char *s2)
     add_env_variable(exe->env->env_dll, str);
   else
     {
-      free(tmp->name);
+      XFREE(tmp->name);
       fill_env_struct(tmp, str);
     }
   put_env_in_tab(exe->env);
@@ -52,8 +52,8 @@ int		my_unsetenv(t_execution *exe, t_cmd *cmd)
     return (B_ERROR("Error, Unkown variable `%s'\n", cmd->stock[1]));
   tmp->prev->next = tmp->next;
   tmp->next->prev = tmp->prev;
-  x_free(tmp->name);
-  x_free(tmp);
+  XFREE(tmp->name);
+  XFREE(tmp);
   put_env_in_tab(exe->env);
   if (!my_strncmp(cmd->stock[1], "PATH", 4))
     actualise_path(exe, NULL);

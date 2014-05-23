@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Mon May 12 22:33:37 2014 chalie_a
-** Last update Wed May 21 20:31:54 2014 chalie_a
+** Last update Thu May 22 23:12:00 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -32,11 +32,11 @@ int		add_in_history_file(t_line *line)
 	  write(fd, tmp->data, my_strlen(tmp->data));
 	  write(fd, "\n", 1);
 	}
-      c_free(&(tmp->data));
-      x_free(tmp->prev);
+      XFREE(tmp->data);
+      XFREE(tmp->prev);
     }
-  x_free(save);
-  x_free(line);
+  XFREE(save);
+  XFREE(line);
   close(fd);
   return (SUCCESS);
 }

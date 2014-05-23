@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
-** Last update Thu May 22 11:58:57 2014 chalie_a
+** Last update Fri May 23 12:31:58 2014 chalie_a
 */
 
 #include <string.h>
@@ -15,8 +15,7 @@
 #include <sys/stat.h>
 #include "parser.h"
 #include "tokenizer.h"
-
-#define IS_EXEC(s)	(!access(s, X_OK) && !is_dir(s) ? 1 : 0)
+#include "sh.h"
 
 int			is_dir(const char* target)
 {
@@ -59,7 +58,7 @@ static char		*is_in_paths(char *cmd, t_execution *exe)
       if (IS_EXEC(str))
 	return (str);
       i++;
-      free(str);
+      XFREE(str);
     }
   return (NULL);
 }

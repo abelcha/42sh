@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Thu May 22 16:00:16 2014 chalie_a
+** Last update Fri May 23 12:40:45 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -20,6 +20,7 @@
 # define B_FAILURE	2
 # define TMP_FILE	".tmp"
 # define ENV_BUFF	256
+# define XFREE(s)	(safe_free(&s))
 # define TRUNC		O_CREAT | O_TRUNC | O_WRONLY
 # define READ_ONLY	O_RDONLY
 # define APPEND		O_CREAT | O_APPEND | O_WRONLY
@@ -29,6 +30,7 @@
 # define B_ERROR(...)	X_ERROR(__VA_ARGS__) ? 2 : R_ERROR(2)
 # define ERRNO		_ERROR("%s\n", strerror(errno))
 
+void		add_info(t_shell *, char *);
 int		change_dir(char *, t_execution *);
 void		my_strcat(char *, char *);
 void		my_strcpy(char *, char *);
@@ -47,7 +49,7 @@ int		my_cd(t_execution *exe, t_cmd *cmd);
 int		put_env_in_dll(char **envp, t_execution *exe);
 int		put_env_in_tab(t_env *);
 int		exec_builtins(t_cmd *cmd, t_execution *exe);
-void		double_free(char **);
+void		double_free(char ***);
 void		fill_env_struct(t_env_dll *elem, char *env_line);
 int		add_env_variable(t_env_dll *elem, char *env_line);
 char		*get_env_line(char *s1, char *s2);
@@ -56,7 +58,7 @@ int		open_redirections(t_cmd *, t_execution *);
 int		close_redirections(t_cmd *, t_execution *);
 void		clear_and_display(t_line *);
 int		x_free(void *ptr);
-void		c_free(char **ptr);
+int		safe_free(void *ptr);
 int		add_in_history_dll(t_line *line);
 int		add_in_history(t_line *line);
 int		add_in_history_file(t_line *line);
@@ -69,10 +71,6 @@ int		my_strcmp(char *, char *);
 char		**get_paths(char *, char);
 int		actualise_path(t_execution *, char *);
 char		*get_env(char **, char *);
-t_execution	*init_exe(char **env);
-t_line	 	*init_sline();
-t_jobs		*init_jobs();
-t_alias		*init_alias();
 t_shell		*init_sh();
 char		**to_tab(char *, int, char);
 void		add_alias(t_shell *, char **);

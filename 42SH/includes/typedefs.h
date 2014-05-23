@@ -5,7 +5,7 @@
 ** Login   <abel@chalier.me>
 ** 
 ** Started on  Sun May 18 06:57:23 2014 chalie_a
-** Last update Thu May 22 11:28:13 2014 chalie_a
+** Last update Fri May 23 11:49:45 2014 chalie_a
 */
 
 #ifndef TYPEDEFS_H_
@@ -119,6 +119,7 @@ typedef struct		s_gb
 
 typedef struct		s_line
 {
+  int			offset;
   int			pos;
   int			line_len;
   int			key;
