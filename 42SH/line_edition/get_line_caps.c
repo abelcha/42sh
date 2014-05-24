@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Sat May 24 18:18:44 2014 chalie_a
+** Last update Sat May 24 21:14:22 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -62,6 +62,7 @@ int			get_line_caps(t_line *line)
       line->line = gnl(0);
   else if (init_line(line) == SUCCESS)
     {
+      signal(SIGQUIT, (__sighandler_t) signal_ctz);
       signal(SIGINT, (__sighandler_t) signal_ctz);
       write(1, line->sh->prompt, line->sh->p_size);
       if (x_read_line(line) == FAILURE)

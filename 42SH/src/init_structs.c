@@ -5,11 +5,12 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Sat May 24 18:09:30 2014 chalie_a
+** Last update Sat May 24 21:24:00 2014 chalie_a
 */
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <signal.h>
 #include "edit.h"
 #include "sh.h"
 
@@ -53,6 +54,7 @@ t_shell				*init_sh(char **env)
 {
   t_shell			*sh;
 
+  signal(SIGTSTP, SIG_IGN);
   if (!(sh = calloc(1, sizeof(t_shell))))
     return (NULL);
   if (!(sh->line = init_sline()))

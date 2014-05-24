@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
-** Last update Fri May 23 12:31:58 2014 chalie_a
+** Last update Sat May 24 21:43:18 2014 chalie_a
 */
 
 #include <string.h>
@@ -30,6 +30,7 @@ static char		*is_absolut_path(char *cmd)
   if (cmd && ((cmd[0] == '.' && cmd[1] == '/') || cmd[0] == '/')
       &&  IS_EXEC(cmd))
     return (my_strdup(cmd));
+  printf("sisi\n");
   return (NULL);
 }
 
@@ -68,7 +69,11 @@ int			find_path(t_cmd *cmd, t_execution *exe)
   if ((cmd->builtin = is_builtin(cmd)) > 0)
     return (SUCCESS);
   if ((cmd->path = is_absolut_path(cmd->stock[0])))
-    return (SUCCESS);
+    {
+      printf("yolo\n");
+      return (SUCCESS);
+    }
+  printf("lol\n");
   if ((cmd->path = is_in_paths(cmd->stock[0], exe)))
     return (SUCCESS);
   return (FAILURE);

@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Sat May 24 18:28:38 2014 chalie_a
+** Last update Sat May 24 21:40:37 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -28,8 +28,9 @@ static int		cmd_not_in_paths(const t_cmd *tmp, t_execution *exe)
 
 static int		exec_command(t_cmd *tmp, t_execution *exe)
 {
-  if (tmp->builtin == -1 &&
-      execve(tmp->path, tmp->stock, exe->env->envp) == FAILURE)
+
+  if (tmp->builtin == -1
+      && printf("%s\n", tmp->path) &&  execve(tmp->path, tmp->stock, exe->env->envp) == FAILURE)
     {
       exe->exit = FAILURE;
       return (_ERROR("Error : execve failed\n"));

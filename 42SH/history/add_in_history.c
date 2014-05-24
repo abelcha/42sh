@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 22:21:05 2014 chalie_a
-** Last update Sat May 24 18:20:59 2014 chalie_a
+** Last update Sat May 24 19:50:13 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -49,6 +49,7 @@ static int			not_ignored(t_line *line)
       return (0);
   return (1);
 }
+
 int				add_in_history_dll(t_line *line)
 {
   if (my_strcmp(line->line, line->sh->history->prev->data)
