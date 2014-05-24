@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 21:06:09 2014 chalie_a
-** Last update Wed May 21 22:25:30 2014 chalie_a
+** Last update Sun May 25 01:06:03 2014 chalie_a
 */
 
 #include "sh.h"
@@ -49,11 +49,27 @@ void			delete_char(t_line *line)
   clear_and_display(line);
 }
 
+void			write_char(int key, t_line *line)
+{
+  if (key >= 256)
+    {
+      write_char(key % 256, line);
+      write_char(key / 256, line);
+    }
+  else if (key != '\n')
+    {
+      if (line->line_len >= (BUFF_LINE * line->realloc_cpt))
+	 line_realloc(line);
+      add_char_in_tab(key, line->line, line->pos);
+      CAP("nd");
+      line->pos++;
+      line->line_len++;
+      (line->line_len % get_cols()) == 0 ? clear_scr(line) :
+	clear_and_display(line);
+    }
+}
+
 void			add_char(t_line *line)
 {
-  add_char_in_tab(line->key, line->line, line->pos);
-  CAP("nd");
-  line->pos++;
-  line->line_len++;
-  clear_and_display(line);
+  write_char(line->key, line);
 }

@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Sat May 24 18:16:53 2014 chalie_a
+** Last update Sun May 25 00:05:02 2014 chalie_a
 */
 
 #include "edit.h"
@@ -59,7 +59,8 @@ void			do_key_actions(t_line *line)
 	  return ;
 	}
     }
-  if (VALID_CHAR(line->key))
+  //  if (VALID_CHAR(line->key))
+  if (i == AK_NB || VALID_CHAR(line->key))
     add_char(line);
 }
 

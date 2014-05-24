@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Sat May 24 21:14:22 2014 chalie_a
+** Last update Sun May 25 00:23:21 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -30,15 +30,13 @@ static int		x_read_line(t_line *line)
   while (line->key != K_RET && line->line)
     {
       line->key = 0;
-      if (read(0, &(line->key), 4) <= 0 || line->key == CTRL_D)
+      if (read(0, &(line->key), sizeof(int)) <= 0 || line->key == CTRL_D)
 	{
 	  tcsetattr(0, TCSANOW, &(line->sh->save));
 	  line->line = NULL;
 	  return (FAILURE);
 	}
       do_key_actions(line);
-      if (line->pos >= (BUFF_LINE * line->realloc_cpt))
-	line_realloc(line);
    }
   return (SUCCESS);
 }
