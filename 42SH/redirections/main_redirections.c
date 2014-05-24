@@ -2,10 +2,10 @@
 ** main_redirections.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Tue May 13 16:57:16 2014 chalie_a
-** Last update Fri May 23 18:51:05 2014 chalie_a
+** Last update Sat May 24 18:31:47 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -52,8 +52,6 @@ int			handle_redirections(t_cmd *root, t_execution *exe)
 
 int			close_redirections(t_cmd *root, t_execution *exe)
 {
-  //  _ERROR("coucou\n");
-  // return (0);
    if (!exe->input)
     return (FAILURE);
   close_red(root->next->red[0]);

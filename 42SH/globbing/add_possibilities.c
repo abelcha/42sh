@@ -2,13 +2,13 @@
 ** tab_glob.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/line_edition
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Thu May 22 11:58:41 2014 chalie_a
+** Last update Sat May 24 18:27:07 2014 chalie_a
 */
 
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <glob.h>
 #include <string.h>
 #include "sh.h"
@@ -48,14 +48,14 @@ static void			fill_glob_elem(t_glob *elem, t_glob *newelem,
   elem->prev->next = newelem;
   elem->prev = newelem;
   if (root->part_match - my_strlen(root->word))
-    root->part_match =
-      get_partial_matching(newelem->prev->data, newelem->data);
+    root->part_match = get_partial_matching(newelem->prev->data,
+					    newelem->data);
 }
 
-int			add_glob(t_gb *root, char *data, int len)
+int				add_glob(t_gb *root, char *data, int len)
 {
-  t_glob		*newelem;
-  t_glob		*elem;
+  t_glob			*newelem;
+  t_glob			*elem;
 
   elem = root->g;
   if (is_doublon(&data[len], root->g))

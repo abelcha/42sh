@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Fri May 23 19:16:33 2014 chalie_a
+** Last update Sat May 24 18:28:38 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -26,8 +26,8 @@ static int		cmd_not_in_paths(const t_cmd *tmp, t_execution *exe)
   return (SUCCESS);
 }
 
-static int		exec_command(/*t_cmd *root, */t_cmd *tmp, t_execution *exe)
-{	      
+static int		exec_command(t_cmd *tmp, t_execution *exe)
+{
   if (tmp->builtin == -1 &&
       execve(tmp->path, tmp->stock, exe->env->envp) == FAILURE)
     {
@@ -35,15 +35,12 @@ static int		exec_command(/*t_cmd *root, */t_cmd *tmp, t_execution *exe)
       return (_ERROR("Error : execve failed\n"));
     }
   else
-    {
-      //       if (exe->nb_pipes != exe->pos + 2)		// USELESS WTF
-      //	 handle_redirections(root, exe);
-      exec_builtins(tmp, exe);
-    }
+    exec_builtins(tmp, exe);
   return (SUCCESS);
 }
 
-static int		exec_in_father(t_cmd *root, t_cmd *tmp, t_execution *exe)
+static int		exec_in_father(t_cmd *root, t_cmd *tmp,
+				       t_execution *exe)
 {
   if (!tmp->path && tmp->builtin == -1)
     return (cmd_not_in_paths(tmp, exe));
@@ -86,9 +83,9 @@ int			exec_builtins(t_cmd *cmd, t_execution *exe)
   return (exe->return_value);
 }
 
-int		execution_loop(t_cmd *cmd, t_execution *exe)
+int			execution_loop(t_cmd *cmd, t_execution *exe)
 {
-  t_cmd		*tmp;
+  t_cmd			*tmp;
 
   tmp = cmd;
   if (handle_redirections(cmd, exe) == FAILURE)
@@ -109,6 +106,5 @@ int		execution_loop(t_cmd *cmd, t_execution *exe)
 	return (FAILURE);
       exe->pid[++exe->pos] = exe->curr_pid;
     }
-  //  printf("exit = %d\n", exe->exit);
   return (exe->exit == 512 ? SUCCESS :  close_redirections(cmd, exe));
 }

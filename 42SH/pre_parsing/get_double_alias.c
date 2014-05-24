@@ -2,10 +2,10 @@
 ** alias.c for Project-Master in /home/tovazm/rendu/42sh/42SH
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 19 12:46:55 2014 chalie_a
-** Last update Fri May 23 16:45:13 2014 chalie_a
+** Last update Sat May 24 18:24:46 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -67,9 +67,9 @@ static void		similar_part(t_alias *tmp, t_alias *root)
    }
 }
 
-void		check_double_alias(t_alias *alias)
+void			check_double_alias(t_alias *alias)
 {
-  t_alias	*tmp;
+  t_alias		*tmp;
 
   tmp = alias;
   while ((tmp = tmp->next) != alias)

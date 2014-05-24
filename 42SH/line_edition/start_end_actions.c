@@ -2,7 +2,7 @@
 ** start_end_actions.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/line_edition
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 14 06:53:32 2014 chalie_a
 ** Last update Wed May 21 22:26:50 2014 chalie_a

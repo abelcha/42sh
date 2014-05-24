@@ -2,7 +2,7 @@
 ** signal.c for Project-Master in /home/tovazm/rendu/42sh/42SH
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Thu May 15 20:08:37 2014 chalie_a
 ** Last update Thu May 22 09:58:14 2014 chalie_a

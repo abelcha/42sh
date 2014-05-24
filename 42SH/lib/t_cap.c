@@ -2,7 +2,7 @@
 ** t_cap.c for Project-Master in /home/tovazm/rendu/42sh/42SH
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 21 21:20:58 2014 chalie_a
 ** Last update Wed May 21 21:28:07 2014 chalie_a

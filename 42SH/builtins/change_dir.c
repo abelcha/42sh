@@ -2,7 +2,7 @@
 ** cd.c for Project-Master in /home/tovazm/rendu/42sh/42SH/builtins
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Tue May 20 10:03:48 2014 chalie_a
 ** Last update Thu May 22 23:13:58 2014 chalie_a

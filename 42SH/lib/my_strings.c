@@ -2,10 +2,10 @@
 ** strings.c for Project-Master in /home/tovazm/rendu/42sh/42SH
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Tue May 20 14:51:11 2014 chalie_a
-** Last update Thu May 22 10:25:29 2014 chalie_a
+** Last update Sat May 24 18:08:39 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -23,7 +23,7 @@ int		my_strlen(const char *str)
 
 void		my_strcpy(char *dest, char *src)
 {
-  int	i;
+  int		i;
 
   i = -1;
   if (!dest || !src)

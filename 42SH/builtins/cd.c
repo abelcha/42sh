@@ -2,10 +2,10 @@
 ** cd.c for Project-Master in /home/tovazm/rendu/42sh/42SH/builtins
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Tue May 20 10:03:48 2014 chalie_a
-** Last update Fri May 23 21:35:10 2014 chalie_a
+** Last update Sat May 24 18:34:40 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -56,9 +56,9 @@ static char		*cd_home(t_execution *exe, t_cmd *cmd)
   return (NULL);
 }
 
-char		*get_current_dir(int cpt)
+char			*get_current_dir(int cpt)
 {
-  char		*pwd;
+  char			*pwd;
 
   if (!(pwd = calloc(cpt, _MEM_POOL)))
     return (NULL);
@@ -70,9 +70,9 @@ char		*get_current_dir(int cpt)
   return (pwd);
 }
 
-int		my_cd(t_execution *exe, t_cmd *cmd)
+int			my_cd(t_execution *exe, t_cmd *cmd)
 {
-  char		*tmpdir;
+  char			*tmpdir;
 
   tmpdir = NULL;
   if (!cmd->stock[1] || cmd->stock[1][0] == '~')

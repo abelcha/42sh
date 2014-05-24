@@ -2,7 +2,7 @@
 ** word_action.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/line_edition
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 14 06:45:56 2014 chalie_a
 ** Last update Wed May 14 20:09:52 2014 chalie_a

@@ -2,10 +2,10 @@
 ** x_free.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Thu May  8 16:11:57 2014 chalie_a
-** Last update Thu May 22 23:45:40 2014 chalie_a
+** Last update Sat May 24 18:09:08 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -43,7 +43,7 @@ void		double_free(char ***ptr)
 	(*ptr)[i] = NULL;
       }
   if (*ptr)
-    {      
+    {
       free(*ptr);
       ptr = NULL;
     }

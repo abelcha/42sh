@@ -2,10 +2,10 @@
 ** get_next_line.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sun Apr 20 17:05:51 2014 chalie_a
-** Last update Wed Apr 23 11:56:43 2014 chalie_a
+** Last update Sat May 24 18:08:10 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -82,20 +82,3 @@ char			*gnl(const int fd)
     buffer[nb++] = str[j];
   return ((str[j - nb - 1] = 0) ? NULL : str);
 }
-
-/*
-int		main()
-{
-  char		*str;
-  int		i = -1;
-  while ((str = gnl(0)))
-    {
-       printf("%s\n", str);
-       free(str);
-       if (++i > 10000)
-	 break;
-    }
-  //  free(str);
-}
-
-*/

@@ -2,10 +2,10 @@
 ** create_cmd_node.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon Apr 21 00:19:42 2014 chalie_a
-** Last update Mon May 19 20:56:42 2014 chalie_a
+** Last update Sat May 24 18:29:24 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -32,9 +32,6 @@ int			create_new_cmd_node(t_cmd *elem)
 {
   t_cmd			*newelem;
 
-  // printf("cmd->token = %d\n",elem->token);
-  //if ( elem->prev->size == 0)
-  //  expected_after_pipe();
   if (!(newelem = calloc(1, sizeof(t_cmd))))
     return (FAILURE);
   if (!(newelem->stock = calloc(_MEM_POOL, sizeof(char *))))

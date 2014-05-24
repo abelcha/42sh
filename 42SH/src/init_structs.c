@@ -2,10 +2,10 @@
 ** main.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Fri May 23 12:40:56 2014 chalie_a
+** Last update Sat May 24 18:09:30 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -29,7 +29,7 @@ static t_execution		*init_exe(char **env)
   return (exe);
 }
 
-static t_line 			*init_sline()
+static t_line			*init_sline()
 {
   t_line			*line;
 

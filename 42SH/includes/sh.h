@@ -2,7 +2,7 @@
 ** 42sh.h for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
 ** Last update Fri May 23 19:42:42 2014 chalie_a

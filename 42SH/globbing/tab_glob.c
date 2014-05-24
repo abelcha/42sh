@@ -2,13 +2,13 @@
 ** tab_glob.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/line_edition
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Thu May 22 23:21:54 2014 chalie_a
+** Last update Sat May 24 18:26:23 2014 chalie_a
 */
 
-#include <stdlib.h> 
+#include <stdlib.h>
 #include <glob.h>
 #include <string.h>
 #include "sh.h"

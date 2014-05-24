@@ -2,7 +2,7 @@
 ** put_in_history.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/history
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 22:33:37 2014 chalie_a
 ** Last update Thu May 22 23:12:00 2014 chalie_a

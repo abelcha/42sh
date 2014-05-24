@@ -2,7 +2,7 @@
 ** add_del_key_actions.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/edit_line
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 21:06:09 2014 chalie_a
 ** Last update Wed May 21 22:25:30 2014 chalie_a

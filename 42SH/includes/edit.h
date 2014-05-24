@@ -2,10 +2,10 @@
 ** edit.h for Project-Master in /home/tovazm/rendu/42sh/ABEL/edit_line
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Thu May 22 12:05:42 2014 chalie_a
+** Last update Sat May 24 18:17:48 2014 chalie_a
 */
 
 #ifndef EDIT_H_
@@ -85,6 +85,10 @@ void	delete_until_end(t_line *line);
 void	move_fwd_char(t_line *line);
 void	move_back_word(t_line *line);
 void	move_fwd_word(t_line *line);
+void    move_left(t_line *line);
+void	move_right(t_line *line);
+void	clear_scr(t_line *line);
+void	real_tab(t_line *line);
 void	delete_word(t_line *line);
 void	clear_and_display(t_line *line);
 void	replace_cursor(int oldpos, int newpos);

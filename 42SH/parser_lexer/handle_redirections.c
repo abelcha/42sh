@@ -2,10 +2,10 @@
 ** handle_redirections.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon Apr 21 02:35:34 2014 chalie_a
-** Last update Fri May 23 12:42:41 2014 chalie_a
+** Last update Sat May 24 18:29:16 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -31,7 +31,7 @@ int			find_red_token(int token)
   return (-1);
 }
 
-int		error_handling(int tk1, int tk2)
+int			error_handling(int tk1, int tk2)
 {
   if (tk2 == T_EOL)
     return (error_handling(tk1, tk2 + 1));
@@ -41,10 +41,10 @@ int		error_handling(int tk1, int tk2)
   return (FAILURE);
 }
 
-int		read_while(t_red *red)
+int			read_while(t_red *red)
 {
-  char		*s;
-  int		fd;
+  char			*s;
+  int			fd;
 
   fd = open(TMP_FILE, O_CREAT | O_TRUNC | O_WRONLY, 0644);
   if (fd < 0)
@@ -65,11 +65,12 @@ int		read_while(t_red *red)
   return (SUCCESS);
 }
 
-int		fill_red_struct(t_token *token, t_cmd *cmd, int red_token,
-				t_execution *exe)
+int			fill_red_struct(t_token *token, t_cmd *cmd,
+					int red_token, t_execution *exe)
 {
-  t_red		*tmp;
-  static int	op_tab[6] = {0, READ_ONLY, TRUNC, APPEND, TRUNC, APPEND};
+  t_red			*tmp;
+  static int		op_tab[6] = {0, READ_ONLY, TRUNC,
+				     APPEND, TRUNC, APPEND};
 
   if (!cmd->red[red_token / 2] &&
       !(cmd->red[red_token / 2] = calloc(1, sizeof(t_red))))
@@ -85,9 +86,10 @@ int		fill_red_struct(t_token *token, t_cmd *cmd, int red_token,
   return (SUCCESS);
 }
 
-int		redirections(t_cmd *cmd, t_token *token, t_execution *exe)
+int			redirections(t_cmd *cmd, t_token *token,
+				     t_execution *exe)
 {
-  int		red_token;
+  int			red_token;
 
   if (token->next->token != T_CMD)
     return (error_handling(token->token, token->next->token));

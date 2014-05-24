@@ -2,19 +2,20 @@
 ** env_dll.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Thu May  8 21:24:59 2014 chalie_a
-** Last update Fri May 23 11:18:45 2014 chalie_a
+** Last update Sat May 24 18:34:20 2014 chalie_a
 */
 
 #include <string.h>
 #include <stdlib.h>
 #include "sh.h"
 
-void			fill_env_struct(t_env_dll *elem, char *env_line)
+void				fill_env_struct(t_env_dll *elem,
+						char *env_line)
 {
-  int			i;
+  int				i;
 
   i = -1;
   while (env_line[++i])
@@ -25,9 +26,10 @@ void			fill_env_struct(t_env_dll *elem, char *env_line)
   elem->size = i;
 }
 
-int			add_env_variable(t_env_dll *elem, char *env_line)
+int				add_env_variable(t_env_dll *elem,
+						 char *env_line)
 {
-  t_env_dll		*newelem;
+  t_env_dll			*newelem;
 
   if (!env_line)
     return (FAILURE);
@@ -52,10 +54,10 @@ static t_env_dll		*init_dll()
   return (root);
 }
 
-int			put_env_in_tab(t_env *env)
+int				put_env_in_tab(t_env *env)
 {
-  t_env_dll		*tmp;
-  int			i;
+  t_env_dll			*tmp;
+  int				i;
 
   i = -1;
   tmp = env->env_dll;
@@ -67,9 +69,9 @@ int			put_env_in_tab(t_env *env)
   return (SUCCESS);
 }
 
-int			put_env_in_dll(char **envp, t_execution *exe)
+int				put_env_in_dll(char **envp, t_execution *exe)
 {
-  int			i;
+  int				i;
 
   i = -1;
   if (!(exe->env->env_dll = init_dll()))

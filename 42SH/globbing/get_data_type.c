@@ -2,7 +2,7 @@
 ** tab_glob.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/line_edition
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
 ** Last update Fri May 23 18:59:56 2014 chalie_a

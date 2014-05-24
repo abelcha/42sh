@@ -2,7 +2,7 @@
 ** init.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/edit_line
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
 ** Last update Wed May 21 22:22:59 2014 chalie_a

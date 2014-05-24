@@ -2,10 +2,10 @@
 ** env_builtins.c for Project-Master in /home/tovazm/rendu/42sh/42SH/builtins
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sun May 18 06:05:18 2014 chalie_a
-** Last update Fri May 23 17:31:28 2014 chalie_a
+** Last update Sat May 24 18:34:49 2014 chalie_a
 */
 
 #include <string.h>
@@ -20,7 +20,6 @@ int		my_env(t_execution *exe, t_cmd *cmd)
   (void)cmd;
   while (exe->env->envp[++i])
     printf("%s\n", exe->env->envp[i]);
-  // printf("coucou\n");
   return (B_SUCCESS);
 }
 

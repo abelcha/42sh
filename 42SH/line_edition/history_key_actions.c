@@ -2,13 +2,13 @@
 ** history_key_actions.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/edit_line
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 20:49:22 2014 chalie_a
-** Last update Wed May 21 22:30:17 2014 chalie_a
+** Last update Sat May 24 18:18:55 2014 chalie_a
 */
 
-#include <stdlib.h> 
+#include <stdlib.h>
 #include "edit.h"
 #include "sh.h"
 

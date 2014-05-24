@@ -5,7 +5,7 @@
 ** Login   <coutar_a@epitech.net>
 ** 
 ** Started on  Mon May  5 09:50:58 2014 coutar_a
-** Last update Fri May 23 19:42:32 2014 chalie_a
+** Last update Sat May 24 18:32:42 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -14,21 +14,20 @@
 #include <stdlib.h>
 #include "sh.h"
 
-static const t_echo	g_esc[] =
-  {
-    {'\\', '\\'},
-    {'a', '\a'},
-    {'b', '\b'},
-    {'c', 'c'},
-    {'e', 'e'},
-    {'f', '\f'},
-    {'n', '\n'},
-    {'r', '\r'},
-    {'t', '\t'},
-    {'v', '\v'}
-  };
+static const t_echo	g_esc[] = {
+  {'\\', '\\'},
+  {'a', '\a'},
+  {'b', '\b'},
+  {'c', 'c'},
+  {'e', 'e'},
+  {'f', '\f'},
+  {'n', '\n'},
+  {'r', '\r'},
+  {'t', '\t'},
+  {'v', '\v'}
+};
 
-static int	    	byte_printer(char *str, int *i)
+static int		byte_printer(char *str, int *i)
 {
   int			byte;
   char			oct[3];

@@ -2,10 +2,10 @@
 ** lexer.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Wed May 21 19:25:19 2014 chalie_a
+** Last update Sat May 24 18:31:39 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -19,8 +19,6 @@ static t_cmd		*init_cmd()
 
   if (!(root = calloc(1, sizeof(t_cmd))))
     return (NULL);
-  //  if (!(root->stock = calloc(MEM_POOL, sizeof(char))))
-  //  return (NULL);
   root->prev = root;
   root->next = root;
   return (root);

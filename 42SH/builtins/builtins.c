@@ -2,10 +2,10 @@
 ** builtins.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Thu May  8 23:49:35 2014 chalie_a
-** Last update Thu May 22 23:14:09 2014 chalie_a
+** Last update Sat May 24 18:33:21 2014 chalie_a
 */
 
 #include <string.h>
@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "sh.h"
 
-int		set_env_tech(t_execution *exe, char *s1, char *s2)
+int			set_env_tech(t_execution *exe, char *s1, char *s2)
 {
   t_env_dll		*tmp;
   char			*str;
@@ -33,7 +33,7 @@ int		set_env_tech(t_execution *exe, char *s1, char *s2)
   return (B_SUCCESS);
 }
 
-int		my_setenv(t_execution *exe, t_cmd *cmd)
+int			my_setenv(t_execution *exe, t_cmd *cmd)
 {
   if (!cmd->stock[1] || !cmd->stock[2] || cmd->stock[3])
     return (B_ERROR("Error, USAGE : setenv [Name] [Value]\n"));
@@ -42,9 +42,9 @@ int		my_setenv(t_execution *exe, t_cmd *cmd)
   return (B_SUCCESS);
 }
 
-int		my_unsetenv(t_execution *exe, t_cmd *cmd)
+int			my_unsetenv(t_execution *exe, t_cmd *cmd)
 {
-  t_env_dll	*tmp;
+  t_env_dll		*tmp;
 
   if (!cmd->stock[1] || cmd->stock[2])
     return (B_ERROR("Error, USAGE : setenv [Name]\n"));
@@ -60,7 +60,7 @@ int		my_unsetenv(t_execution *exe, t_cmd *cmd)
   return (B_SUCCESS);
 }
 
-int		my_exit(t_execution *exe, t_cmd *cmd)
+int			my_exit(t_execution *exe, t_cmd *cmd)
 {
   exe->exit = my_atoi(cmd->stock[1]) + 256;
   return (B_SUCCESS);

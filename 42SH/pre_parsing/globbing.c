@@ -2,7 +2,7 @@
 ** globbing.c for Project-Master in /home/tovazm/rendu/42sh/42SH/pre_parsing
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 21 21:01:20 2014 chalie_a
 ** Last update Thu May 22 21:12:42 2014 chalie_a

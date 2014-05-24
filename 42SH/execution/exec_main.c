@@ -5,7 +5,7 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Fri May 23 19:20:34 2014 chalie_a
+** Last update Sat May 24 18:28:49 2014 chalie_a
 */
 
 #include <stdio.h>
@@ -59,7 +59,7 @@ static int		exec(t_cmd *cmd, t_execution *exe)
     return (FAILURE);
   execution_loop(cmd, exe);
   if (cmd->prev->background && !exe->return_value)
-    setpgid(exe->curr_pid, exe->curr_pid);    
+    setpgid(exe->curr_pid, exe->curr_pid);
   else if (exe->nb_pipes > 0 && !exe->exit)
     wait_pipes(exe);
   XFREE(exe->pid);

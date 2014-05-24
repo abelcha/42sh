@@ -2,10 +2,10 @@
 ** add_token_in_node.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
-** Last update Wed May 21 19:26:58 2014 chalie_a
+** Last update Sat May 24 18:18:24 2014 chalie_a
 */
 
 #include <string.h>
@@ -29,7 +29,8 @@ static int			add_data_in_cmd(t_cmd *cmd,
   if (!cmd)
     return (FAILURE);
   if (cmd->size >= (cmd->realloc_cpt * _MEM_POOL))
-    if (!(cmd->stock = realloc(cmd->stock, ++(cmd->realloc_cpt) * _MEM_POOL * 8 + 8)))
+    if (!(cmd->stock = realloc(cmd->stock, ++(cmd->realloc_cpt)
+			       * _MEM_POOL * 8 + 8)))
       return (FAILURE);
   return (fill_data_stock(cmd, token));
 }

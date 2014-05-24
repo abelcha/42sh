@@ -1,4 +1,10 @@
-
+## Makefile.c for Project-Master in /mnt/home/tovazm/rendu/42sh/42SH
+## 
+## Made by chalie_a
+## Login   <abel@chalier.me>
+## 
+## Started on  Sat May 24 18:06:02 2014 chalie_a
+##
 
 CC		=	gcc -g3
 
@@ -50,6 +56,7 @@ LINE		=	./line_edition/add_del_key_actions.c	\
 			./line_edition/history_key_actions.c	\
 			./line_edition/start_end_actions.c	\
 			./line_edition/arrow_key_action.c	\
+			./line_edition/arrow_key_tabs.c		\
 			./line_edition/init_termcaps.c		\
 			./line_edition/get_line_caps.c		\
 			./line_edition/word_action.c		\
@@ -95,12 +102,9 @@ RM	=	rm -fr
 all	:	$(NAME)
 
 $(NAME)	:	$(ALL_OBJ)
-
 		$(CC) -o $(NAME) $(ALL_OBJ) -lncurses
 		@cat header
-
 clean	:
-
 		$(RM) $(ALL_OBJ)
 
 fclean	:	clean

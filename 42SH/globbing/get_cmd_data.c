@@ -2,10 +2,10 @@
 ** tab_glob.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/line_edition
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Thu May 22 23:22:08 2014 chalie_a
+** Last update Sat May 24 18:28:08 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -40,12 +40,12 @@ static void		check_match(char *temp, t_gb *gb, int len, char flag)
   temp[my_strlen(temp)] = '*';
 }
 
-int		get_data(char *path, char *word, t_gb *gb)
+int			get_data(char *path, char *word, t_gb *gb)
 {
-  char	      	*temp;
-  glob_t	gl;
-  int		len;
-  int		i;
+  char			*temp;
+  glob_t		gl;
+  int			len;
+  int			i;
 
   i = -1;
   if (!(temp = get_fusion(path, word, &len)))
@@ -62,10 +62,10 @@ int		get_data(char *path, char *word, t_gb *gb)
   return (SUCCESS);
 }
 
-int		get_command(char *word, t_line *line, t_gb *gb)
+int			get_command(char *word, t_line *line, t_gb *gb)
 {
-  char		**p_tab;
-  int		i;
+  char			**p_tab;
+  int			i;
 
   i = -1;
   p_tab = line->sh->exe->env->paths;

@@ -5,16 +5,16 @@
 ** Login   <chalie_a@epitech.net>
 ** 
 ** Started on  Mon Oct 21 11:45:34 2013 chalie_a
-** Last update Tue May 20 14:55:49 2014 chalie_a
+** Last update Sat May 24 18:30:09 2014 chalie_a
 */
 
 #include <stdlib.h>
 
 static char	**parsing(char **tab, char *str, int nb, char c)
 {
-  int	i;
-  int	j;
-  int	k;
+  int		i;
+  int		j;
+  int		k;
 
   i = 0;
   j = 0;
@@ -76,7 +76,6 @@ char		**get_paths(char *str, char c)
   char		**tab;
 
   i = 0;
-
   nb = count_word(str, c);
   if (!(tab = calloc((nb + 1), sizeof(str))))
     return (NULL);

@@ -2,7 +2,7 @@
 ** tokenizer.h for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Fri Apr 18 00:51:03 2014 chalie_a
 ** Last update Fri May 23 12:29:13 2014 chalie_a

@@ -2,15 +2,15 @@
 ** init.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/edit_line
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Fri May 23 19:42:19 2014 chalie_a
+** Last update Sat May 24 18:18:44 2014 chalie_a
 */
 
 #include <unistd.h>
 #include <signal.h>
-#include <stdlib.h> 
+#include <stdlib.h>
 #include "sh.h"
 #include "edit.h"
 

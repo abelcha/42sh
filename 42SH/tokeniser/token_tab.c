@@ -2,7 +2,7 @@
 ** lexer.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sun Apr 20 09:52:11 2014 chalie_a
 ** Last update Mon May 19 18:38:50 2014 beau_v

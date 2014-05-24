@@ -2,10 +2,10 @@
 ** pre_parsing.c for Project-Master in /home/tovazm/rendu/42sh/42SH
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 19 17:25:33 2014 chalie_a
-** Last update Fri May 23 00:20:43 2014 chalie_a
+** Last update Sat May 24 18:24:31 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -78,9 +78,9 @@ static int		history_find(char *str, t_shell *sh)
   return (safe_joint(sh->line, tmp->data));
 }
 
-int		parse_line(char *str, t_shell *sh)
+int			parse_line(char *str, t_shell *sh)
 {
-  char		**tmp;
+  char			**tmp;
 
   if ((tmp = is_globbing(str)))
     return (add_in_buffer(tmp, sh->line, 0));

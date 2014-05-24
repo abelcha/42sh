@@ -2,10 +2,10 @@
 ** init_history.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/history
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 22:21:05 2014 chalie_a
-** Last update Fri May 23 21:35:31 2014 chalie_a
+** Last update Sat May 24 18:20:59 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -13,7 +13,6 @@
 #include <stdlib.h>
 #include "edit.h"
 #include "sh.h"
-
 
 static t_history		*init_root_history()
 {
@@ -39,10 +38,9 @@ static int			add_elem_in_history(t_history *elem)
   return (SUCCESS);
 }
 
-
-static int		not_ignored(t_line *line)
+static int			not_ignored(t_line *line)
 {
-  int			i;
+  int				i;
 
   i = -1;
   while (line->sh->hist_ign && line->sh->hist_ign[++i])
@@ -51,9 +49,10 @@ static int		not_ignored(t_line *line)
       return (0);
   return (1);
 }
-int		add_in_history_dll(t_line *line)
+int				add_in_history_dll(t_line *line)
 {
-  if (my_strcmp(line->line, line->sh->history->prev->data) && not_ignored(line))
+  if (my_strcmp(line->line, line->sh->history->prev->data)
+      && not_ignored(line))
     if (add_elem_in_history(line->sh->history) != FAILURE)
       {
 	line->sh->history->prev->len = line->line_len;
@@ -63,11 +62,11 @@ int		add_in_history_dll(t_line *line)
   return (SUCCESS);
 }
 
-int			init_history(t_line *line)
+int				init_history(t_line *line)
 {
-  int			fd;
-  char			*str;
-  int			i;
+  int				fd;
+  char				*str;
+  int				i;
 
   i = -1;
   if (!(line->sh->history = init_root_history()))

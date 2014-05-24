@@ -2,7 +2,7 @@
 ** find_cmd_path.c for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
 ** Last update Fri May 23 12:31:58 2014 chalie_a

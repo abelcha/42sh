@@ -2,7 +2,7 @@
 ** parser.h for Project-Master in /home/tovazm/rendu/42sh/ABEL
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
 ** Last update Fri May 23 12:34:23 2014 chalie_a

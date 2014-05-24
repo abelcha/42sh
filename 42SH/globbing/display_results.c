@@ -2,14 +2,14 @@
 ** tab_glob.c for Project-Master in /home/tovazm/rendu/42sh/ABEL/line_edition
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Thu May 22 14:47:32 2014 chalie_a
+** Last update Sat May 24 18:25:13 2014 chalie_a
 */
 
 #include <unistd.h>
-#include <stdio.h> 
+#include <stdio.h>
 #include "sh.h"
 #include "edit.h"
 
@@ -74,10 +74,10 @@ static void		print_list(int maxlen, t_glob *root,
     }
 }
 
-void		display_pos(t_gb *root, t_line *line)
+void			display_pos(t_gb *root, t_line *line)
 {
-  int		cols;
-  int		maxlen;
+  int			cols;
+  int			maxlen;
 
   if (root->total > 42 && yes_or_no(root->total) == FAILURE)
     {

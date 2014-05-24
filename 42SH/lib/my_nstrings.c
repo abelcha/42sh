@@ -2,7 +2,7 @@
 ** my_nstrings.c for Project-Master in /home/tovazm/rendu/42sh/42SH
 ** 
 ** Made by chalie_a
-** Login   <abel@chalier.me>
+** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Thu May 22 11:37:18 2014 chalie_a
 ** Last update Thu May 22 11:57:39 2014 chalie_a
