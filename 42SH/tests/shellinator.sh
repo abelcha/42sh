@@ -35,8 +35,9 @@ CMD=(
         'rm toto &> /dev/null'
 	'echo $PWD && echo $USER && echo $TERM && echo $HOME'
 	'ls|ls|ls|ls -la -h|ls|ls|wc'
-	'cd / && echo -n root : cmd: &&pwd;echo env: $PWD;cd ~ && echo -n HOME: cmd:&& pwd;echo env: $PWD'
+	'cd / && echo -n ROOT : cmd: &&pwd;echo env: $PWD;cd ~ && echo -n HOME: cmd:&& pwd;echo env: $PWD'
 	'echo -n ***'
+	'echo -n hey && echo -n cool ; echo -n tg'
 )
 
 function disp {
