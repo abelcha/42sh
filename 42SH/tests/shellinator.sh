@@ -38,8 +38,9 @@ CMD=(
 	'cd / && echo -n ROOT : cmd: &&pwd;echo env: $PWD;cd ~ && echo -n HOME: cmd:&& pwd;echo env: $PWD'
 	'echo -n ***'
 	'echo -n hey && echo -n cool ; echo -n tg'
+	'echo 42|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat'
+	'cat < /etc/resolv.conf | cat | cat > tmp43; cat tmp43 | cat >> tmp43 ; cat tmp43 && rm tmp43'
 )
-
 function disp {
 	echo "$*" 1>&2
 }
