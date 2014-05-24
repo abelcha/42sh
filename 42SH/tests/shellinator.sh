@@ -35,15 +35,14 @@ CMD=(
         ';/usr/bin/ls;'
         '       /usr/bin/ls     |       cat     -e      '
         '/usr/bin/ls|cat'
-        '        '
-        '<< toto cat > toto ; << EOF cat | sed s/toto/0/ > ma_note ; /bin/echo -n ma_note: ; < ma_note'
-        'echo coucou >test; < test /usr/bin/ls | cat -e| wc -c >> test && >> test echo success ;cat test'
+	'<< toto cat > toto ; << EOF cat | sed s/toto/0/ > ma_note ; /bin/echo -n ma_note: ; < ma_note cat ; rm ma_note'
+        'echo coucou >test; < test /usr/bin/ls | cat -e| wc -c >> test && >> test echo success ;cat test ; rm test'
         'cat test52; rm tmp42'
         'rm toto &> /dev/null'
 	'echo $PWD && echo $USER && echo $TERM && echo $HOME'
 	'ls|ls|ls|ls -la -h|ls|ls|wc'
-	'cd / && echo -n ROOT : cmd: &&pwd;echo env: $PWD;cd ~ && echo -n HOME: cmd:&& pwd;echo env: $PWD'
-	'echo -n ***'
+	'cd ~ ; pwd ; echo $PWD'
+	'echo -n /***'
 	'echo -n hey && echo -n cool ; echo -n tg'
 	'echo 42|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat'
 	'cat < /etc/resolv.conf | cat | cat > tmp43; cat tmp43 | cat >> tmp43 ; cat tmp43 && rm tmp43'
@@ -64,8 +63,5 @@ for i in "${CMD[@]}"; do
             echo -e "\e[1m\e[91mFAILED\e[0m"
 	    echo "\e[7m"$SHELL1"\e[27m {\e[33m"$VAR1"\e[0m}"
 	    echo "\e[7m"$SHELL2"\e[27m {\e[33m"$VAR2"\e[0m}"
-	    #echo "${i}" | ./42sh
-	    #echo "${i}" | zsh
         fi
-	#echo "-----------------"
 done
