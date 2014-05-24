@@ -1,8 +1,15 @@
-#! /usr/bin/env zsh
+#!/bin/zsh
+## shellinator.sh for 42sh in /data/tek/projects/42sh/42SH/tests
+## 
+## Made by kalatz_a
+## Login   <alexandre@kalatzis.net>
+## 
+## Started on  Sat May 24 19:28:18 2014 kalatz_a
+## Last update Sat May 24 19:28:18 2014 kalatz_a
+##
 
 SHELL1="./42sh"
 SHELL2="zsh"
-
 CMD=(
         '/usr/bin/ls -l'
         'echo 42sh'
