@@ -1,0 +1,1 @@
+echo ok || echo fail; cd /root &> /dev/null || echo on || echo noob ; echo dirait | cat ; echo que; echo c^est good > tmp42 && cat tmp42 || echo c^est fail ; echo lol 1> /dev/null && echo bien joué || echo haha
