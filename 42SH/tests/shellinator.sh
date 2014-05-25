@@ -41,7 +41,7 @@ CMD=(
         'rm toto &> /dev/null'
 	'echo $PWD && echo $USER && echo $TERM && echo $HOME'
 	'ls|ls|ls|ls -la -h|ls|ls|wc'
-	'cd ~ ; pwd ; echo $PWD'
+	'cd ~ ; pwd ; env | grep PWD; env | grep OLDPWD'
 	'echo -n /***'
 	'echo -n hey && echo -n cool ; echo -n tg'
 	'echo 42|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat'
