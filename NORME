@@ -1,6 +1,0 @@
-1) Valgrind Clean (NO LEAKS)
-2) 1 fonction non statique par fichier
-3) seul la fonction non statique peut faire 25 ligne
-4) les autres fonctions ne depasse pas 15 lignes
-5) Compile avec CLANG (sans warning)
-

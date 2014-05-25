@@ -1,3 +1,0 @@
-find ./ | grep .c > tmp &&
- awk '{ printf "\t\t"; print; }' tmp > maketmp &&
-   sed -i  's/$/\t\t\\/g' maketmp
