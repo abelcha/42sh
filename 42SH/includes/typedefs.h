@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sun May 18 06:57:23 2014 chalie_a
-** Last update Sun May 25 00:23:33 2014 chalie_a
+** Last update Sun May 25 14:59:04 2014 chalie_a
 */
 
 #ifndef TYPEDEFS_H_
