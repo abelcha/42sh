@@ -20,7 +20,7 @@ int		kill_sons(int *pid)
 
   x = -1;
   while (pid[++x])
-    kill(pid[x], 9);
+    kill(pid[x], SIGINT);
   return (SUCCESS);
 }
 

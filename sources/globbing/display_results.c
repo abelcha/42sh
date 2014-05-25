@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May 14 06:50:00 2014 chalie_a
-** Last update Sat May 24 18:25:13 2014 chalie_a
+** Last update Sun May 25 22:04:31 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -50,7 +50,8 @@ static int		yes_or_no(const int total)
       return (FAILURE);
     else if (buffer[0] == 'y')
       return (SUCCESS);
-    else if (buffer[0] == 'n')
+    else if (buffer[0] == '\t');
+    else
       return (FAILURE);
 }
 

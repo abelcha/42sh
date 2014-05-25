@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 **
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Sun May 25 13:09:37 2014 chalie_a
+** Last update Sun May 25 20:56:39 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -31,6 +31,7 @@
 # define B_ERROR(...)	X_ERROR(__VA_ARGS__) ? 2 : R_ERROR(2)
 # define ERRNO		(_ERROR("%s\n", strerror(errno)))
 
+t_shell		*init_sh(char **);
 int		exec_command(t_cmd *, t_execution *);
 void		add_info(t_shell *, char *);
 int		change_dir(char *, t_execution *);

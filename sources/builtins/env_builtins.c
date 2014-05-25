@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sun May 18 06:05:18 2014 chalie_a
-** Last update Sat May 24 18:34:49 2014 chalie_a
+** Last update Sun May 25 22:28:50 2014 chalie_a
 */
 
 #include <string.h>
@@ -31,7 +31,7 @@ char		*get_env_line(char *s1, char *s2)
 
   j = -1;
   i = -1;
-  if (!(str = calloc(strlen(s1) + strlen(s2) + 2, sizeof(char))))
+  if (!(str = calloc(my_strlen(s1) + my_strlen(s2) + 2, sizeof(char))))
     return (NULL);
   while (s1[++i])
     str[i] = s1[i];

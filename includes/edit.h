@@ -5,26 +5,13 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 15:12:30 2014 chalie_a
-** Last update Sat May 24 18:17:48 2014 chalie_a
+** Last update Sun May 25 20:48:44 2014 chalie_a
 */
 
 #ifndef EDIT_H_
 # define EDIT_H_
 
 # include "typedefs.h"
-
-/*
-** Ctrl-a	Move to the start of the line.
-** Ctrl-e	Move to the end of the line.
-** Ctrl-b	Move back one character.
-** Alt-b	Move back one word.
-** Ctrl-f	Move forward one character.
-** Alt-f	Move forward one word.
-** Ctrl-u	Delete from the cursor to the beginning of the line.
-** Ctrl-k	Delete from the cursor to the end of the line.
-** Ctrl-w	Delete from the cursor to the start of the word.
-** Ctrl-l	Clear the screen
-*/
 
 # define AK_NB		18
 # define K_LEFT		4479771
@@ -98,4 +85,5 @@ void	tab_glob(t_line *line);
 int	get_command(char *word, t_line *line, t_gb *gb);
 int	get_type(const char *, int);
 char	*get_word(char *, int, int *);
+
 #endif /* !EDIT_H_ */

@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Sat Apr 19 00:10:02 2014 chalie_a
-** Last update Sun May 25 01:06:24 2014 chalie_a
+** Last update Sun May 25 20:05:17 2014 chalie_a
 */
 
 #ifndef PARSER_H_
@@ -14,7 +14,7 @@
 # include "typedefs.h"
 # define BEG_SEM	(token->prev->token == T_EOL && token->token == T_SEM)
 # define LAST_PIPE	(token->next->token == T_EOL ? 1 : 0)
-# define _MEM_POOL	(4)
+# define _MEM_POOL	(1024)
 # define BEFORE		0
 # define AFTER		1
 # define SIMPLE_RED__	(O_CREAT | O_TRUNC | O_WRONLY)

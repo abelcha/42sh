@@ -1,5 +1,5 @@
 42SH NAME
-42sh \- Shell for ninja developers
+42sh - Shell for ninja developers
 
 42SH DESCRIPTION
 42sh is a UNIX Shell with a lot of features, like autocompletion, history, alias,
@@ -13,7 +13,25 @@ Prompt
              - CTRL^D : Exit the 42sh
 
              - CTRL^L : Clear the screen
- 
+
+	     - CTRL^A : Move to the start of the line
+	     
+	     - CTRL^E : Move to the end of the line
+
+	     - CTRL^B : Move back one character
+
+	     - ALT^B : Move back one word
+
+	     - CTRL^F : Move forward one character
+
+	     - ALT^F  : Move forward one word
+
+	     - CTRL^U : Delete from the cursor to the beggining of the line.
+
+	     - CTRL^K : Delete from the cursor to the end of the line.
+	     
+	     - CTRL^W : Delete from the cursor to the start of the word. 
+
              - Right and Left Arrows : Move into command line
 
              - Up and Down Arrows : Show previous commands

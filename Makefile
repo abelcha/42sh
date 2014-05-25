@@ -1,12 +1,13 @@
 ## Makefile.c for Project-Master in /mnt/home/tovazm/rendu/42sh/42SH
 ## 
 ## Made by chalie_a
-## Login   <abel@chalier.me>
+## Login   <abel.chalier@epitech.eu>
 ## 
 ## Started on  Sat May 24 18:06:02 2014 chalie_a
+## Last update Sun May 25 22:11:46 2014 chalie_a
 ##
 
-CC		=	gcc -g3 -lefence
+CC		=	gcc
 
 NAME		=	42sh
 
@@ -115,5 +116,3 @@ fclean	:	clean
 re	:	fclean all
 
 .PHONY	:	all clean fclean re
-
-.SILENT	:	all clean fclean re
