@@ -4,5 +4,5 @@ alias		emacs	 emacs -nw
 alias	    	ne	 emacs
 alias		ll	ls -l
 alias		la	ls -la
-#alias		ls	ls --color
+alias		ls	ls --color
 HIST_IGNORE	ls:clear:exit

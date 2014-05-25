@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Wed May  7 22:20:12 2014 chalie_a
-** Last update Sat May 24 23:53:27 2014 chalie_a
+** Last update Sun May 25 17:26:16 2014 chalie_a
 */
 
 #include <string.h>
@@ -54,7 +54,8 @@ static char		*is_in_paths(char *cmd, t_execution *exe)
   i = 0;
   while (cmd && exe->env->paths && exe->env->paths[i])
     {
-      str = my_strjoint(exe->env->paths[i], cmd);
+      if (!(str = my_strjoint(exe->env->paths[i], cmd)))
+	return (NULL);
       if (IS_EXEC(str))
 	return (str);
       i++;
