@@ -51,6 +51,7 @@ RED		=	./redirections/main_redirections.c	\
 
 EXE		=	./execution/exec_main.c			\
 			./execution/exec_loop.c			\
+			./execution/exec_command.c		\
 
 LINE		=	./line_edition/add_del_key_actions.c	\
 			./line_edition/history_key_actions.c	\

@@ -5,14 +5,26 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Thu Apr 17 23:43:50 2014 chalie_a
-** Last update Sat May 24 21:24:00 2014 chalie_a
+** Last update Sun May 25 12:32:36 2014 chalie_a
 */
 
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
+#include <sys/stat.h>
 #include "edit.h"
 #include "sh.h"
+
+static int			is_reg()
+{
+  struct stat			s;
+
+  if (isatty(0) == 1)
+    return (1);
+  else if (fstat(0, &s) == 0 && s.st_mode & S_IFREG)
+    return (1);
+  return (0);
+}
 
 static t_execution		*init_exe(char **env)
 {
@@ -26,7 +38,7 @@ static t_execution		*init_exe(char **env)
     return (NULL);
   if (!(exe->env->paths = get_paths(get_env(env, "PATH="), ':')))
     return (NULL);
-  exe->input = isatty(0);
+  exe->input = is_reg();
   return (exe);
 }
 

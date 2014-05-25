@@ -5,13 +5,13 @@
 ## Login   <alexandre@kalatzis.net>
 ## 
 ## Started on  Sat May 24 19:28:18 2014 kalatz_a
-## Last update Sat May 24 19:28:18 2014 kalatz_a
+## Last update Sun May 25 12:59:12 2014 chalie_a
 ##
 
 SHELL1="./42sh"
 SHELL2="zsh"
 CMD=(
-        '/usr/bin/ls -l'
+#        '/usr/bin/ls -l'
         'echo 42sh'
         'cd ~ && pwd'
         'cd && pwd'
@@ -26,7 +26,7 @@ CMD=(
         'cd /root &> /dev/null && echo ne_doit_pas_safficher'
         '/usr/bin/ls && echo doit_safficher'
         'badcommand &> /dev/null || echo doit_safficher'
-#       '/bin/kill -11 0 || echo doit_safficher'
+#	'/bin/kill -11 0 || echo doit_safficher'
         '/usr/bin/ls && pwd && cd / && /usr/bin/ls  && echo ne_doit_pas_safficher'
         'cd . || pwd'
         'vbadvbadbad &> /dev/null && /usr/bin/ls || echo doit_safficher'
@@ -35,14 +35,14 @@ CMD=(
         ';/usr/bin/ls;'
         '       /usr/bin/ls     |       cat     -e      '
         '/usr/bin/ls|cat'
-	'<< toto cat > toto ; << EOF cat | sed s/toto/0/ > ma_note ; /bin/echo -n ma_note: ; < ma_note cat ; rm ma_note'
+#	'<< toto cat > toto ; << EOF cat | sed s/toto/0/ > ma_note ; /bin/echo -n ma_note: ; < ma_note cat ; rm ma_note'
         'echo coucou >test; < test /usr/bin/ls | cat -e| wc -c >> test && >> test echo success ;cat test ; rm test'
         'cat test52; rm tmp42'
         'rm toto &> /dev/null'
 	'echo $PWD && echo $USER && echo $TERM && echo $HOME'
 	'ls|ls|ls|ls -la -h|ls|ls|wc'
-	'cd ~ ; pwd ; echo $PWD'
-	'echo -n /***'
+	'cd ~ ; pwd ; env | grep PWD='
+	'echo -n /*** | sort'
 	'echo -n hey && echo -n cool ; echo -n tg'
 	'echo 42|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat|cat'
 	'cat < /etc/resolv.conf | cat | cat > tmp43; cat tmp43 | cat >> tmp43 ; cat tmp43 && rm tmp43'
@@ -54,8 +54,8 @@ function disp {
 for i in "${CMD[@]}"; do
         NB=$((NB+1))
 	echo -n "\e[1m\e[104m"$NB" \e[49m Testing ['\e[34m${i}\e[39m']\e[21m ... "
-	VAR1=$(echo "${i}" | $SHELL1 2>&1)
-	VAR2=$(echo "${i}" | $SHELL2 2>&1)
+	VAR1=$(echo "${i}" > tmp1 && $SHELL1 < tmp1  2>&1)
+	VAR2=$(echo "${i}" > tmp2 &&  $SHELL2 < tmp2 2>&1)
 	if [ "$VAR1" = "$VAR2" ];
 	then
             echo -e "\e[1m\e[92mSUCCESS\e[0m"

@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 22:21:05 2014 chalie_a
-** Last update Sat May 24 19:50:13 2014 chalie_a
+** Last update Sun May 25 13:01:11 2014 chalie_a
 */
 
 #include <unistd.h>
@@ -44,8 +44,7 @@ static int			not_ignored(t_line *line)
 
   i = -1;
   while (line->sh->hist_ign && line->sh->hist_ign[++i])
-    if (!my_strncmp(line->line, line->sh->hist_ign[i],
-		 my_strlen(line->sh->hist_ign[i])))
+    if (!my_strcmp(line->line, line->sh->hist_ign[i]))
       return (0);
   return (1);
 }

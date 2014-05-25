@@ -1,0 +1,1 @@
+cat < /etc/resolv.conf | cat | cat > tmp43; cat tmp43 | cat >> tmp43 ; cat tmp43 && rm tmp43

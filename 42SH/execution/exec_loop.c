@@ -5,9 +5,11 @@
 ** Login   <chalie_a@epitech.eu>
 ** 
 ** Started on  Sun Mar  9 22:40:44 2014 chalie_a
-** Last update Sat May 24 23:52:42 2014 chalie_a
+** Last update Sun May 25 13:10:36 2014 chalie_a
 */
 
+#include <string.h>
+#include <errno.h>
 #include <stdio.h>
 #include <unistd.h>
 #include "sh.h"
@@ -26,32 +28,18 @@ static int		cmd_not_in_paths(const t_cmd *tmp, t_execution *exe)
   return (SUCCESS);
 }
 
-static int		exec_command(t_cmd *tmp, t_execution *exe)
-{
-
-  if (tmp->builtin == -1 &&
-      execve(tmp->path, tmp->stock, exe->env->envp) == FAILURE)
-    {
-      exe->exit = FAILURE;
-      return (_ERROR("Error : execve failed\n"));
-    }
-  else
-    exec_builtins(tmp, exe);
-  return (SUCCESS);
-}
-
 static int		exec_in_father(t_cmd *root, t_cmd *tmp,
 				       t_execution *exe)
 {
   if (!tmp->path && tmp->builtin == -1)
     return (cmd_not_in_paths(tmp, exe));
   if (tmp->next != root && dup2(exe->fdp[1], STDOUT_FILENO) < 0)
-    return (FAILURE);
+    return (ERRNO);
   if (exe->prev_pipe != -1 && dup2(exe->prev_pipe, STDIN_FILENO) < 0)
-    return (FAILURE);
+    return (ERRNO);
   if (tmp->next != root)
     close(exe->fdp[0]);
-  if (my_strcmp(tmp->stock[1], "-nw"))
+  if (NW(tmp->stock[1]))
     setsid();
   exec_command(tmp, exe);
   close(exe->fdp[1]);

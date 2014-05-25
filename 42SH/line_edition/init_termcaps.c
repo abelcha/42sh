@@ -5,13 +5,14 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 12 15:42:51 2014 chalie_a
-** Last update Wed May 21 22:22:59 2014 chalie_a
+** Last update Sun May 25 12:03:47 2014 chalie_a
 */
 
 #include <string.h>
 #include <stdio.h>
 #include <term.h>
 #include <errno.h>
+#include <string.h>
 #include "edit.h"
 #include "sh.h"
 

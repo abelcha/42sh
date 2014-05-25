@@ -1,11 +1,11 @@
 /*
 ** 42sh.h for Project-Master in /home/tovazm/rendu/42sh/ABEL
-** 
+**
 ** Made by chalie_a
 ** Login   <abel.chalier@epitech.eu>
-** 
+**
 ** Started on  Sun Apr 20 23:31:35 2014 chalie_a
-** Last update Fri May 23 19:42:42 2014 chalie_a
+** Last update Sun May 25 13:09:37 2014 chalie_a
 */
 
 #ifndef SH_H_
@@ -24,12 +24,14 @@
 # define TRUNC		O_CREAT | O_TRUNC | O_WRONLY
 # define READ_ONLY	O_RDONLY
 # define APPEND		O_CREAT | O_APPEND | O_WRONLY
+# define NW(s)		(my_strcmp(s, "-nw") ? 1 : 0)
 # define R_ERROR(n)	n == 1 ? -1 : 2
 # define X_ERROR(...)	(fprintf(stderr, __VA_ARGS__))
 # define _ERROR(...)	X_ERROR(__VA_ARGS__) ? -1 : R_ERROR(1)
 # define B_ERROR(...)	X_ERROR(__VA_ARGS__) ? 2 : R_ERROR(2)
-# define ERRNO		_ERROR("%s\n", strerror(errno))
+# define ERRNO		(_ERROR("%s\n", strerror(errno)))
 
+int		exec_command(t_cmd *, t_execution *);
 void		add_info(t_shell *, char *);
 int		change_dir(char *, t_execution *);
 void		my_strcat(char *, char *);
