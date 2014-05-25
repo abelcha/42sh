@@ -5,7 +5,7 @@
 ** Login   <abel.chalier@epitech.eu>
 ** 
 ** Started on  Mon May 19 17:25:33 2014 chalie_a
-** Last update Sun May 25 16:08:39 2014 chalie_a
+** Last update Sun May 25 20:00:06 2014 chalie_a
 */
 
 #include <stdlib.h>
@@ -70,10 +70,14 @@ static int		history_find(char *str, t_shell *sh)
   int			i;
 
   i = -1;
-  if ((nbr = my_atoi(&str[1])) <= 0)
+  if (str[1] == '!')
+    nbr = 1;
+  else if ((nbr = my_atoi(&str[1])) <= 0)
     return (safe_joint(sh->line, str));
   tmp = sh->history;
-  while ((tmp = tmp->next) != sh->history && ++i < nbr);
+  while ((tmp = tmp->prev) != sh->history && ++i < nbr);
+  if (tmp == sh->history)
+    return (FAILURE);
   printf("%d--> %s\n", nbr, tmp->data);
   return (safe_joint(sh->line, tmp->data));
 }

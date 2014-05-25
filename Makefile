@@ -6,7 +6,7 @@
 ## Started on  Sat May 24 18:06:02 2014 chalie_a
 ##
 
-CC		=	gcc -lefence -g3
+CC		=	gcc -g3 -lefence
 
 NAME		=	42sh
 
