@@ -14,6 +14,7 @@ Prompt
 
              - CTRL^L : Clear the screen
 
+<<<<<<< HEAD
 	     - CTRL^A : Move to the start of the line
 	     
 	     - CTRL^E : Move to the end of the line
@@ -32,9 +33,11 @@ Prompt
 	     
 	     - CTRL^W : Delete from the cursor to the start of the word. 
 
+=======
+>>>>>>> ad257c3379a3e7e95f26b97bfb719fde122ba11d
              - Right and Left Arrows : Move into command line
 
-             - Up and Down Arrows : Show previous commands
+             - Up and Down Arrows : Brows throught commands history
 
              - Tabulation : Autocompletion
 
@@ -43,7 +46,7 @@ Prompt
 
 History
 
-	42sh allows a lot of features relatives to previous commands lines.
+	42sh allows a lot of features relatives to previous command lines.
 
 	You can search previous commands in the termcaps prompt with up and down arrows.
 
@@ -75,7 +78,7 @@ Alias
 
 Environment
 
-	Environment variables can be used like variables: "setenv var value" to set, "unsetenv var" to unset, "$var" to use and "setenv" to view.
+	Environment variables can be used like variables: "setenv var value" to set, "unsetenv var" to unset, "$var" to use and "env" to view.
 
 	Note: The $PATH environment variable contains all the paths where 42sh searches binarys to exec. Delete it is not the best way to use 42sh.
 
