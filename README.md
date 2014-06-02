@@ -2,15 +2,15 @@
 
 Grade : 23/20
 
-42SH NAME
-42sh - Shell for ninja developers
+	42SH NAME
+	42sh - Shell for ninja developers
 
-42SH DESCRIPTION
-42sh is a UNIX Shell with a lot of features, like autocompletion, history, alias,
+	42SH DESCRIPTION
+	42sh is a UNIX Shell with a lot of features, like autocompletion, history, alias,
       globing, background, variables of environment.
 
-42SH FEATURES
-Prompt
+	42SH FEATURES
+	Prompt
 
 	 When standard input is a tty, termcaps prompt is available and includes a lot of features:
 
