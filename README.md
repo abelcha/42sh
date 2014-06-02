@@ -36,8 +36,7 @@ Grade : 23/20
 
 	     - CTRL^W : Delete from the cursor to the start of the word. 
 
-=======
->>>>>>> ad257c3379a3e7e95f26b97bfb719fde122ba11d
+
              - Right and Left Arrows : Move into command line
 
              - Up and Down Arrows : Brows throught commands history
